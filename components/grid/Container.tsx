@@ -9,7 +9,7 @@ export function Container({ children, fluid }: Props) {
     <div
       className={cn(
         fluid ? 'w-full' : 'w-full max-w-5xl',
-        ' mx-auto px-4 flex flex-col'
+        'mx-auto px-4 flex flex-col'
       )}
     >
       {children}

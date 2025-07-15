@@ -43,8 +43,8 @@ const gridCvaStates = cva('grid', {
 type Props = {
   children: React.ReactNode;
   cols: VariantProps<typeof gridCvaStates>['cols'];
-  gap: VariantProps<typeof gridCvaStates>['gap'];
-  wrap: boolean;
+  gap?: VariantProps<typeof gridCvaStates>['gap'];
+  wrap?: boolean;
 };
 function GridContainer({ children, cols = 1, gap = 0, wrap = false }: Props) {
   return <div className={gridCvaStates({ cols, gap, wrap })}>{children}</div>;
