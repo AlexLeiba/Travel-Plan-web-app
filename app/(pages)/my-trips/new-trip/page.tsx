@@ -29,9 +29,10 @@ function NewTripPage() {
     defaultValues: {
       title: '',
       description: '',
+      location: '',
       startDate: '',
       endDate: '',
-      imageUrl: '', // Initialize with an empty file object
+      imageUrl: '', // Initialize with null (no file selected)
     },
   });
 
@@ -88,6 +89,13 @@ function NewTripPage() {
                   type='textarea'
                   error={errors.description?.message}
                   {...register('description')}
+                />
+                <Input
+                  placeholder='Type the location...'
+                  title='Location'
+                  type='text'
+                  error={errors.location?.message}
+                  {...register('location')}
                 />
               </div>
               <FormProvider {...formMethods}>

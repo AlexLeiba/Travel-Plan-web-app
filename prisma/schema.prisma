@@ -73,6 +73,8 @@ id String @id @default(cuid())
   title String
   description String
   imageUrl String?
+  imageId String? // ID of the image in Cloudinary
+  location String
 
   startDate DateTime
   endDate DateTime

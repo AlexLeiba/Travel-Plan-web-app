@@ -2,7 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 
 // Return "https" URLs by setting secure: true
 
-export function cloudinaryUpload() {
+export default function cloudinaryUpload() {
   cloudinary.config({
     secure: process.env.NODE_ENV === 'production',
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
