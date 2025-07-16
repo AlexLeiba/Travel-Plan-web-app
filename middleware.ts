@@ -17,9 +17,6 @@ export async function middleware(req: NextRequest) {
   // Retrieve the token from cookies
   const token = req.cookies.get('next-auth.session-token')?.value;
 
-  const tokenValues = req.cookies.get('next-auth.session-token');
-  console.log('🚀 ~ middleware ~ tokenValues:\n\n\n', tokenValues, '\n\n');
-
   if (!token) {
     const loginUrl = new URL('/', req.url);
 

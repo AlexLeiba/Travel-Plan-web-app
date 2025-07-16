@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import NextAuth, { getServerSession } from 'next-auth';
+import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 
@@ -36,13 +36,3 @@ export const authOptions = NextAuth({
 });
 
 export { authOptions as GET, authOptions as POST };
-
-export async function userSession() {
-  const session: { user: { email: string } } | null = await getServerSession(
-    authOptions
-  );
-  if (!session) {
-    throw new Error('You must be logged in to access this resource');
-  }
-  return session;
-}

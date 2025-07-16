@@ -6,9 +6,15 @@ import { cn } from '@/lib/utilities';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { Loader } from '../ui/loader';
+import { api } from '@/lib/apiFactory/api';
+import axios from 'axios';
 
 export function UploadImage() {
-  const { setValue } = useFormContext();
+  const {
+    setValue,
+    formState: { errors },
+  } = useFormContext();
+
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<{ url: string; imageId?: string }>({
@@ -16,6 +22,7 @@ export function UploadImage() {
     imageId: '',
   });
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   async function uploadImage(file: File) {
     const fileReader = new FileReader();
@@ -24,19 +31,32 @@ export function UploadImage() {
     fileReader.onload = async () => {
       const previewUrl = fileReader.result as string;
 
-      const uploadedImage = await fetch('/api/upload-image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const uploadedImage = await axios.post(
+        '/api/upload-image',
+
+        {
+          imageUrl: previewUrl,
         },
-        body: JSON.stringify({ imageUrl: previewUrl }),
-      });
-      const imageResponse = await uploadedImage.json();
+        {
+          headers: {
+            'Content-type': 'application/json',
+          },
+          onUploadProgress: (progressEvent) => {
+            if (progressEvent && progressEvent.total) {
+              const progress =
+                (progressEvent.loaded / progressEvent.total) * 100;
+              setUploadProgress(progress);
+            }
+          },
+        }
+      );
 
-      setImageUrl({ url: previewUrl, imageId: imageResponse.imageId });
+      setImageUrl({ url: previewUrl, imageId: uploadedImage.data.imageId });
 
-      setValue('imageUrl', imageResponse.imageUrl || ''); // Update the form value with the image URL
-      setLoading(false);
+      setValue('imageUrl', uploadedImage.data.imageUrl || ''); // Update the form value with the image URL
+      setValue('imageId', uploadedImage.data.imageId); // Update the form value with the image URL
+      setLoading(false); // Reset loading state after upload
+      setUploadProgress(0); // Reset upload progress after upload
     };
   }
 
@@ -86,12 +106,7 @@ export function UploadImage() {
     setValue('imageUrl', ''); // Clear the form value
 
     try {
-      await fetch(`/api/upload-image?imageId=${imageUrl.imageId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      await api().deleteImage(imageUrl.imageId || '');
       setImageUrl({ url: '', imageId: '' }); // Reset the image URL state
       toast.success('Image deleted successfully!');
     } catch (error: any) {
@@ -105,7 +120,7 @@ export function UploadImage() {
   return (
     <>
       {loading ? (
-        <UploadImageLoader />
+        <UploadImageLoader uploadProgress={uploadProgress} />
       ) : (
         <div
           role='button'
@@ -116,8 +131,12 @@ export function UploadImage() {
             }
           }}
           className={cn(
-            dragOver ? 'border-green-300' : 'border-gray-300',
-            'border-2 border-dotted p-4 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10 relative'
+            errors.imageUrl && !imageUrl.url
+              ? 'border-red-500'
+              : !errors.imageUrl && dragOver
+              ? 'border-green-300'
+              : 'border-gray-300',
+            'border-2 h-[329px] border-dotted p-8 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10 relative overflow-hidden'
           )}
           onDrop={(e) => handleDropImage(e)}
           onDragOver={(e) => {
@@ -147,6 +166,7 @@ export function UploadImage() {
                 alt='image-upload'
                 width={200}
                 height={200}
+                className='object-cover w-full h-[260px] rounded-md '
               />
             </div>
           )}
@@ -181,15 +201,18 @@ export function UploadImage() {
   );
 }
 
-function UploadImageLoader() {
+function UploadImageLoader({ uploadProgress }: { uploadProgress: number }) {
   return (
     <div
       className={cn(
         'border-gray-300',
-        'border-2 h-[329px] border-dotted p-4  hover:bg-gray-200 transition-colors duration-200 z-10 relative flex justify-center items-center'
+        'border-2 h-[329px] w-full border-dotted p-8  hover:bg-gray-200 transition-colors duration-200 z-10 relative flex justify-center items-center'
       )}
     >
-      <Loader color='black' />
+      <div>
+        <Loader color='black' />
+        {uploadProgress > 0 && <p>{uploadProgress.toFixed(0)}%</p>}
+      </div>
     </div>
   );
 }
