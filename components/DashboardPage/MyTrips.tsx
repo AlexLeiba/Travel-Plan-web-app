@@ -1,6 +1,5 @@
 'use client';
 import { Trip } from '@/lib/generated/prisma';
-import { useUserSession } from '@/lib/useUserSession';
 import React from 'react';
 import toast from 'react-hot-toast';
 
@@ -12,7 +11,7 @@ function MyTrips({
     error?: string;
   };
 }) {
-  const user = useUserSession();
+  //   const user = useUserSession();
 
   if (trips.error) {
     toast.error(trips.error);
@@ -22,14 +21,18 @@ function MyTrips({
   }
   return (
     <div>
-      <h2>Welcome back {user?.name}</h2>
-      <div>
-        {trips.data?.map((trip) => (
+      {/* <h2>Welcome back {user?.name}</h2> */}
+      <div className='flex gap-6 flex-wrap'>
+        {/* {trips.data?.map((trip) => (
           <div key={trip.id}>
-            <h3>{trip.title}</h3>
+            <h5>{trip.title}</h5>
             <p>{trip.description}</p>
           </div>
-        ))}
+        ))} */}
+        <h5>Trips : {trips.data?.length}</h5>
+        <h5>Planned : 2</h5>
+        <h5>Completed : 1</h5>
+        <h5>Canceled : 0</h5> {/* how many deleted trips */}
       </div>
     </div>
   );
