@@ -1,18 +1,12 @@
 'use client';
-import { cn } from '@/lib/utilities';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Spacer } from '../ui/spacer';
+import { Spacer } from '../../ui/spacer';
+import { NavButton } from './CarouselNavButton';
 
-export function Carousel({
-  images,
-}: {
-  images: {
-    title: string;
-    imageUrl: string;
-  }[];
-}) {
+type Props = { carouselData: { imageUrl: string; title: string }[] };
+
+export function Slider({ carouselData }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div>
@@ -22,15 +16,15 @@ export function Carousel({
         <NavButton
           direction='prev'
           setCurrentIndex={setCurrentIndex}
-          length={images.length}
+          length={carouselData.length}
         />
         <NavButton
           direction='next'
           setCurrentIndex={setCurrentIndex}
-          length={images.length}
+          length={carouselData.length}
         />
 
-        {images?.map((image, index) => (
+        {carouselData?.map((image, index) => (
           <div
             key={image.imageUrl + index}
             className='transition-transform duration-500 ease-in-out '
@@ -56,36 +50,5 @@ export function Carousel({
         ))}
       </div>
     </div>
-  );
-}
-
-export function NavButton({
-  setCurrentIndex,
-  length,
-  direction,
-}: {
-  setCurrentIndex: Dispatch<SetStateAction<number>>;
-  length: number;
-  direction: 'prev' | 'next';
-}) {
-  function handleMove() {
-    setCurrentIndex((prev) => {
-      if (direction === 'next') {
-        return prev + 1 < length ? prev + 1 : 0;
-      } else {
-        return prev - 1 >= 0 ? prev - 1 : length - 1;
-      }
-    });
-  }
-  return (
-    <button
-      className={cn(
-        direction === 'next' ? 'right-4' : 'left-4',
-        'absolute z-50 cursor-pointer p-2 top-1/2 transform -translate-y-1/2 opacity-50 bg-white rounded-full shadow-md'
-      )}
-      onClick={handleMove}
-    >
-      {direction === 'next' ? <ArrowRight /> : <ArrowLeft />}
-    </button>
   );
 }

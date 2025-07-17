@@ -1,23 +1,15 @@
-'use client';
-import { Trip } from '@/lib/generated/prisma';
 import React from 'react';
+import { getTripsStatsAction } from '@/lib/server-actions/get-trips-stats';
 import toast from 'react-hot-toast';
 
-function MyTrips({
-  trips,
-}: {
-  trips: {
-    data: Trip[] | null;
-    error?: string;
-  };
-}) {
-  //   const user = useUserSession();
+async function MyTrips() {
+  const { data, error } = await getTripsStatsAction();
 
-  if (trips.error) {
-    toast.error(trips.error);
+  if (error) {
+    toast.error(error);
   }
-  if (!trips || (trips.data && trips.data.length === 0)) {
-    return <div>No trips found.</div>;
+  if (!data || (data?.all && data.all === 0)) {
+    return <div>No trips stats was found.</div>;
   }
   return (
     <div>
@@ -29,10 +21,9 @@ function MyTrips({
             <p>{trip.description}</p>
           </div>
         ))} */}
-        <h5>Trips : {trips.data?.length}</h5>
-        <h5>Planned : 2</h5>
-        <h5>Completed : 1</h5>
-        <h5>Canceled : 0</h5> {/* how many deleted trips */}
+        <h5>Trips : {data?.all}</h5>
+        <h5>Planned : {data?.planned}</h5>
+        <h5>Completed : {data?.completed}</h5>
       </div>
     </div>
   );
