@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Button } from '../ui/button';
+import { AuthButton } from '../ui/authButton';
 
 export function HeroSection() {
   return (
@@ -14,9 +13,7 @@ export function HeroSection() {
           Home Page Lorem ipsum dolor sit amet.
         </p>
 
-        <Link href={'/my-trips/new-trip'}>
-          <Button classNameCustome='px-12'>New trip</Button>
-        </Link>
+        <AuthButton type='landingPage' />
       </div>
     </div>
   );

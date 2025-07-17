@@ -28,7 +28,7 @@ export default function Layout({
       <SessionProvider>
         <Navbar />
 
-        <main className='flex-grow mt-18'>{children}</main>
+        <main className='flex-grow mt-32 mb-24'>{children}</main>
 
         <Footer />
       </SessionProvider>

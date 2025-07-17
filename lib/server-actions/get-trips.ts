@@ -5,7 +5,13 @@ import { Trip } from '../generated/prisma';
 import { getServerUserSession } from '../getServerUserSession';
 
 export async function getTripsAction(
-  { type }: { type: 'planned' | 'completed' | 'all' } = { type: 'all' }
+  {
+    type,
+    search,
+  }: { type: 'planned' | 'completed' | 'all'; search?: string } = {
+    type: 'all',
+    search: '',
+  }
 ): Promise<{
   data: Trip[] | null;
   error?: string;
@@ -42,8 +48,13 @@ export async function getTripsAction(
       throw new Error('No trips was found');
     }
 
+    const filteredSearchTrips = trips.filter((trip) => {
+      if (!search) return true;
+      return trip.title.toLowerCase().includes(search.toLowerCase());
+    });
+
     return {
-      data: trips,
+      data: filteredSearchTrips,
       error: undefined,
     };
   } catch (error: any) {

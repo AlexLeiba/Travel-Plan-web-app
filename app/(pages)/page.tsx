@@ -1,9 +1,8 @@
-import { Carousel } from '@/components/DashboardPage/Carousel/Carousel';
+import { Slider } from '@/components/DashboardPage/Carousel/Slider';
 import { HeroSection } from '@/components/DashboardPage/HeroSection';
-import MyTrips from '@/components/DashboardPage/MyTrips';
 import { Container } from '@/components/grid/Container';
 import { Spacer } from '@/components/ui/spacer';
-import { Suspense } from 'react';
+import { CAROUSEL_DATA } from '@/lib/consts';
 
 export default async function Home() {
   return (
@@ -12,15 +11,7 @@ export default async function Home() {
         <HeroSection />
         <Spacer sm={12} md={12} lg={24} />
 
-        <Suspense>
-          <MyTrips />
-        </Suspense>
-
-        <Spacer sm={12} md={12} lg={24} />
-
-        <Suspense>
-          <Carousel />
-        </Suspense>
+        <Slider carouselData={CAROUSEL_DATA} />
       </Container>
     </>
   );

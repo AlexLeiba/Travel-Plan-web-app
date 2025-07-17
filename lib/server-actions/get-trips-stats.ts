@@ -6,9 +6,8 @@ import { prisma } from '../prisma';
 export async function getTripsStatsAction() {
   const session = await getServerUserSession();
   const currentDate = new Date();
-  console.log('🚀 ~ getTripsStatsAction ~ currentDate:', currentDate.getTime());
 
-  if (!session || !session.user || !session.user.email) {
+  if (!session || !session?.user || !session?.user?.email) {
     throw new Error('You must be logged in to get trips');
   }
   try {
