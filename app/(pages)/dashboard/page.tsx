@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Carousel } from '@/components/DashboardPage/Carousel/Carousel';
-import MyTrips from '@/components/DashboardPage/MyTrips';
+import { MyTripsStats } from '@/components/DashboardPage/MyTripsStats';
 import { Container } from '@/components/grid/Container';
 import { Spacer } from '@/components/ui/spacer';
 
@@ -10,8 +10,9 @@ export default async function Dashboard() {
       <Container>
         <h1>Dashboard</h1>
         <Spacer sm={6} md={6} lg={12} />
+
         <Suspense>
-          <MyTrips />
+          <MyTripsStats />
         </Suspense>
 
         <Spacer sm={12} md={12} lg={24} />

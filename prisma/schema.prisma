@@ -72,8 +72,8 @@ id String @id @default(cuid())
 
   title String
   description String
-  imageUrl String?
-  imageId String? // ID of the image in Cloudinary
+  imageUrl String
+  imageId String // ID of the image in Cloudinary
   location String
 
   startDate DateTime
@@ -83,8 +83,10 @@ id String @id @default(cuid())
 
 user User @relation(fields: [userId], references: [id], onDelete: Cascade)//info about user who created the trip
 //The relation will be between userId (which was sent on creating the trip) and id (of User model)
-
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  linkUrl String?
+  linkTitle String?
+  starRate Float?
 }

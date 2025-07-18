@@ -16,3 +16,5 @@ export const CAROUSEL_DATA = [
     title: 'Travel Plan 4',
   },
 ];
+
+export const SORT_OPTIONS = ['planned', 'completed', 'all'];

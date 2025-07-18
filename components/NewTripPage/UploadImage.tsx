@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Image as ImageIcon, X } from 'lucide-react';
 import { cn } from '@/lib/utilities';
@@ -9,11 +9,21 @@ import { Loader } from '../ui/loader';
 import { api } from '@/lib/apiFactory/api';
 import axios from 'axios';
 
-export function UploadImage() {
+type Props = {
+  imageDefault?: { url: string; id: string };
+};
+export function UploadImage({ imageDefault }: Props) {
   const {
     setValue,
     formState: { errors },
   } = useFormContext();
+
+  useEffect(() => {
+    setImageUrl({
+      url: imageDefault?.url || '',
+      imageId: imageDefault?.id || '',
+    });
+  }, [imageDefault]);
 
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -21,6 +31,7 @@ export function UploadImage() {
     url: '',
     imageId: '',
   });
+
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -177,7 +188,7 @@ export function UploadImage() {
               className='flex justify-center items-center flex-col cursor-pointer'
             >
               <p className='text-center text-gray-600 mb-2 font-medium'>
-                Upload image
+                Upload image *
               </p>
               <ImageIcon
                 cursor={'pointer'}

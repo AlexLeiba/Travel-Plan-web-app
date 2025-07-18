@@ -20,7 +20,7 @@ export function Input({
   error,
   type = 'text',
   textareaRows = 4,
-  // handleChange,
+  handleChange,
   ...restProp
 }: Props) {
   return (
@@ -34,7 +34,7 @@ export function Input({
           className='py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   border-green-300 w-full'
           name={title}
           rows={textareaRows}
-          // onChange={handleChange}
+          onChange={handleChange}
           {...restProp}
         />
       ) : (
@@ -42,7 +42,7 @@ export function Input({
           className='py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   border-green-300 w-full'
           name={title}
           type={type}
-          // onChange={handleChange}
+          onChange={handleChange}
           {...restProp}
         />
       )}

@@ -6,12 +6,18 @@ type Props = {
 };
 export async function MyTrips({ params: { type, search } }: Props) {
   const trips = await getTripsAction({ type, search });
-  console.log('🚀 ~ MyTrips ~ trips:', trips);
+
   return (
     <div className='grid grid-cols-1 gap-4'>
-      {trips.data?.map((trip) => {
-        return <TripCard key={trip.id} data={trip} />;
-      })}
+      {trips?.data && trips.data.length > 0 ? (
+        trips.data?.map((trip) => {
+          return <TripCard key={trip.id} data={trip} />;
+        })
+      ) : (
+        <div>
+          <p>No trips was found</p>
+        </div>
+      )}
     </div>
   );
 }

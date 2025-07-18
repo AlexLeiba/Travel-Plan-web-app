@@ -33,6 +33,8 @@ function NewTripPage() {
       startDate: '',
       endDate: '',
       imageUrl: '', // Initialize with null (no file selected)
+      linkUrl: '',
+      linkTitle: '',
     },
   });
 
@@ -79,20 +81,20 @@ function NewTripPage() {
                 <Input
                   {...register('title')}
                   placeholder='Type the title of the trip...'
-                  title='Title'
+                  title='Title *'
                   type='text'
                   error={errors.title?.message}
                 />
                 <Input
                   placeholder='Type the description of the trip...'
-                  title='Description'
+                  title='Description *'
                   type='textarea'
                   error={errors.description?.message}
                   {...register('description')}
                 />
                 <Input
                   placeholder='Type the location...'
-                  title='Location'
+                  title='Location *'
                   type='text'
                   error={errors.location?.message}
                   {...register('location')}
@@ -105,15 +107,33 @@ function NewTripPage() {
 
             <GridContainer cols={2} gap={10}>
               <Input
+                placeholder='Type link url here'
+                title='Link'
+                type='text'
+                error={errors.linkUrl?.message}
+                {...register('linkUrl')}
+              />
+              <Input
+                placeholder='Type link title here'
+                title='Link title'
+                type='text'
+                error={errors.linkTitle?.message}
+                {...register('linkTitle')}
+              />
+            </GridContainer>
+            <GridContainer cols={2} gap={10}>
+              <Input
+                min={'1993-01-01'}
                 placeholder=''
-                title='Start date'
+                title='Start date *'
                 type='date'
                 error={errors.startDate?.message}
                 {...register('startDate')}
               />
               <Input
+                min={'1993-01-01'}
                 placeholder=''
-                title='End date'
+                title='End date *'
                 type='date'
                 error={errors.endDate?.message}
                 {...register('endDate')}

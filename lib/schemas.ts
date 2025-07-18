@@ -12,6 +12,9 @@ export const TripSchema = z.object({
   endDate: z.string().min(1, 'End date is required'),
   imageUrl: z.string().min(1, 'Image URL is required'),
   imageId: z.string().min(1, 'Image ID is required'),
+
+  linkUrl: z.string().optional(),
+  linkTitle: z.string().optional(),
 });
 
 export type TripSchemaType = z.infer<typeof TripSchema>;

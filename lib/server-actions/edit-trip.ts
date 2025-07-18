@@ -5,11 +5,11 @@ import { Trip } from '../generated/prisma';
 import { TripSchemaType } from '../schemas';
 import { getServerUserSession } from '../getServerUserSession';
 
-export async function createTripAction(formData: TripSchemaType) {
+export async function editTripAction(formData: TripSchemaType, tripId: string) {
   const session = await getServerUserSession();
 
   if (!session || !session.user || !session.user.email) {
-    throw new Error('You must be logged in to create a trip');
+    throw new Error('You must be logged in to edit a trip');
   }
 
   try {
@@ -27,24 +27,25 @@ export async function createTripAction(formData: TripSchemaType) {
       throw new Error('Image URL is required');
     }
 
-    const createdTrip: Trip | null = await prisma.trip.create({
+    const updatedTrip: Trip | null = await prisma.trip.update({
+      where: {
+        userId: foundUser.id,
+        id: tripId,
+      },
       data: {
         ...formData,
         startDate: new Date(formData.startDate),
         endDate: new Date(formData.endDate),
         userId: foundUser.id,
-        imageUrl: formData.imageUrl || '', // Use the secure URL from Cloudinary
-        imageId: formData.imageId || '', // Store the image ID if available
-        linkUrl: formData.linkUrl || '',
-        linkTitle: formData.linkTitle || formData.linkUrl ? 'Link' : '',
       },
     });
-    console.log('🚀 ~ createTripAction ~ createdTrip:\n\n\n\n\n', createdTrip);
 
-    if (!createdTrip) {
-      throw new Error('Failed to create trip');
+    console.log('🚀 ~  updatedTrip:', updatedTrip);
+
+    if (!updatedTrip) {
+      throw new Error('Failed to update trip');
     }
   } catch (error: any) {
-    console.error('Error uploading image:', error);
+    console.error('Error editting trip:', error);
   }
 }

@@ -40,7 +40,7 @@ export async function getTripsAction(
         ...(type === 'all' && {}),
       },
       orderBy: {
-        startDate: 'asc',
+        createdAt: 'desc',
       },
     });
 

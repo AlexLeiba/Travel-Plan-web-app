@@ -30,7 +30,7 @@ export async function MyTripsPage({
 
       <div className='flex justify-between items-center gap-4'>
         <div className='flex items-center gap-8'>
-          <Dropdown options={['planned', 'completed', 'all']} title='Sort' />
+          <Dropdown title='Sort' />
           <InputSearch title='Search' placeholder='Search trips' />
         </div>
 

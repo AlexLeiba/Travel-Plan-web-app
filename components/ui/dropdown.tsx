@@ -1,12 +1,12 @@
 'use client';
 
+import { SORT_OPTIONS } from '@/lib/consts';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 type Props = {
   title: string;
-  options: string[];
 };
-export function Dropdown({ title, options }: Props) {
+export function Dropdown({ title }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -25,7 +25,7 @@ export function Dropdown({ title, options }: Props) {
         id={title}
         onChange={(e) => handleSelectParam(e.target.value)}
       >
-        {options.map((option) => {
+        {SORT_OPTIONS.map((option) => {
           return (
             <option key={option} value={option}>
               {option.charAt(0).toUpperCase() + option.slice(1)}
