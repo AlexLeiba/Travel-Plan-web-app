@@ -1,5 +1,6 @@
 import { Container } from '@/components/grid/Container';
 import { MyTrips } from '@/components/MyTripsPage/MyTrips';
+import { TripCardSkeleton } from '@/components/MyTripsPage/TripCardSkeleton';
 import { Button } from '@/components/ui/button';
 import { Dropdown } from '@/components/ui/dropdown';
 import { InputSearch } from '@/components/ui/inputSearch';
@@ -52,7 +53,7 @@ export async function MyTripsPage({
       </div>
       <Spacer sm={6} md={6} lg={6} />
 
-      <Suspense>
+      <Suspense fallback={<TripCardSkeleton />}>
         <MyTrips params={paramType} />
       </Suspense>
     </Container>

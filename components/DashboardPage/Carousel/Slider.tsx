@@ -12,7 +12,7 @@ export function Slider({ carouselData }: Props) {
     <div>
       <h5>Your Trips Gallery</h5>
       <Spacer sm={6} md={6} lg={6} />
-      <div className='w-full h-[600px] flex overflow-hidden relative'>
+      <div className='w-full rounded-md h-[600px] flex overflow-hidden relative'>
         <NavButton
           direction='prev'
           setCurrentIndex={setCurrentIndex}

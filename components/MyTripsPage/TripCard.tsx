@@ -9,7 +9,7 @@ import { deleteTripAction } from '@/lib/server-actions/delete-trip';
 export function TripCard({ data }: { data: Trip }) {
   return (
     <>
-      <div className=' bg-gray-300 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
+      <div className=' bg-gray-100 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
         <ModalProvider>
           <ModalTrigger customeClassName='absolute right-0 top-0'>
             <div className='p-1 transition-all hover:bg-red-500 rounded-full bg-red-200/50 flex items-center justify-center absolute right-2 top-2 cursor-pointer'>
