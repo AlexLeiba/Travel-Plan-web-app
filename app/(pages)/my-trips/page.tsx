@@ -22,9 +22,19 @@ export async function MyTripsPage({
     <Container>
       <div className='flex items-end gap-4'>
         <h1>My trips </h1>
-        <p>
-          {paramType.type && paramType.type !== 'all' && `(${paramType.type})`}
-        </p>
+        <div className='flex items-center gap-2'>
+          <p>
+            {paramType.type &&
+              paramType.type !== 'all' &&
+              `(${paramType.type})`}
+          </p>
+          {paramType.type === 'completed' && (
+            <div className='size-2 rounded-full bg-purple-500'></div>
+          )}
+          {paramType.type === 'planned' && (
+            <div className='size-2 rounded-full bg-green-500'></div>
+          )}
+        </div>
       </div>
       <Spacer sm={6} md={6} lg={12} />
 
