@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TripSchema, TripSchemaType } from '@/lib/schemas';
-import { UploadImage } from '@/components/NewTripPage/UploadImage';
 import { Plane } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { usePathname, useRouter } from 'next/navigation';
@@ -18,6 +17,7 @@ import axios from 'axios';
 import { parseDateInDefaultFormat } from '@/lib/parseDateInDefaultFormat';
 import { editTripAction } from '@/lib/server-actions/edit-trip';
 import { Loader } from '@/components/ui/loader';
+import { UploadImage } from '@/components/ui/UploadImage';
 
 function EditTripPage() {
   const pathname = usePathname();

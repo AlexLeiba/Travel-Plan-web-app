@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TripSchema, TripSchemaType } from '@/lib/schemas';
-import { UploadImage } from '@/components/NewTripPage/UploadImage';
+import { UploadImage } from '@/components/ui/UploadImage';
 import { Plane } from 'lucide-react';
 import { createTripAction } from '@/lib/server-actions/create-trip';
 import toast from 'react-hot-toast';

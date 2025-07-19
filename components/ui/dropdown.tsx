@@ -11,7 +11,6 @@ export function Dropdown({ title }: Props) {
   const router = useRouter();
 
   function handleSelectParam(v: string) {
-    console.log('🚀 ~ handleSelectParam ~ v:', v);
     const params = new URLSearchParams(searchParams.toString());
     params.set('type', v);
     router.replace(`?${params.toString()}`);

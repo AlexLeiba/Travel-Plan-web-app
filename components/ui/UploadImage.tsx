@@ -5,7 +5,7 @@ import { Image as ImageIcon, X } from 'lucide-react';
 import { cn } from '@/lib/utilities';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
-import { Loader } from '../ui/loader';
+import { Loader } from './loader';
 import { api } from '@/lib/apiFactory/api';
 import axios from 'axios';
 
