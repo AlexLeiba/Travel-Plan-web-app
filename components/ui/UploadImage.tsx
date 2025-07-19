@@ -175,8 +175,8 @@ export function UploadImage({ imageDefault }: Props) {
               <Image
                 src={imageUrl.url}
                 alt='image-upload'
-                width={200}
-                height={200}
+                width={800}
+                height={600}
                 className='object-cover w-full h-[260px] rounded-md '
               />
             </div>

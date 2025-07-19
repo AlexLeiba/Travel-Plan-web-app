@@ -39,8 +39,8 @@ export function TripCard({ data }: { data: Trip }) {
             className='object-center object-cover lg:h-full h-[250px] w-full'
             src={data.imageUrl || ''}
             alt='image'
-            width={300}
-            height={200}
+            width={800}
+            height={600}
           />
         </div>
 

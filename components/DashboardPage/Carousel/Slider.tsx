@@ -7,6 +7,7 @@ import { NavButton } from './CarouselNavButton';
 type Props = { carouselData: { imageUrl: string; title: string }[] };
 
 export function Slider({ carouselData }: Props) {
+  console.log('🚀 ~ Slider ~ carousel Data:', carouselData);
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div>
@@ -38,9 +39,9 @@ export function Slider({ carouselData }: Props) {
             <Image
               src={image.imageUrl}
               alt='image'
-              width={300}
-              height={200}
-              className='object-cover  w-full h-full '
+              width={1000}
+              height={600}
+              className='object-cover object-center  w-[992px] '
               key={index}
             />
             <h5 className='text-shadow-lg text-shadow-white font-medium absolute bottom-12 z-40 left-8'>
