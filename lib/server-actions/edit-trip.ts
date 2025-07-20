@@ -27,16 +27,27 @@ export async function editTripAction(formData: TripSchemaType, tripId: string) {
       throw new Error('Image URL is required');
     }
 
+    const { isLinkSelected, ...formDataWithoutLink } = formData;
+    console.log('🚀 ~ editTripAction ~ isLinkSelected:', isLinkSelected);
+
+    const imagesData = formData.images?.map((image) => ({
+      userId: foundUser.id,
+      imageId: image.imageId || '',
+      imageUrl: image.imageUrl || '',
+    }));
+
     const updatedTrip: Trip | null = await prisma.trip.update({
       where: {
         userId: foundUser.id,
         id: tripId,
       },
       data: {
-        ...formData,
+        ...formDataWithoutLink,
         startDate: new Date(formData.startDate),
         endDate: new Date(formData.endDate),
         userId: foundUser.id,
+        images:
+          imagesData && imagesData.length ? { create: imagesData } : undefined,
       },
     });
 

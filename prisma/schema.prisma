@@ -67,6 +67,18 @@ model VerificationToken{
   @@unique([identifier, token])
 }
 
+model Images {
+  id String @id @default(cuid())
+  tripId String
+  imageId String
+  imageUrl String
+  userId String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
 model Trip{
 id String @id @default(cuid())
 
@@ -76,17 +88,20 @@ id String @id @default(cuid())
   imageId String // ID of the image in Cloudinary
   location String
 
+
   startDate DateTime
   endDate DateTime
 
   userId String
-
 user User @relation(fields: [userId], references: [id], onDelete: Cascade)//info about user who created the trip
 //The relation will be between userId (which was sent on creating the trip) and id (of User model)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   linkUrl String?
   linkTitle String?
   starRate Float?
+
+  images Images[]
 }

@@ -18,10 +18,13 @@ import { Plane } from 'lucide-react';
 import { createTripAction } from '@/lib/server-actions/create-trip';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { Toggle } from '@/components/ui/toggle';
+import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 
 function NewTripPage() {
   const navigate = useRouter();
   const [creating, setCreating] = useState(false);
+  const [withLink, setWithLink] = useState(false);
   const formMethods = useForm<TripSchemaType>({
     resolver: zodResolver(TripSchema),
     mode: 'onChange',
@@ -35,6 +38,7 @@ function NewTripPage() {
       imageUrl: '', // Initialize with null (no file selected)
       linkUrl: '',
       linkTitle: '',
+      isLinkSelected: false,
     },
   });
 
@@ -46,7 +50,6 @@ function NewTripPage() {
 
   async function onSubmit(formData: TripSchemaType) {
     setCreating(true);
-    console.log('🚀 ~ NewTripPage ~ onSubmit:', formData);
 
     try {
       await createTripAction(formData);
@@ -59,6 +62,13 @@ function NewTripPage() {
     } finally {
       setCreating(false);
     }
+  }
+
+  function handleLinkChange() {
+    setWithLink((prevState) => {
+      formMethods.setValue('isLinkSelected', !prevState);
+      return !prevState;
+    });
   }
   return (
     <Container>
@@ -99,46 +109,63 @@ function NewTripPage() {
                   error={errors.location?.message}
                   {...register('location')}
                 />
+
+                <Input
+                  min={'1993-01-01'}
+                  placeholder=''
+                  title='Start date *'
+                  type='date'
+                  error={errors.startDate?.message}
+                  {...register('startDate')}
+                />
+                <Input
+                  min={'1993-01-01'}
+                  placeholder=''
+                  title='End date *'
+                  type='date'
+                  error={errors.endDate?.message}
+                  {...register('endDate')}
+                />
+
+                <Spacer size={4} />
+                <div>
+                  <Toggle handleChange={handleLinkChange} selected={withLink} />
+                </div>
+                {withLink && (
+                  <>
+                    <Input
+                      disabled={!withLink}
+                      placeholder='Type link url here'
+                      title='Link url'
+                      type='text'
+                      error={errors.linkUrl?.message}
+                      {...register('linkUrl')}
+                    />
+                    <Input
+                      disabled={!withLink}
+                      placeholder='Type link title here'
+                      title='Link title'
+                      type='text'
+                      error={errors.linkTitle?.message}
+                      {...register('linkTitle')}
+                    />
+                  </>
+                )}
               </div>
               <FormProvider {...formMethods}>
-                <UploadImage />
+                <div className='flex flex-col gap-4'>
+                  <UploadImage title='Upload cover image *' />
+
+                  <UploadMultipleImage
+                    type='multiple'
+                    title='Upload images'
+                    fieldName='images'
+                  />
+                </div>
               </FormProvider>
             </GridContainer>
 
-            <GridContainer cols={2} gap={10}>
-              <Input
-                placeholder='Type link url here'
-                title='Link'
-                type='text'
-                error={errors.linkUrl?.message}
-                {...register('linkUrl')}
-              />
-              <Input
-                placeholder='Type link title here'
-                title='Link title'
-                type='text'
-                error={errors.linkTitle?.message}
-                {...register('linkTitle')}
-              />
-            </GridContainer>
-            <GridContainer cols={2} gap={10}>
-              <Input
-                min={'1993-01-01'}
-                placeholder=''
-                title='Start date *'
-                type='date'
-                error={errors.startDate?.message}
-                {...register('startDate')}
-              />
-              <Input
-                min={'1993-01-01'}
-                placeholder=''
-                title='End date *'
-                type='date'
-                error={errors.endDate?.message}
-                {...register('endDate')}
-              />
-            </GridContainer>
+            <Spacer size={2} />
             <Button
               disabled={creating}
               loading={creating}

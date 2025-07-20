@@ -11,18 +11,21 @@ import axios from 'axios';
 
 type Props = {
   imageDefault?: { url: string; id: string };
+  title: string;
 };
-export function UploadImage({ imageDefault }: Props) {
+export function UploadImage({ imageDefault, title }: Props) {
   const {
     setValue,
     formState: { errors },
   } = useFormContext();
 
   useEffect(() => {
-    setImageUrl({
-      url: imageDefault?.url || '',
-      imageId: imageDefault?.id || '',
-    });
+    if (!errors.imageUrl) {
+      setImageUrl({
+        url: imageDefault?.url || '',
+        imageId: imageDefault?.id || '',
+      });
+    }
   }, [imageDefault]);
 
   const [dragOver, setDragOver] = useState(false);
@@ -114,11 +117,11 @@ export function UploadImage({ imageDefault }: Props) {
 
   async function handleImageDelete() {
     setLoading(true);
-    setValue('imageUrl', ''); // Clear the form value
 
     try {
       await api().deleteImage(imageUrl.imageId || '');
       setImageUrl({ url: '', imageId: '' }); // Reset the image URL state
+      setValue('imageUrl', ''); // Clear the form value
       toast.success('Image deleted successfully!');
     } catch (error: any) {
       console.error('Error deleting image:', error);
@@ -147,7 +150,7 @@ export function UploadImage({ imageDefault }: Props) {
               : !errors.imageUrl && dragOver
               ? 'border-green-300'
               : 'border-gray-300',
-            'border-2 h-[329px] border-dotted p-8 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10 relative overflow-hidden'
+            'border-2 h-[250px] border-dotted p-2 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10 relative overflow-hidden'
           )}
           onDrop={(e) => handleDropImage(e)}
           onDragOver={(e) => {
@@ -177,7 +180,7 @@ export function UploadImage({ imageDefault }: Props) {
                 alt='image-upload'
                 width={800}
                 height={600}
-                className='object-cover w-full h-[260px] rounded-md '
+                className='object-cover w-full h-[230px] rounded-md '
               />
             </div>
           )}
@@ -188,7 +191,7 @@ export function UploadImage({ imageDefault }: Props) {
               className='flex justify-center items-center flex-col cursor-pointer'
             >
               <p className='text-center text-gray-600 mb-2 font-medium'>
-                Upload image *
+                {title}
               </p>
               <ImageIcon
                 cursor={'pointer'}
@@ -217,7 +220,7 @@ function UploadImageLoader({ uploadProgress }: { uploadProgress: number }) {
     <div
       className={cn(
         'border-gray-300',
-        'border-2 h-[329px] w-full border-dotted p-8  hover:bg-gray-200 transition-colors duration-200 z-10 relative flex justify-center items-center'
+        'border-2 h-[250px] w-full border-dotted p-8  hover:bg-gray-200 transition-colors duration-200 z-10 relative flex justify-center items-center'
       )}
     >
       <div>

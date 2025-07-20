@@ -18,12 +18,16 @@ import { parseDateInDefaultFormat } from '@/lib/parseDateInDefaultFormat';
 import { editTripAction } from '@/lib/server-actions/edit-trip';
 import { Loader } from '@/components/ui/loader';
 import { UploadImage } from '@/components/ui/UploadImage';
+import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
+import { Toggle } from '@/components/ui/toggle';
 
 function EditTripPage() {
   const pathname = usePathname();
   const navigate = useRouter();
   const [creating, setCreating] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [withLink, setWithLink] = useState(false);
+  console.log('🚀 ~ EditTripPage ~ selectedTrip:', selectedTrip);
 
   const tripId = pathname.split('/')[3];
 
@@ -71,6 +75,10 @@ function EditTripPage() {
       setValue('imageId', response.data.data.imageId);
       setValue('linkUrl', response.data.data.linkUrl);
       setValue('linkTitle', response.data.data.linkTitle);
+      setValue('images', response.data.data.images);
+      setValue('isLinkSelected', response.data.data.linkUrl ? true : false);
+
+      setWithLink(response.data.data.linkUrl ? true : false);
     }
     getTrip();
   }, [tripId]);
@@ -115,6 +123,17 @@ function EditTripPage() {
       setCreating(false);
     }
   }
+
+  function handleLinkChange() {
+    setWithLink((prevState) => {
+      formMethods.setValue('isLinkSelected', !prevState);
+      if (!prevState === false) {
+        formMethods.setValue('linkUrl', '');
+        formMethods.setValue('linkTitle', '');
+      }
+      return !prevState;
+    });
+  }
   return (
     <Container>
       <div className='flex  gap-4'>
@@ -156,75 +175,92 @@ function EditTripPage() {
                   error={errors.location?.message}
                   {...register('location')}
                 />
-              </div>
-              <FormProvider {...formMethods}>
-                <UploadImage
-                  imageDefault={{
-                    url: selectedTrip?.imageUrl || '',
-                    id: selectedTrip?.imageId || '',
+
+                <Controller
+                  name='startDate'
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <Input
+                        disabled={!selectedTrip}
+                        handleChange={onChange}
+                        value={value}
+                        placeholder=''
+                        title='Start date'
+                        type='date'
+                        min={'1993-01-01'}
+                        error={errors.startDate?.message}
+                        {...register('startDate')}
+                      />
+                    );
                   }}
                 />
+
+                <Controller
+                  name='endDate'
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <Input
+                        disabled={!selectedTrip}
+                        handleChange={onChange}
+                        value={value}
+                        placeholder=''
+                        title='End date'
+                        type='date'
+                        min={'1993-01-01'}
+                        error={errors.endDate?.message}
+                        {...register('endDate')}
+                      />
+                    );
+                  }}
+                />
+
+                <Spacer size={4} />
+                <div>
+                  <Toggle handleChange={handleLinkChange} selected={withLink} />
+                </div>
+
+                {withLink && (
+                  <>
+                    <Input
+                      disabled={!selectedTrip}
+                      placeholder='Type link url here'
+                      title='Link url'
+                      type='text'
+                      error={errors.linkUrl?.message}
+                      {...register('linkUrl')}
+                    />
+                    <Input
+                      disabled={!selectedTrip}
+                      placeholder='Type link title here'
+                      title='Link title'
+                      type='text'
+                      error={errors.linkTitle?.message}
+                      {...register('linkTitle')}
+                    />
+                  </>
+                )}
+              </div>
+              <FormProvider {...formMethods}>
+                <div className='flex flex-col gap-4'>
+                  <UploadImage
+                    title='Upload cover image *'
+                    imageDefault={{
+                      url: selectedTrip?.imageUrl || '',
+                      id: selectedTrip?.imageId || '',
+                    }}
+                  />
+
+                  <UploadMultipleImage
+                    type='multiple'
+                    title='Upload images'
+                    fieldName='images'
+                  />
+                </div>
               </FormProvider>
             </GridContainer>
-            <GridContainer cols={2} gap={10}>
-              <Input
-                disabled={!selectedTrip}
-                placeholder='Type link url here'
-                title='Link'
-                type='text'
-                error={errors.linkUrl?.message}
-                {...register('linkUrl')}
-              />
-              <Input
-                disabled={!selectedTrip}
-                placeholder='Type link title here'
-                title='Link title'
-                type='text'
-                error={errors.linkTitle?.message}
-                {...register('linkTitle')}
-              />
-            </GridContainer>
-            <GridContainer cols={2} gap={10}>
-              <Controller
-                name='startDate'
-                control={control}
-                render={({ field: { onChange, value } }) => {
-                  return (
-                    <Input
-                      disabled={!selectedTrip}
-                      handleChange={onChange}
-                      value={value}
-                      placeholder=''
-                      title='Start date'
-                      type='date'
-                      min={'1993-01-01'}
-                      error={errors.startDate?.message}
-                      {...register('startDate')}
-                    />
-                  );
-                }}
-              />
 
-              <Controller
-                name='endDate'
-                control={control}
-                render={({ field: { onChange, value } }) => {
-                  return (
-                    <Input
-                      disabled={!selectedTrip}
-                      handleChange={onChange}
-                      value={value}
-                      placeholder=''
-                      title='End date'
-                      type='date'
-                      min={'1993-01-01'}
-                      error={errors.endDate?.message}
-                      {...register('endDate')}
-                    />
-                  );
-                }}
-              />
-            </GridContainer>
             <Button
               disabled={creating || !selectedTrip}
               loading={creating}

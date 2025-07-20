@@ -37,6 +37,7 @@ export function Slider({ carouselData }: Props) {
             }}
           >
             <Image
+              quality={100}
               src={image.imageUrl}
               alt='image'
               width={1000}

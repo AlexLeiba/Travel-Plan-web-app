@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utilities';
+
 type Props = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     title: string;
@@ -26,12 +28,22 @@ export function Input({
   return (
     <div>
       <label htmlFor={title}>
-        <p className='text-gray-600 mb-2 font-medium'>{title}</p>
+        <p
+          className={cn(
+            restProp?.disabled ? 'text-gray-200' : 'text-gray-600',
+            ' mb-2 font-medium'
+          )}
+        >
+          {title}
+        </p>
       </label>
 
       {type === 'textarea' ? (
         <textarea
-          className='py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   border-green-300 w-full'
+          className={cn(
+            restProp?.disabled ? ' border-gray-300' : ' border-green-300',
+            'py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   w-full'
+          )}
           name={title}
           rows={textareaRows}
           onChange={handleChange}
@@ -39,7 +51,10 @@ export function Input({
         />
       ) : (
         <input
-          className='py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   border-green-300 w-full'
+          className={cn(
+            restProp?.disabled ? ' border-gray-300' : ' border-green-300',
+            'py-2 px-3 focus:outline-none focus:border-t-1  border-b-1    w-full'
+          )}
           name={title}
           type={type}
           onChange={handleChange}

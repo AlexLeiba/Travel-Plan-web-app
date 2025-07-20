@@ -27,9 +27,18 @@ export async function createTripAction(formData: TripSchemaType) {
       throw new Error('Image URL is required');
     }
 
+    const imagesData = formData.images?.map((image) => ({
+      userId: foundUser.id,
+      imageId: image.imageId || '',
+      imageUrl: image.imageUrl || '',
+    }));
+
     const createdTrip: Trip | null = await prisma.trip.create({
       data: {
-        ...formData,
+        // ...formData,
+        location: formData.location.trim(),
+        title: formData.title.trim(),
+        description: formData.description.trim(),
         startDate: new Date(formData.startDate),
         endDate: new Date(formData.endDate),
         userId: foundUser.id,
@@ -37,6 +46,8 @@ export async function createTripAction(formData: TripSchemaType) {
         imageId: formData.imageId || '', // Store the image ID if available
         linkUrl: formData.linkUrl || '',
         linkTitle: formData.linkTitle || formData.linkUrl ? 'Link' : '',
+        images:
+          imagesData && imagesData.length ? { create: imagesData } : undefined,
       },
     });
     console.log('🚀 ~ createTripAction ~ createdTrip:\n\n\n\n\n', createdTrip);

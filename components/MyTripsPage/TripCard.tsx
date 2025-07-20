@@ -57,7 +57,9 @@ export function TripCard({ data }: { data: Trip }) {
                 target='_blank'
                 className='text-green-700 hover:underline '
               >
-                {data.linkTitle || 'Link'}
+                <div className='px-2 bg-black text-white rounded-full'>
+                  {data.linkTitle || 'Link'}
+                </div>
               </Link>
             ) : (
               <div></div>

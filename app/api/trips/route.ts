@@ -29,6 +29,9 @@ export async function GET(req: NextRequest) {
         userId: foundUser.id,
         id: selectedTripId,
       },
+      include: {
+        images: true,
+      },
     });
 
     if (!trip) {
