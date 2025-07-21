@@ -77,6 +77,7 @@ function EditTripPage() {
       setValue('linkTitle', response.data.data.linkTitle);
       setValue('images', response.data.data.images);
       setValue('isLinkSelected', response.data.data.linkUrl ? true : false);
+      setValue('starRate', response.data.data.starRate);
 
       setWithLink(response.data.data.linkUrl ? true : false);
     }

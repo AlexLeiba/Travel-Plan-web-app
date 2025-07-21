@@ -1,3 +1,4 @@
+'use client';
 import { cva } from 'class-variance-authority';
 import { Loader } from './loader';
 
@@ -61,7 +62,10 @@ export function Button({
           className: classNameCustome,
         })}`}
         {...restProps}
-        onClick={handleClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClick?.();
+        }}
       >
         {loading ? <Loader /> : children}
       </button>

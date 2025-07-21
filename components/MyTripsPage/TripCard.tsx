@@ -1,6 +1,6 @@
 'use client';
 import { Trip } from '@/lib/generated/prisma';
-import { Edit, X } from 'lucide-react';
+import { Edit, Eye, X } from 'lucide-react';
 import Image from 'next/image';
 import { ModalContent, ModalProvider, ModalTrigger } from '../ui/modal';
 import Link from 'next/link';
@@ -31,6 +31,14 @@ export function TripCard({ data }: { data: Trip }) {
         >
           <div className='p-1 transition-all hover:bg-green-500 rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
             <Edit />
+          </div>
+        </Link>
+        <Link
+          href={`/my-trips/trip/${data.id}`}
+          className='absolute right-2 top-22'
+        >
+          <div className='p-1 transition-all hover:bg-green-500 rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
+            <Eye />
           </div>
         </Link>
         {/* TODd addModal on delete */}
