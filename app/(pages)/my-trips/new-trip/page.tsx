@@ -13,13 +13,13 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TripSchema, TripSchemaType } from '@/lib/schemas';
-import { UploadImage } from '@/components/ui/UploadImage';
 import { Plane } from 'lucide-react';
 import { createTripAction } from '@/lib/server-actions/create-trip';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Toggle } from '@/components/ui/toggle';
 import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
+import { StarRate } from '@/components/ui/starRate';
 
 function NewTripPage() {
   const navigate = useRouter();
@@ -46,12 +46,25 @@ function NewTripPage() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
+  console.log('🚀 ~ NewTripPage ~ errors:', errors);
 
   async function onSubmit(formData: TripSchemaType) {
-    setCreating(true);
+    const startDate = new Date(formData.startDate);
+    const endDate = new Date(formData.endDate);
+
+    if (startDate >= endDate) {
+      setError('startDate', {
+        message: 'Start date must be before the End date',
+      });
+      return;
+    }
 
     try {
+      // UPLOAD IMAGES
+
+      setCreating(true);
       await createTripAction(formData);
 
       toast.success('Trip created successfully!');
@@ -88,6 +101,7 @@ function NewTripPage() {
           >
             <GridContainer cols={2} gap={10}>
               <div className='flex flex-col gap-4'>
+                {/* Inputs */}
                 <Input
                   {...register('title')}
                   placeholder='Type the title of the trip...'
@@ -110,6 +124,7 @@ function NewTripPage() {
                   {...register('location')}
                 />
 
+                {/* Dates */}
                 <Input
                   min={'1993-01-01'}
                   placeholder=''
@@ -127,6 +142,7 @@ function NewTripPage() {
                   {...register('endDate')}
                 />
 
+                {/* Add link */}
                 <Spacer size={4} />
                 <div>
                   <Toggle handleChange={handleLinkChange} selected={withLink} />
@@ -154,17 +170,29 @@ function NewTripPage() {
               </div>
               <FormProvider {...formMethods}>
                 <div className='flex flex-col gap-4'>
-                  <UploadImage title='Upload cover image *' />
+                  {/* Star rate */}
+                  <FormProvider {...formMethods}>
+                    <StarRate />
+                  </FormProvider>
 
+                  {/* Upload cover image */}
+                  <UploadMultipleImage
+                    type='single'
+                    title='Upload cover image *'
+                    fieldName='imageUrl'
+                  />
+
+                  {/* Upload images */}
                   <UploadMultipleImage
                     type='multiple'
-                    title='Upload images'
+                    title='Upload more images'
                     fieldName='images'
                   />
                 </div>
               </FormProvider>
             </GridContainer>
 
+            {/* Submit button */}
             <Spacer size={2} />
             <Button
               disabled={creating}

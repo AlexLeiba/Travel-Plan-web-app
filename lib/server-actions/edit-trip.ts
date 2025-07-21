@@ -28,7 +28,7 @@ export async function editTripAction(formData: TripSchemaType, tripId: string) {
     }
 
     const { isLinkSelected, ...formDataWithoutLink } = formData;
-    console.log('🚀 ~ editTripAction ~ isLinkSelected:', isLinkSelected);
+    console.log('isLinkSelected:', isLinkSelected);
 
     const imagesData = formData.images?.map((image) => ({
       userId: foundUser.id,
@@ -46,12 +46,15 @@ export async function editTripAction(formData: TripSchemaType, tripId: string) {
         startDate: new Date(formData.startDate),
         endDate: new Date(formData.endDate),
         userId: foundUser.id,
-        images:
-          imagesData && imagesData.length ? { create: imagesData } : undefined,
+        images: {
+          deleteMany: {},
+          create: imagesData || [],
+        },
+        starRate: formData.starRate || 0,
       },
     });
 
-    console.log('🚀 ~  updatedTrip:', updatedTrip);
+    console.log('🚀 ~  updatedTrip:\n\n\n', updatedTrip);
 
     if (!updatedTrip) {
       throw new Error('Failed to update trip');

@@ -5,7 +5,7 @@ import { CardContent, NewTripCard } from '@/components/NewTripPage/NewTripCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Spacer } from '@/components/ui/spacer';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TripSchema, TripSchemaType } from '@/lib/schemas';
@@ -17,9 +17,9 @@ import axios from 'axios';
 import { parseDateInDefaultFormat } from '@/lib/parseDateInDefaultFormat';
 import { editTripAction } from '@/lib/server-actions/edit-trip';
 import { Loader } from '@/components/ui/loader';
-import { UploadImage } from '@/components/ui/UploadImage';
 import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 import { Toggle } from '@/components/ui/toggle';
+import { StarRate } from '@/components/ui/starRate';
 
 function EditTripPage() {
   const pathname = usePathname();
@@ -27,7 +27,6 @@ function EditTripPage() {
   const [creating, setCreating] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [withLink, setWithLink] = useState(false);
-  console.log('🚀 ~ EditTripPage ~ selectedTrip:', selectedTrip);
 
   const tripId = pathname.split('/')[3];
 
@@ -59,6 +58,7 @@ function EditTripPage() {
     formState: { errors, isDirty },
     setValue,
     control,
+    setError,
   } = formMethods;
   console.log('🚀 ~ EditTripPage ~ errors:', errors);
 
@@ -109,9 +109,18 @@ function EditTripPage() {
   }, [isDirty]);
 
   async function onSubmit(formData: TripSchemaType) {
-    setCreating(true);
+    const startDate = new Date(formData.startDate);
+    const endDate = new Date(formData.endDate);
+
+    if (startDate >= endDate) {
+      setError('startDate', {
+        message: 'Start date must be before the End date',
+      });
+      return;
+    }
 
     try {
+      setCreating(true);
       await editTripAction(formData, tripId);
 
       toast.success('Trip updated successfully!');
@@ -134,6 +143,13 @@ function EditTripPage() {
       return !prevState;
     });
   }
+
+  const defaultCoverImage = useMemo(() => {
+    return {
+      url: selectedTrip?.imageUrl || '',
+      id: selectedTrip?.imageId || '',
+    };
+  }, [selectedTrip?.imageUrl, selectedTrip?.imageId]);
   return (
     <Container>
       <div className='flex  gap-4'>
@@ -217,6 +233,7 @@ function EditTripPage() {
                 />
 
                 <Spacer size={4} />
+
                 <div>
                   <Toggle handleChange={handleLinkChange} selected={withLink} />
                 </div>
@@ -244,17 +261,21 @@ function EditTripPage() {
               </div>
               <FormProvider {...formMethods}>
                 <div className='flex flex-col gap-4'>
-                  <UploadImage
+                  {/* Star rate */}
+                  <FormProvider {...formMethods}>
+                    <StarRate defaultValue={selectedTrip?.starRate || 0} />
+                  </FormProvider>
+
+                  <UploadMultipleImage
+                    type='single'
                     title='Upload cover image *'
-                    imageDefault={{
-                      url: selectedTrip?.imageUrl || '',
-                      id: selectedTrip?.imageId || '',
-                    }}
+                    fieldName='imageUrl'
+                    imageDefault={defaultCoverImage}
                   />
 
                   <UploadMultipleImage
                     type='multiple'
-                    title='Upload images'
+                    title='Upload more images'
                     fieldName='images'
                   />
                 </div>

@@ -22,7 +22,7 @@ export function UploadMultipleImage({
   imageDefault,
   title,
   type = 'single',
-  fieldName,
+  fieldName = 'imageUrl',
 }: Props) {
   const {
     setValue,
@@ -43,7 +43,6 @@ export function UploadMultipleImage({
     control,
     name: 'images',
   });
-  console.log('🚀 ~ fields:', fields);
 
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,10 +50,12 @@ export function UploadMultipleImage({
     url: '',
     imageId: '',
   });
+  console.log('🚀 ~ imageUrl:', imageUrl);
 
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  // UPLOAD IMAGE HANDLER
   async function uploadImage(file: File) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
@@ -62,6 +63,7 @@ export function UploadMultipleImage({
     fileReader.onload = async () => {
       const previewUrl = fileReader.result as string;
 
+      // UPLOAD IMAGE
       const uploadedImage = await axios.post(
         '/api/upload-image',
 
@@ -85,12 +87,19 @@ export function UploadMultipleImage({
       //MULTIPLE IMAGES
       if (type === 'multiple') {
         append({
-          imageUrl: uploadedImage.data.imageUrl || '',
-          imageId: uploadedImage.data.imageId || '',
+          imageUrl: uploadedImage.data.imageUrl,
+          imageId: uploadedImage.data.imageId,
         });
       } else {
         // SINGLE IMAGE
-        setImageUrl({ url: previewUrl, imageId: uploadedImage.data.imageId });
+
+        //To preview image
+        setImageUrl({
+          url: uploadedImage.data.imageUrl,
+          imageId: uploadedImage.data.imageId,
+        });
+
+        // To update form value
         setValue(fieldName || 'imageUrl', uploadedImage.data.imageUrl || ''); // Update the form value with the image URL
         setValue('imageId', uploadedImage.data.imageId); // Update the form value with the image URL
       }
@@ -194,7 +203,7 @@ export function UploadMultipleImage({
               }
             }}
             className={cn(
-              errors.images && !imageUrl.url
+              type === 'single' && errors[fieldName] && !imageUrl.url
                 ? 'border-red-500'
                 : !errors.images && dragOver
                 ? 'border-green-300'
@@ -214,13 +223,15 @@ export function UploadMultipleImage({
             }}
           >
             {imageUrl.url && (
-              <X
+              <div
                 onClick={(e) => {
                   e.stopPropagation();
                   handleImageDelete();
                 }}
-                className='absolute right-2 top-2 z-50'
-              />
+                className='rounded-full absolute top-2 right-2 flex justify-center items-center bg-gray-200/50 p-1 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10'
+              >
+                <X className=' ' />
+              </div>
             )}
             {imageUrl.url && (
               <div>
@@ -273,22 +284,24 @@ export function UploadMultipleImage({
           </div>
         </>
       )}
-      <GridContainer cols={2} gap={4} wrap={true}>
-        {fields?.map((field: any) => {
-          return (
-            <React.Fragment key={field.imageId}>
-              {field && (
-                <PreviewImagesCard
-                  imageUrl={field.imageUrl}
-                  handleDelete={() =>
-                    handleMultipleImageDelete(field.imageId, field.imageId)
-                  }
-                />
-              )}
-            </React.Fragment>
-          );
-        })}
-      </GridContainer>
+      {type === 'multiple' && (
+        <GridContainer cols={2} gap={4} wrap={true}>
+          {fields?.map((field: Record<string, string>, index: number) => {
+            return (
+              <React.Fragment key={field.imageUrl}>
+                {field && (
+                  <PreviewImagesCard
+                    imageUrl={field.imageUrl}
+                    handleDelete={() =>
+                      handleMultipleImageDelete(index, field.imageId)
+                    }
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </GridContainer>
+      )}
     </>
   );
 }

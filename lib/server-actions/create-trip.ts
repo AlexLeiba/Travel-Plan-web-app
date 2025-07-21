@@ -36,6 +36,7 @@ export async function createTripAction(formData: TripSchemaType) {
     const createdTrip: Trip | null = await prisma.trip.create({
       data: {
         // ...formData,
+        starRate: formData.starRate || 0,
         location: formData.location.trim(),
         title: formData.title.trim(),
         description: formData.description.trim(),

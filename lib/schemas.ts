@@ -26,7 +26,7 @@ export const TripSchema = z
     startDate: z.string().min(1, 'Start date is required'),
     endDate: z.string().min(1, 'End date is required'),
 
-    imageUrl: z.url().min(1, 'Image URL is required'),
+    imageUrl: z.string().min(1, 'Image URL is required'),
     imageId: z.string().min(1, 'Image ID is required'),
     images: z.array(
       z.object({
@@ -34,9 +34,24 @@ export const TripSchema = z
         imageId: z.string().optional(),
       })
     ),
+    starRate: z.number().optional(),
 
     isLinkSelected: z.boolean().optional(),
   })
+  // .refine(
+  //   (data) => {
+  //     const startDate = new Date(data.startDate).getTime();
+  //     const endDate = new Date(data.endDate).getTime();
+  //     console.log('🚀 ~ .refine ~ startDate:', startDate, endDate);
+
+  //     return startDate >= endDate;
+  //   },
+  //   {
+  //     path: ['startDate', 'endDate'],
+  //     message: 'Start date must be before the End date',
+  //   }
+  // )
+
   .and(discriminatedLinkSchema);
 
 export type TripSchemaType = z.infer<typeof TripSchema>;
