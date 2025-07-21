@@ -12,7 +12,7 @@ export function TripCard({ data }: { data: Trip }) {
       <div className=' bg-gray-100 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
         <ModalProvider>
           <ModalTrigger customeClassName='absolute right-0 top-0'>
-            <button className='p-1 transition-all hover:bg-red-500 rounded-full bg-red-200/50 flex items-center justify-center absolute right-2 top-2 cursor-pointer'>
+            <button className='p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-red-200/50 flex items-center justify-center absolute right-2 top-2 cursor-pointer'>
               <X />
             </button>
           </ModalTrigger>
@@ -29,7 +29,7 @@ export function TripCard({ data }: { data: Trip }) {
           href={`/my-trips/edit-trip/${data.id}`}
           className='absolute right-2 top-12'
         >
-          <div className='p-1 transition-all hover:bg-green-500 rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
+          <div className='p-1 transition-all text-gray-400 hover:bg-green-500 hover:text-white rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
             <Edit />
           </div>
         </Link>
@@ -37,7 +37,7 @@ export function TripCard({ data }: { data: Trip }) {
           href={`/my-trips/trip/${data.id}`}
           className='absolute right-2 top-22'
         >
-          <div className='p-1 transition-all hover:bg-green-500 rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
+          <div className='p-1 transition-all text-gray-400 hover:text-white hover:bg-green-500 rounded-full bg-green-200/50 flex items-center justify-center  cursor-pointer'>
             <Eye />
           </div>
         </Link>

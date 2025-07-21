@@ -51,6 +51,9 @@ export function ModalContent({ children, handleConfirm }: ModalContentProps) {
     >
       <div className='bg-white rounded-lg px-4 py-8  h-[200px] shadow-md flex flex-col justify-between relative'>
         <X
+          role='button'
+          tabIndex={0}
+          onKeyDown={(v) => v.key === 'Enter' && setIsVisible(false)}
           onClick={() => setIsVisible(false)}
           className='absolute right-2 top-2 cursor-pointer'
         />

@@ -26,7 +26,13 @@ export function StarRate({ defaultValue }: Props) {
       <div className='flex items-center gap-2'>
         <p className='font-medium'>Rate your trip</p>
         {selectedStar > 0 && (
-          <X onClick={() => setSelectedStar(0)} className='cursor-pointer' />
+          <X
+            onClick={() => setSelectedStar(0)}
+            className='cursor-pointer'
+            role='button'
+            tabIndex={0}
+            onKeyDown={(v) => v.key === 'Enter' && setSelectedStar(0)}
+          />
         )}
       </div>
 
@@ -34,6 +40,9 @@ export function StarRate({ defaultValue }: Props) {
         {stars.map((_, index) => {
           return (
             <div
+              role='button'
+              tabIndex={0}
+              onKeyDown={(v) => v.key === 'Enter' && handleStarClick(index + 1)}
               onMouseEnter={() => setStarState(index + 1)}
               onMouseLeave={() => setStarState(0)}
               key={index}

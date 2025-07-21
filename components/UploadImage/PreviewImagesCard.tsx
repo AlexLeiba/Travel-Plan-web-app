@@ -9,7 +9,12 @@ export function PreviewImagesCard({ imageUrl, handleDelete }: Props) {
   return (
     <div className='relative overflow-hidden rounded-md border-1 border-gray-300 w-full h-32'>
       <div className='rounded-full absolute top-1 right-1 flex justify-center items-center bg-gray-200/50 p-1 cursor-pointer hover:bg-gray-200 transition-colors duration-200 z-10'>
-        <X onClick={handleDelete} className=' ' />
+        <X
+          onClick={handleDelete}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleDelete()}
+        />
       </div>
       <Image
         src={imageUrl}
