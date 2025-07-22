@@ -1,13 +1,13 @@
 'use client';
 import { Trip } from '@/lib/generated/prisma';
-import { Edit, Eye, X } from 'lucide-react';
+import { Edit, Eye, Images, X } from 'lucide-react';
 import Image from 'next/image';
 import { ModalContent, ModalProvider, ModalTrigger } from '../ui/modal';
 import Link from 'next/link';
 import { deleteTripAction } from '@/lib/server-actions/delete-trip';
 import { PreviewStarRate } from '../TripSinglePage/PreviewStarRate';
 
-export function TripCard({ data }: { data: Trip }) {
+export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
   return (
     <>
       <div className=' bg-gray-100 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
@@ -62,32 +62,35 @@ export function TripCard({ data }: { data: Trip }) {
             <p className='lg:line-clamp-4 line-clamp-1'>{data.description}</p>
           </div>
 
-          <div className='flex justify-between '>
-            {data.linkUrl ? (
-              <Link
-                href={data.linkUrl}
-                target='_blank'
-                className='text-green-700 hover:underline '
-              >
-                <div className='px-2 bg-black text-white rounded-full'>
-                  {data.linkTitle && data.linkTitle?.length > 20
-                    ? data.linkTitle?.substring(0, 20) + '...'
-                    : data.linkTitle || 'Link'}
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
+          <div className='flex flex-col items-end gap-2'>
+            {data.images && data.images?.length > 0 && <Images />}
+            <div className='flex justify-between gap-8 '>
+              {data.linkUrl ? (
+                <Link
+                  href={data.linkUrl}
+                  target='_blank'
+                  className='text-green-700 hover:underline '
+                >
+                  <div className='px-2 bg-black text-white rounded-full'>
+                    {data.linkTitle && data.linkTitle?.length > 20
+                      ? data.linkTitle?.substring(0, 20) + '...'
+                      : data.linkTitle || 'Link'}
+                  </div>
+                </Link>
+              ) : (
+                <div></div>
+              )}
 
-            <div className='flex justify-between items-center gap-4'>
-              <p>
-                <span className='font-medium'>From:</span>{' '}
-                {new Date(data.startDate).toLocaleDateString()}
-              </p>
-              <p>
-                <span className='font-medium'>To:</span>{' '}
-                {new Date(data.endDate).toLocaleDateString()}
-              </p>
+              <div className='flex justify-between items-center gap-4'>
+                <p>
+                  <span className='font-medium'>From:</span>{' '}
+                  {new Date(data.startDate).toLocaleDateString()}
+                </p>
+                <p>
+                  <span className='font-medium'>To:</span>{' '}
+                  {new Date(data.endDate).toLocaleDateString()}
+                </p>
+              </div>
             </div>
           </div>
         </div>

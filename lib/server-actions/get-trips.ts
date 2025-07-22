@@ -60,6 +60,9 @@ export async function getTripsAction({
       },
       // skip:(page - 1) * tripsPerPage,
       take: tripsPerPage * page,
+      include: {
+        images: true,
+      },
     });
 
     if (!trips) {
