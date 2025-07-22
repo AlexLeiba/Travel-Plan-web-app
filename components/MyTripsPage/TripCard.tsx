@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ModalContent, ModalProvider, ModalTrigger } from '../ui/modal';
 import Link from 'next/link';
 import { deleteTripAction } from '@/lib/server-actions/delete-trip';
+import { PreviewStarRate } from '../TripSinglePage/PreviewStarRate';
 
 export function TripCard({ data }: { data: Trip }) {
   return (
@@ -41,8 +42,11 @@ export function TripCard({ data }: { data: Trip }) {
             <Eye />
           </div>
         </Link>
-        {/* TODd addModal on delete */}
-        <div className='flex flex-1'>
+
+        <div className='flex flex-1 relative'>
+          <div className='absolute top-2 left-2 flex items-center gap-2'>
+            <PreviewStarRate rate={data?.starRate || 0} />
+          </div>
           <Image
             className='object-center object-cover lg:h-full h-[250px] w-full'
             src={data.imageUrl || ''}
