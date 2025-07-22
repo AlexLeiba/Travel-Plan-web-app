@@ -66,7 +66,9 @@ export function TripCard({ data }: { data: Trip }) {
                 className='text-green-700 hover:underline '
               >
                 <div className='px-2 bg-black text-white rounded-full'>
-                  {data.linkTitle || 'Link'}
+                  {data.linkTitle && data.linkTitle?.length > 20
+                    ? data.linkTitle?.substring(0, 20) + '...'
+                    : data.linkTitle || 'Link'}
                 </div>
               </Link>
             ) : (

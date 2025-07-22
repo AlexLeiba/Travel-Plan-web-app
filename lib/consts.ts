@@ -17,4 +17,4 @@ export const CAROUSEL_DATA = [
   },
 ];
 
-export const SORT_OPTIONS = ['planned', 'completed', 'all'];
+export const SORT_OPTIONS = ['planned', 'completed', 'all', 'newest', 'oldest'];

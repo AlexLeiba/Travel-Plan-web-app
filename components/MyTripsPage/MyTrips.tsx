@@ -1,23 +1,25 @@
 import { getTripsAction } from '@/lib/server-actions/get-trips';
-import { TripCard } from './TripCard';
+import { TripsCardList } from './TripsCardList';
 
 type Props = {
-  params: { type: 'planned' | 'completed' | 'all'; search?: string };
+  params: {
+    type: 'planned' | 'completed' | 'all';
+    search?: string;
+    page?: number;
+    order?: 'newest' | 'oldest';
+  };
 };
-export async function MyTrips({ params: { type, search } }: Props) {
-  const trips = await getTripsAction({ type, search });
+
+// infinite scroll.
+// 1. pas to server action prop with searchParams with new index
+export async function MyTrips({
+  params: { type, search, page, order },
+}: Props) {
+  const trips = await getTripsAction({ type, search, page, order });
 
   return (
-    <div className='grid grid-cols-1 gap-4'>
-      {trips?.data && trips.data.length > 0 ? (
-        trips.data?.map((trip) => {
-          return <TripCard key={trip.id} data={trip} />;
-        })
-      ) : (
-        <div>
-          <p>No trips was found</p>
-        </div>
-      )}
+    <div className=''>
+      <TripsCardList trips={trips || []} />
     </div>
   );
 }
