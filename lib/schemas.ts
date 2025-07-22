@@ -19,9 +19,12 @@ export const TripSchema = z
     description: z
       .string()
       .min(1, 'Description is required, at least 1 character long'),
+
     location: z
       .string()
       .min(1, 'Location is required, at least 1 character long'),
+    lattitude: z.string().optional(),
+    lngitude: z.string().optional(),
 
     startDate: z.string().min(1, 'Start date is required'),
     endDate: z.string().min(1, 'End date is required'),

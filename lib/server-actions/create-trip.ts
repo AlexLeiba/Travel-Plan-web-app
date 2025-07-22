@@ -38,6 +38,8 @@ export async function createTripAction(formData: TripSchemaType) {
         // ...formData,
         starRate: formData.starRate || 0,
         location: formData.location.trim(),
+        lattitude: formData.lattitude || '0',
+        lngitude: formData.lngitude || '0',
         title: formData.title.trim(),
         description: formData.description.trim(),
         startDate: new Date(formData.startDate),

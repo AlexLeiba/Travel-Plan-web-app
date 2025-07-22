@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { Toggle } from '@/components/ui/toggle';
 import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 import { StarRate } from '@/components/ui/starRate';
+import { SearchLocationInput } from '@/components/ui/searchLocationInput';
 
 function NewTripPage() {
   const navigate = useRouter();
@@ -33,6 +34,8 @@ function NewTripPage() {
       title: '',
       description: '',
       location: '',
+      lattitude: '0',
+      lngitude: '0',
       startDate: '',
       endDate: '',
       imageUrl: '', // Initialize with null (no file selected)
@@ -116,13 +119,22 @@ function NewTripPage() {
                   error={errors.description?.message}
                   {...register('description')}
                 />
-                <Input
+                {/* <Input
                   placeholder='Type the location...'
                   title='Location *'
                   type='text'
                   error={errors.location?.message}
                   {...register('location')}
-                />
+                /> */}
+                <FormProvider {...formMethods}>
+                  <SearchLocationInput
+                    placeholder='Type the location...'
+                    title='Location *'
+                    type='text'
+                    error={errors.location?.message}
+                    // {...register('location')}
+                  />
+                </FormProvider>
 
                 {/* Dates */}
                 <Input

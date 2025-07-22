@@ -87,6 +87,8 @@ id String @id @default(cuid())
   imageUrl String
   imageId String // ID of the image in Cloudinary
   location String
+  lattitude String
+  lngitude String
 
 
   startDate DateTime
