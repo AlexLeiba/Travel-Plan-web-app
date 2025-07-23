@@ -1,7 +1,6 @@
 import { Container } from '@/components/grid/Container';
-import LocationMap from '@/components/TripSinglePage/LocationMap';
-import { PreviewGallery } from '@/components/TripSinglePage/PreviewGallery';
 import { PreviewStarRate } from '@/components/TripSinglePage/PreviewStarRate';
+import { TabsSectionView } from '@/components/TripSinglePage/TabsSectionView';
 import { Spacer } from '@/components/ui/spacer';
 import { getSingleTripAction } from '@/lib/server-actions/get-single-trip';
 import { Edit } from 'lucide-react';
@@ -78,33 +77,8 @@ async function SingleTripPage({
       <div className='w-[80%]'>
         <p className='whitespace-pre-wrap'>{tripData?.description}</p>
       </div>
-
-      {tripData && tripData.lattitude && (
-        <>
-          <Spacer size={12} />
-          <p className='font-bold'>Location on map</p>
-          <Spacer size={2} />
-          <LocationMap
-            locationCoordinates={[
-              Number(tripData?.lattitude),
-              Number(tripData?.lngitude),
-            ]}
-            title={tripData?.location}
-          />
-        </>
-      )}
-
       <Spacer size={12} />
-
-      {tripData && tripData.images && tripData?.images?.length > 0 && (
-        <>
-          <p className='font-bold'>Trip Gallery</p>
-          <Spacer size={2} />
-
-          <PreviewGallery tripImages={tripData?.images} />
-          <Spacer size={8} />
-        </>
-      )}
+      {tripData && <TabsSectionView tripData={tripData} />}
     </Container>
   );
 }

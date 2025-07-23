@@ -13,8 +13,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: ['bg-green-500 text-white', 'hover:bg-green-600'],
-        secondary: 'bg-black text-white hover:bg-black/80',
+        primary: [
+          'bg-green-500 text-white',
+          'hover:bg-green-600 border-1 border-black/50',
+        ],
+        secondary:
+          'bg-black text-white hover:bg-black/80 border-1 border-black/50',
+        outline:
+          'bg-white text-black border-1 border-black/50 hover:opacity-80',
       },
       size: {
         sm: ['p-1'],
@@ -38,7 +44,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   error?: string;
   loading?: boolean;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   classNameCustome?: string;
   handleClick?: () => void;
