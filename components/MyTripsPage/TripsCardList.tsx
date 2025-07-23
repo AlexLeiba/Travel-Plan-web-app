@@ -18,6 +18,7 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
   const searchParam = searchParams.get('search');
   const router = useRouter();
 
+  // HANDLE INTERSECTION OBSERVER
   const observer = new IntersectionObserver(
     ([entries]) => {
       if (

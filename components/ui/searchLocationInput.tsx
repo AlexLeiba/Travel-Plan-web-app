@@ -1,5 +1,5 @@
 'use client';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import 'leaflet/dist/leaflet.css';
@@ -60,6 +60,7 @@ export function SearchLocationInput({
     setValue('location', '');
     setValue('lattitude', '');
     setValue('lngitude', '');
+    setResults([]);
   }
 
   function handleSelectLocation(result: SearchResult<RawResult>) {
@@ -88,8 +89,13 @@ export function SearchLocationInput({
           <div className='absolute right-2 top-2'>
             <Loader color='black' />
           </div>
+        ) : inputValue.length > 0 ? (
+          <X
+            className='absolute text-gray-500 right-2 top-2 cursor-pointer'
+            onClick={cleanSearch}
+          />
         ) : (
-          <X className='absolute right-2 top-2' onClick={cleanSearch} />
+          <Search className='absolute text-gray-500 right-2 top-2 ' />
         )}
         <input
           disabled={loading}

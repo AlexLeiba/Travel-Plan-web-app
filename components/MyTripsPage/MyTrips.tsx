@@ -10,8 +10,6 @@ type Props = {
   };
 };
 
-// infinite scroll.
-// 1. pas to server action prop with searchParams with new index
 export async function MyTrips({
   params: { type, search, page, order },
 }: Props) {

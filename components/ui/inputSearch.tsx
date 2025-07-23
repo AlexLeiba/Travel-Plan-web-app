@@ -1,5 +1,5 @@
 'use client';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -47,7 +47,14 @@ export function InputSearch({
 
   return (
     <div className='relative'>
-      <X className='absolute right-2 top-2' onClick={cleanSearch} />
+      {value.length > 0 ? (
+        <X
+          className='absolute text-gray-500 right-2 top-2 cursor-pointer'
+          onClick={cleanSearch}
+        />
+      ) : (
+        <Search className='absolute text-gray-500 right-2 top-2 ' />
+      )}
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}

@@ -26,7 +26,8 @@ export async function MyTripsPage({
         <div className='flex items-center gap-2'>
           <p>
             {paramType.type &&
-              paramType.type !== 'all' &&
+              (paramType.type === 'planned' ||
+                paramType.type === 'completed') &&
               `(${paramType.type})`}
           </p>
           {paramType.type === 'completed' && (
@@ -41,8 +42,8 @@ export async function MyTripsPage({
 
       <div className='flex justify-between items-center gap-4'>
         <div className='flex items-center gap-8'>
-          <Dropdown title='Sort' type='type' />
-          <Dropdown title='Sort' type='order' />
+          <Dropdown title='Type' type='type' />
+          <Dropdown title='Order' type='order' />
           <InputSearch title='Search' placeholder='Search trips' />
         </div>
 
