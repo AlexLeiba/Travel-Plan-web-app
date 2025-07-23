@@ -20,6 +20,7 @@ import { Loader } from '@/components/ui/loader';
 import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 import { Toggle } from '@/components/ui/toggle';
 import { StarRate } from '@/components/ui/starRate';
+import { SearchLocationInput } from '@/components/ui/searchLocationInput';
 
 function EditTripPage() {
   const pathname = usePathname();
@@ -60,7 +61,6 @@ function EditTripPage() {
     control,
     setError,
   } = formMethods;
-  console.log('🚀 ~ EditTripPage ~ errors:', errors);
 
   useEffect(() => {
     async function getTrip() {
@@ -184,14 +184,16 @@ function EditTripPage() {
                   error={errors.description?.message}
                   {...register('description')}
                 />
-                <Input
-                  disabled={!selectedTrip}
-                  placeholder='Type the location...'
-                  title='Location'
-                  type='text'
-                  error={errors.location?.message}
-                  {...register('location')}
-                />
+
+                <FormProvider {...formMethods}>
+                  <SearchLocationInput
+                    defaultInputValue={selectedTrip?.location}
+                    placeholder='Type the location...'
+                    title='Location *'
+                    type='text'
+                    error={errors.location?.message}
+                  />
+                </FormProvider>
 
                 <Controller
                   name='startDate'

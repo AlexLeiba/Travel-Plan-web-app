@@ -1,4 +1,5 @@
 import { Container } from '@/components/grid/Container';
+import LocationMap from '@/components/TripSinglePage/LocationMap';
 import { PreviewGallery } from '@/components/TripSinglePage/PreviewGallery';
 import { PreviewStarRate } from '@/components/TripSinglePage/PreviewStarRate';
 import { Spacer } from '@/components/ui/spacer';
@@ -72,13 +73,28 @@ async function SingleTripPage({
           )}
         </div>
       </div>
-      <Spacer size={4} />
+      <Spacer size={6} />
 
       <div className='w-[80%]'>
         <p className='whitespace-pre-wrap'>{tripData?.description}</p>
       </div>
 
-      <Spacer size={8} />
+      {tripData && tripData.lattitude && (
+        <>
+          <Spacer size={12} />
+          <p className='font-bold'>Location on map</p>
+          <Spacer size={2} />
+          <LocationMap
+            locationCoordinates={[
+              Number(tripData?.lattitude),
+              Number(tripData?.lngitude),
+            ]}
+            title={tripData?.location}
+          />
+        </>
+      )}
+
+      <Spacer size={12} />
 
       {tripData && tripData.images && tripData?.images?.length > 0 && (
         <>

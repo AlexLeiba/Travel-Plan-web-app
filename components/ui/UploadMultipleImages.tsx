@@ -50,7 +50,6 @@ export function UploadMultipleImage({
     url: '',
     imageId: '',
   });
-  console.log('🚀 ~ imageUrl:', imageUrl);
 
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);

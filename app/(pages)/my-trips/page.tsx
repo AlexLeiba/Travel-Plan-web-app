@@ -9,7 +9,7 @@ import { Plane } from 'lucide-react';
 import Link from 'next/link';
 import React, { Suspense } from 'react';
 
-export async function MyTripsPage({
+async function MyTripsPage({
   searchParams,
 }: {
   searchParams: Promise<{

@@ -4,6 +4,8 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { Button } from './button';
@@ -40,7 +42,29 @@ type ModalContentProps = {
   handleConfirm: () => void;
 };
 export function ModalContent({ children, handleConfirm }: ModalContentProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const { isVisible, setIsVisible } = useContext(ModalContext);
+
+  useEffect(() => {
+    if (isVisible) {
+      const handleClickOutside = (e: MouseEvent) => {
+        console.log('first');
+        if (ref.current && !ref.current.contains(e.target as Node)) {
+          console.log('first2');
+          setIsVisible(false);
+        }
+      };
+      document.addEventListener('click', handleClickOutside);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          setIsVisible(false);
+        }
+      });
+      return () => {
+        document.removeEventListener('click', handleClickOutside);
+      };
+    }
+  }, [isVisible]);
 
   return (
     <div
@@ -49,7 +73,10 @@ export function ModalContent({ children, handleConfirm }: ModalContentProps) {
         'fixed z-50 inset-0 bg-black/50 backdrop-blur-sm  items-center justify-center'
       )}
     >
-      <div className='bg-white rounded-lg px-4 py-8  h-[200px] shadow-md flex flex-col justify-between relative'>
+      <div
+        ref={ref}
+        className='bg-white rounded-lg px-4 pt-8 pb-4  h-[200px] shadow-md flex flex-col justify-between relative'
+      >
         <X
           role='button'
           tabIndex={0}
@@ -62,12 +89,17 @@ export function ModalContent({ children, handleConfirm }: ModalContentProps) {
           <Button
             handleClick={handleConfirm}
             variant='secondary'
-            classNameCustome='bg-red-500 hover:bg-red-600'
+            classNameCustome='bg-red-500 hover:bg-red-600 px-4'
           >
             Delete
           </Button>
 
-          <Button handleClick={() => setIsVisible(false)}>Cancel</Button>
+          <Button
+            handleClick={() => setIsVisible(false)}
+            classNameCustome='px-8'
+          >
+            Cancel
+          </Button>
         </div>
       </div>
     </div>

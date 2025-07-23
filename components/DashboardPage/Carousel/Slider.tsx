@@ -7,7 +7,6 @@ import { NavButton } from './CarouselNavButton';
 type Props = { carouselData: { imageUrl: string; title: string }[] };
 
 export function Slider({ carouselData }: Props) {
-  console.log('🚀 ~ Slider ~ carousel Data:', carouselData);
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div>

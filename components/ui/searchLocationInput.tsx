@@ -1,21 +1,35 @@
 'use client';
+import React from 'react';
 import { Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-geosearch/dist/geosearch.css';
 import { cn } from '@/lib/utilities';
 import { SearchResult } from 'leaflet-geosearch/dist/providers/provider.js';
 import { RawResult } from 'leaflet-geosearch/dist/providers/civilDefenseMapProvider.js';
 import { Loader } from './loader';
 import { useFormContext } from 'react-hook-form';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-geosearch/dist/geosearch.css';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     title: string;
     error?: string;
+    defaultInputValue?: string;
   };
-export function SearchLocationInput({ title, error, ...restProp }: Props) {
+export function SearchLocationInput({
+  title,
+  error,
+  defaultInputValue,
+  ...restProp
+}: Props) {
+  const [OpenStreetMapProvider, setProvider] = useState<any>(null);
+
+  useEffect(() => {
+    import('leaflet-geosearch').then((mod) => {
+      setProvider(() => mod.OpenStreetMapProvider);
+    });
+  }, []);
+
   const { setValue } = useFormContext();
   const [inputValue, setInputValue] = useState('');
   const [selectedInputValues, setSelectedInputValues] = useState<string>('');
@@ -41,6 +55,13 @@ export function SearchLocationInput({ title, error, ...restProp }: Props) {
 
     return () => clearTimeout(timeoutId);
   }, [inputValue]);
+
+  useEffect(() => {
+    if (defaultInputValue) {
+      setSelectedInputValues(defaultInputValue);
+      setInputValue(defaultInputValue);
+    }
+  }, [defaultInputValue]);
 
   function cleanSearch() {
     setInputValue('');

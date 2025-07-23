@@ -15,39 +15,40 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
 
   //   HANDLE URL
   const searchParams = useSearchParams();
-  const searchParam = searchParams.get('search');
+
   const router = useRouter();
 
-  // HANDLE INTERSECTION OBSERVER
-  const observer = new IntersectionObserver(
-    ([entries]) => {
-      if (
-        entries.isIntersecting &&
-        data &&
-        data.length < totalTrips &&
-        !searchParam
-      ) {
-        setIntersepted(entries.isIntersecting);
-        const searchParamsObj = new URLSearchParams(searchParams);
-        const page = searchParamsObj.get('page');
-        if (page) {
-          const newPage = Number(page) + 1;
-          searchParamsObj.set('page', newPage.toString());
-        } else {
-          searchParamsObj.set('page', '2');
-        }
-        router.replace(`?${searchParamsObj.toString()}`);
-      } else {
-        setIntersepted(false);
-      }
-    },
-    {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5, // 0.5 = 50% is visible
-    }
-  );
   useEffect(() => {
+    // HANDLE INTERSECTION OBSERVER
+    const observer = new IntersectionObserver(
+      ([entries]) => {
+        const searchParam = searchParams.get('search');
+        if (
+          entries.isIntersecting &&
+          data &&
+          data.length < totalTrips &&
+          !searchParam
+        ) {
+          setIntersepted(entries.isIntersecting);
+          const searchParamsObj = new URLSearchParams(searchParams);
+          const page = searchParamsObj.get('page');
+          if (page) {
+            const newPage = Number(page) + 1;
+            searchParamsObj.set('page', newPage.toString());
+          } else {
+            searchParamsObj.set('page', '2');
+          }
+          router.replace(`?${searchParamsObj.toString()}`);
+        } else {
+          setIntersepted(false);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5, // 0.5 = 50% is visible
+      }
+    );
     const target = observeRefElement.current;
     if (target) {
       observer.observe(target);
