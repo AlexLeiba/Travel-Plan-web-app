@@ -14,21 +14,8 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     title: string;
     error?: string;
-    type?:
-      | 'text'
-      | 'email'
-      | 'tel'
-      | 'password'
-      | 'number'
-      | 'textarea'
-      | 'date';
   };
-export function SearchLocationInput({
-  title,
-  error,
-  type = 'text',
-  ...restProp
-}: Props) {
+export function SearchLocationInput({ title, error, ...restProp }: Props) {
   const { setValue } = useFormContext();
   const [inputValue, setInputValue] = useState('');
   const [selectedInputValues, setSelectedInputValues] = useState<string>('');
@@ -103,7 +90,7 @@ export function SearchLocationInput({
           onChange={(e) => setInputValue(e.target.value)}
           className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100  w-full hover:bg-gray-300 transition-all'
           name={title}
-          type={type}
+          type={'text'}
           {...restProp}
         />
 
@@ -119,7 +106,6 @@ export function SearchLocationInput({
               className='mb-4 hover:bg-gray-400 hover:text-white cursor-pointer p-2'
             >
               <p>{result.label}</p>
-              {/* <p>{result.description}</p> */}
             </div>
           ))}
         </div>

@@ -7,21 +7,8 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     title: string;
     error?: string;
-    type?:
-      | 'text'
-      | 'email'
-      | 'tel'
-      | 'password'
-      | 'number'
-      | 'textarea'
-      | 'date';
   };
-export function InputSearch({
-  title,
-  error,
-  type = 'text',
-  ...restProp
-}: Props) {
+export function InputSearch({ title, error, ...restProp }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [value, setValue] = useState('');
@@ -60,7 +47,7 @@ export function InputSearch({
         onChange={(e) => setValue(e.target.value)}
         className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100  w-full hover:bg-gray-300 transition-all'
         name={title}
-        type={type}
+        type={'text'}
         {...restProp}
       />
 
