@@ -48,7 +48,7 @@ export async function createTripAction(formData: TripSchemaType) {
         imageUrl: formData.imageUrl || '', // Use the secure URL from Cloudinary
         imageId: formData.imageId || '', // Store the image ID if available
         linkUrl: formData.linkUrl || '',
-        linkTitle: formData.linkTitle || formData.linkUrl ? 'Link' : '',
+        linkTitle: formData.linkTitle || '',
         images:
           imagesData && imagesData.length ? { create: imagesData } : undefined,
       },

@@ -24,11 +24,11 @@ export function StarRate({ defaultValue }: Props) {
   return (
     <div className='flex items-start gap-2 flex-col'>
       <div className='flex items-center gap-2'>
-        <p className='font-medium'>Rate your trip</p>
+        <p className='font-medium dark:text-white'>Rate your trip</p>
         {selectedStar > 0 && (
           <X
             onClick={() => setSelectedStar(0)}
-            className='cursor-pointer'
+            className='cursor-pointer dark:text-white'
             role='button'
             tabIndex={0}
             onKeyDown={(v) => v.key === 'Enter' && setSelectedStar(0)}
