@@ -1,20 +1,39 @@
+import Image from 'next/image';
 import { AuthButton } from '../ui/authButton';
+import { Spacer } from '../ui/spacer';
 
 export function HeroSection() {
   return (
-    <div className='space-y-10'>
-      <h1 className='font-[family-name:var(--font-serif)]'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-        ullam.
-      </h1>
+    <div className='space-y-10 flex  items-center justify-center'>
+      <div>
+        <h1 className='font-[family-name:var(--font-playwrite)]'>
+          Travel , Plan and Enjoy your trips
+        </h1>
 
-      <div className='flex gap-8 items-center w-full'>
-        <p className='font-[family-name:var(--font-geist-sans)]'>
-          Home Page Lorem ipsum dolor sit amet.
+        <Spacer size={8} />
+        <h2 className='font-[family-name:var(--font-playwrite)]'>
+          Save your best moments and destinations
+        </h2>
+        <Spacer size={2} />
+        <p>Enjoy the travel experience each time you visit your profile</p>
+        <p>Keep track of all visited places, and plan your next trips :)</p>
+        <p>
+          The <b>theme</b> will adapt to your system preferences
         </p>
 
-        <AuthButton type='landingPage' />
+        <Spacer size={8} />
+        <div className='flex gap-8 items-center w-full'>
+          <AuthButton type='landingPage' />
+        </div>
       </div>
+
+      <Image
+        className='w-full object-cover '
+        src={'/travel.png'}
+        alt='hero'
+        width={600}
+        height={600}
+      />
     </div>
   );
 }

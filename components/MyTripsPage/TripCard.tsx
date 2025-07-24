@@ -10,12 +10,12 @@ import { PreviewStarRate } from '../TripSinglePage/PreviewStarRate';
 export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
   return (
     <>
-      <div className=' bg-gray-100 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
+      <div className=' bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
         <ModalProvider>
           <ModalTrigger customeClassName='absolute right-1 top-1'>
             <button
               title='Delete trip'
-              className='p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-red-200/50 flex items-center justify-center absolute right-2 top-2 cursor-pointer'
+              className='p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer'
             >
               <X />
             </button>
@@ -72,12 +72,12 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
               <Images className='text-yellow-500' />
             )}
             <div className='flex items-center gap-2'>
-              <p className='text-gray-500 body-sm'>
+              <p className='text-gray-500 dark:text-gray-50 body-sm'>
                 {data.location.length > 40
                   ? data.location.substring(0, 40) + '...'
                   : data.location}
               </p>
-              <Pin className='text-gray-500' />
+              <Pin className='text-gray-500 dark:text-gray-50' />
             </div>
 
             <div className='flex justify-between gap-8 '>

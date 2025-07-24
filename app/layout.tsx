@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Playwrite_HU } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -12,6 +12,10 @@ const geistMono = Geist_Mono({
   //passed this variables to all body to use it across all components
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+const playwrite = Playwrite_HU({
+  //passed this variables to all body to use it across all components
+  variable: '--font-playwrite',
 });
 
 export const metadata: Metadata = {
@@ -27,7 +31,7 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playwrite.variable} antialiased flex flex-col min-h-screen`}
       >
         <Toaster />
         {children}

@@ -85,7 +85,9 @@ export function SearchLocationInput({
       <label htmlFor={title}>
         <p
           className={cn(
-            restProp?.disabled ? 'text-gray-200' : 'text-gray-600',
+            restProp?.disabled
+              ? 'text-gray-200'
+              : 'text-gray-600 dark:text-white',
             ' mb-2 font-medium'
           )}
         >
@@ -99,7 +101,7 @@ export function SearchLocationInput({
           </div>
         ) : inputValue.length > 0 ? (
           <X
-            className='absolute text-gray-500 right-2 top-2 cursor-pointer'
+            className='absolute text-gray-500 z-20 right-2 top-2 cursor-pointer'
             onClick={cleanSearch}
           />
         ) : (
@@ -109,7 +111,7 @@ export function SearchLocationInput({
           disabled={loading}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100  w-full hover:bg-gray-300 transition-all'
+          className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100 dark:bg-transparent dark:border-white dark:border-1 dark:text-white  w-full hover:bg-gray-300  dark:hover:opacity-80 dark:hover:bg-transparent transition-all dark:placeholder:text-gray-400'
           name={title}
           type={'text'}
           {...restProp}
@@ -119,14 +121,14 @@ export function SearchLocationInput({
       </div>
 
       {results.length > 0 && (
-        <div className='bg-white rounded-md p-2 shadow-lg max-h-[300px] overflow-y-auto'>
+        <div className='bg-white dark:bg-gray-300 rounded-md p-2 shadow-lg max-h-[300px] overflow-y-auto'>
           {results.map((result: SearchResult<RawResult>, index: number) => (
             <div
               onClick={() => handleSelectLocation(result)}
               key={index}
-              className='mb-4 hover:bg-gray-400 hover:text-white cursor-pointer p-2'
+              className='mb-4 hover:bg-gray-400 rounded-md  hover:text-white cursor-pointer p-2'
             >
-              <p>{result.label}</p>
+              <p className='dark:text-gray-600'>{result.label}</p>
             </div>
           ))}
         </div>

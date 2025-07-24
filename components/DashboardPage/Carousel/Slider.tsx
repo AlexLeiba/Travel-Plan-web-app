@@ -4,13 +4,18 @@ import Image from 'next/image';
 import { Spacer } from '../../ui/spacer';
 import { NavButton } from './CarouselNavButton';
 
-type Props = { carouselData: { imageUrl: string; title: string }[] };
+type Props = {
+  carouselData: { imageUrl: string; title: string }[];
+  title?: string;
+};
 
-export function Slider({ carouselData }: Props) {
+export function Slider({ carouselData, title }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div>
-      <h5>Your Trips Gallery</h5>
+      <h5 className='font-[family-name:var(--font-playwrite)] font-bold'>
+        {title || 'Your Trips Gallery'}
+      </h5>
       <Spacer sm={6} md={6} lg={6} />
       <div className='w-full rounded-md h-[600px] flex overflow-hidden relative'>
         <NavButton
@@ -44,7 +49,7 @@ export function Slider({ carouselData }: Props) {
               className='object-cover object-center  w-[992px] '
               key={index}
             />
-            <h5 className='text-shadow-lg text-shadow-white font-medium absolute bottom-12 z-40 left-8'>
+            <h5 className='text-shadow-md text-white text-shadow-black font-medium absolute bottom-12 z-40 left-8'>
               {image.title}
             </h5>
           </div>

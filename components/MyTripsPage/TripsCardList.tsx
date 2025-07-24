@@ -62,7 +62,7 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
   if (!data)
     return (
       <div>
-        <p>No trips was found</p>
+        <p className='dark:text-white'>No trips was found</p>
       </div>
     );
 
@@ -75,7 +75,7 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
         })
       ) : (
         <div>
-          <p>No trips was found</p>
+          <p className='dark:text-white'>No trips was found</p>
         </div>
       )}
 

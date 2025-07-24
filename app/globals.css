@@ -3,34 +3,61 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary-color: #000000;
-  --secondary-color: #1016af;
-  --tertiary-color: #036d28;
-  --font-serif: 'Courier New', Courier, monospace;
-}
+@layer base {
+  :root {
+    --text: black;
+    --background: #ffffff;
+    --foreground: #171717;
+    --primary-color: #000000;
+    --secondary-color: #1016af;
+    --tertiary-color: #036d28;
+    --font-serif: 'Courier New', Courier, monospace;
+  }
 
-h1 {
-  @apply text-5xl;
-}
+  h1 {
+    @apply text-5xl;
+    color: var(--text);
+  }
 
-h2 {
-  @apply text-4xl;
-}
-h3 {
-  @apply text-3xl;
-}
+  h2 {
+    @apply text-4xl;
+    color: var(--text);
+  }
+  h3 {
+    @apply text-3xl;
+    color: var(--text);
+  }
 
-h5 {
-  @apply text-2xl;
-}
+  h5 {
+    @apply text-2xl;
+    color: var(--text);
+  }
 
-p {
-  @apply text-base;
-}
+  p {
+    @apply text-base;
+    color: var(--text);
+  }
 
-.body-sm {
-  @apply text-sm;
+  .body-sm {
+    @apply text-sm;
+    color: var(--text);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /*Will adapt the theme based on browser Theme*/
+    :root {
+      --text: #ffffff;
+      --background: #000000;
+      --foreground: #171717;
+      --primary-color: #000000;
+      --secondary-color: #1016af;
+      --tertiary-color: #036d28;
+      --font-serif: 'Courier New', Courier, monospace;
+
+      input,
+      textarea {
+        color: var(--text);
+      }
+    }
+  }
 }

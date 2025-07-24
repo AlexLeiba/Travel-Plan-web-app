@@ -7,7 +7,7 @@ type Props = {
 export function Toggle({ handleChange, selected }: Props) {
   return (
     <div className='flex gap-2'>
-      <p className={cn('text-gray-600 font-medium')}>Link +</p>
+      <p className={cn('text-gray-600 dark:text-white font-medium')}>Link +</p>
       <div
         onClick={handleChange}
         className='bg-white border-1 w-[50px] border-gray-300 rounded-full p-1 cursor-pointer hover:opacity-80'

@@ -18,7 +18,7 @@ const buttonVariants = cva(
           'hover:bg-green-600 border-1 border-black/50',
         ],
         secondary:
-          'bg-black text-white hover:bg-black/80 border-1 border-black/50',
+          'bg-black text-white hover:opacity-80 border-1 dark:border-gray-400 border-black/50',
         outline:
           'bg-white text-black border-1 border-black/50 hover:opacity-80',
       },

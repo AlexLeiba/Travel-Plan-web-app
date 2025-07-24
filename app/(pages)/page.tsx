@@ -6,13 +6,13 @@ import { CAROUSEL_DATA } from '@/lib/consts';
 
 export default async function Home() {
   return (
-    <>
+    <div className='w-full h-full'>
       <Container>
         <HeroSection />
-        <Spacer sm={12} md={12} lg={24} />
+        <Spacer sm={6} md={6} lg={6} />
 
-        <Slider carouselData={CAROUSEL_DATA} />
+        <Slider title='App Gallery' carouselData={CAROUSEL_DATA} />
       </Container>
-    </>
+    </div>
   );
 }

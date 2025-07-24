@@ -45,7 +45,7 @@ export function InputSearch({ title, error, ...restProp }: Props) {
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100  w-full hover:bg-gray-300 transition-all'
+        className='py-2 pl-3 pr-8 focus:outline-none rounded-md bg-gray-100 text-black  w-full hover:bg-gray-300 transition-all'
         name={title}
         type={'text'}
         {...restProp}

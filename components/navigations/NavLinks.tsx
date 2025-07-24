@@ -17,14 +17,16 @@ export function NavLinks() {
     <div className='flex gap-8 items-center'>
       {links.map((link) => {
         return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={cn(
-              pathname === link.href ? 'text-green-600' : 'hover:text-green-600'
-            )}
-          >
-            {link.name}
+          <Link key={link.name} href={link.href}>
+            <p
+              className={cn(
+                pathname === link.href
+                  ? 'text-green-600'
+                  : 'hover:text-green-600'
+              )}
+            >
+              {link.name}
+            </p>
           </Link>
         );
       })}

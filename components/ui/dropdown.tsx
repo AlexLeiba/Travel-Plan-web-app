@@ -28,7 +28,7 @@ export function Dropdown({ title, type }: Props) {
     <div>
       <select
         value={searchParams.get(type) || 'all'}
-        className='p-2 bg-gray-100 rounded-md outline-none hover:bg-gray-300  cursor-pointer transition-all'
+        className='p-[10px] bg-gray-100 rounded-md outline-none hover:bg-gray-300  cursor-pointer transition-all'
         name={title}
         id={title}
         onChange={(e) => handleSelectParam(e.target.value)}

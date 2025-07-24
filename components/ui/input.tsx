@@ -30,7 +30,9 @@ export function Input({
       <label htmlFor={title}>
         <p
           className={cn(
-            restProp?.disabled ? 'text-gray-200' : 'text-gray-600',
+            restProp?.disabled
+              ? 'text-gray-200'
+              : 'text-gray-600 dark:text-white',
             ' mb-2 font-medium'
           )}
         >
@@ -41,7 +43,7 @@ export function Input({
       {type === 'textarea' ? (
         <textarea
           className={cn(
-            restProp?.disabled ? ' border-gray-300' : ' border-green-300',
+            restProp?.disabled ? ' border-gray-300' : ' border-green-300 ',
             'py-2 px-3 focus:outline-none focus:border-t-1  border-b-1   w-full'
           )}
           name={title}
@@ -53,7 +55,7 @@ export function Input({
         <input
           className={cn(
             restProp?.disabled ? ' border-gray-300' : ' border-green-300',
-            'py-2 px-3 focus:outline-none focus:border-t-1  border-b-1    w-full'
+            'py-2 px-3 focus:outline-none focus:border-t-1  border-b-1    w-full '
           )}
           name={title}
           type={type}
