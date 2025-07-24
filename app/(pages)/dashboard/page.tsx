@@ -6,6 +6,11 @@ import { Spacer } from '@/components/ui/spacer';
 import { MyTripsStatsSkeleton } from '@/components/DashboardPage/MyTripsStatsSkeleton';
 import { CarouselSkeleton } from '@/components/DashboardPage/Carousel/CarouselSkeleton';
 
+export const metadata = {
+  title: 'Travel-Plan  / Dashboard',
+  description: 'Travel ,Plan and Enjoy your trips',
+};
+
 export default async function Dashboard() {
   return (
     <>

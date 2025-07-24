@@ -6,25 +6,31 @@ import {
   NewTripCard,
 } from '@/components/NewTripPage/NewTripCard';
 import { Spacer } from '@/components/ui/spacer';
-
 import { NewTripForm } from '@/components/NewTripPage/NewTripForm';
+
+export const metadata = {
+  title: 'Travel-App / New trip',
+  description: 'Travel ,Plan and Enjoy your trips',
+};
 
 function NewTripPage() {
   return (
-    <Container>
-      <h2>New trip</h2>
-      <Spacer sm={12} md={12} lg={24} />
+    <>
+      <Container>
+        <h2>New trip</h2>
+        <Spacer sm={12} md={12} lg={24} />
 
-      <NewTripCard>
-        <CardHeader>
-          <h3>Create a new trip</h3>
-        </CardHeader>
+        <NewTripCard>
+          <CardHeader>
+            <h3>Create a new trip</h3>
+          </CardHeader>
 
-        <CardContent>
-          <NewTripForm />
-        </CardContent>
-      </NewTripCard>
-    </Container>
+          <CardContent>
+            <NewTripForm />
+          </CardContent>
+        </NewTripCard>
+      </Container>
+    </>
   );
 }
 

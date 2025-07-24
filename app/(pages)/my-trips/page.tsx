@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import { Container } from '@/components/grid/Container';
 import { MyTrips } from '@/components/MyTripsPage/MyTrips';
 import { TripCardSkeleton } from '@/components/MyTripsPage/TripCardSkeleton';
@@ -7,7 +8,11 @@ import { InputSearch } from '@/components/ui/inputSearch';
 import { Spacer } from '@/components/ui/spacer';
 import { Plane } from 'lucide-react';
 import Link from 'next/link';
-import React, { Suspense } from 'react';
+
+export const metadata = {
+  title: 'Travel-Plan / My trips',
+  description: 'Travel ,Plan and Enjoy your trips',
+};
 
 async function MyTripsPage({
   searchParams,

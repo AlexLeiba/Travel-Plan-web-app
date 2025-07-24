@@ -8,6 +8,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+export const metadata = {
+  title: 'Travel-Plan / Trip',
+  description: 'Travel ,Plan and Enjoy your trips',
+};
+
 async function SingleTripPage({
   params,
 }: {

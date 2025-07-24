@@ -21,6 +21,7 @@ import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 import { Toggle } from '@/components/ui/toggle';
 import { StarRate } from '@/components/ui/starRate';
 import { SearchLocationInput } from '@/components/ui/searchLocationInput';
+import Head from 'next/head';
 
 function EditTripPage() {
   const pathname = usePathname();
@@ -152,154 +153,169 @@ function EditTripPage() {
     };
   }, [selectedTrip?.imageUrl, selectedTrip?.imageId]);
   return (
-    <Container>
-      <div className='flex  gap-4'>
-        <h2>Edit trip</h2>
-        {!selectedTrip && <Loader color='black' />}
-      </div>
-      <Spacer sm={12} md={12} lg={24} />
+    <>
+      <Head>
+        <title>Travel-Plan / New trip</title>
+        <meta name='description' content='Travel ,Plan and Enjoy your trips' />
+        <meta name='og:title' content='Travel-Plan / New trip' />
+        <meta
+          name='og:description'
+          content='Travel ,Plan and Enjoy your trips'
+        />
+      </Head>
 
-      <NewTripCard>
-        <CardContent>
-          <form
-            action=''
-            className='flex flex-col gap-4'
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <GridContainer cols={2} gap={10}>
-              <div className='flex flex-col gap-4'>
-                <Input
-                  disabled={!selectedTrip}
-                  {...register('title')}
-                  placeholder='Type the title of the trip...'
-                  title='Title'
-                  type='text'
-                  error={errors.title?.message}
-                />
-                <Input
-                  disabled={!selectedTrip}
-                  placeholder='Type the description of the trip...'
-                  title='Description'
-                  type='textarea'
-                  error={errors.description?.message}
-                  {...register('description')}
-                />
+      <Container>
+        <div className='flex  gap-4'>
+          <h2>Edit trip</h2>
+          {!selectedTrip && <Loader color='black' />}
+        </div>
+        <Spacer sm={12} md={12} lg={24} />
 
-                <FormProvider {...formMethods}>
-                  <SearchLocationInput
-                    defaultInputValue={selectedTrip?.location}
-                    placeholder='Type the location...'
-                    title='Location *'
-                    type='text'
-                    error={errors.location?.message}
-                  />
-                </FormProvider>
-
-                <Controller
-                  name='startDate'
-                  control={control}
-                  render={({ field: { onChange, value } }) => {
-                    return (
-                      <Input
-                        disabled={!selectedTrip}
-                        handleChange={onChange}
-                        value={value}
-                        placeholder=''
-                        title='Start date'
-                        type='date'
-                        min={'1993-01-01'}
-                        error={errors.startDate?.message}
-                        {...register('startDate')}
-                      />
-                    );
-                  }}
-                />
-
-                <Controller
-                  name='endDate'
-                  control={control}
-                  render={({ field: { onChange, value } }) => {
-                    return (
-                      <Input
-                        disabled={!selectedTrip}
-                        handleChange={onChange}
-                        value={value}
-                        placeholder=''
-                        title='End date'
-                        type='date'
-                        min={'1993-01-01'}
-                        error={errors.endDate?.message}
-                        {...register('endDate')}
-                      />
-                    );
-                  }}
-                />
-
-                <Spacer size={4} />
-
-                <div>
-                  <Toggle handleChange={handleLinkChange} selected={withLink} />
-                </div>
-
-                {withLink && (
-                  <>
-                    <Input
-                      disabled={!selectedTrip}
-                      placeholder='Type link url here'
-                      title='Link url'
-                      type='text'
-                      error={errors.linkUrl?.message}
-                      {...register('linkUrl')}
-                    />
-                    <Input
-                      disabled={!selectedTrip}
-                      placeholder='Type link title here'
-                      title='Link title'
-                      type='text'
-                      error={errors.linkTitle?.message}
-                      {...register('linkTitle')}
-                    />
-                  </>
-                )}
-              </div>
-              <FormProvider {...formMethods}>
+        <NewTripCard>
+          <CardContent>
+            <form
+              action=''
+              className='flex flex-col gap-4'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <GridContainer cols={2} gap={10}>
                 <div className='flex flex-col gap-4'>
-                  {/* Star rate */}
+                  <Input
+                    disabled={!selectedTrip}
+                    {...register('title')}
+                    placeholder='Type the title of the trip...'
+                    title='Title'
+                    type='text'
+                    error={errors.title?.message}
+                  />
+                  <Input
+                    disabled={!selectedTrip}
+                    placeholder='Type the description of the trip...'
+                    title='Description'
+                    type='textarea'
+                    error={errors.description?.message}
+                    {...register('description')}
+                  />
+
                   <FormProvider {...formMethods}>
-                    <StarRate defaultValue={selectedTrip?.starRate || 0} />
+                    <SearchLocationInput
+                      defaultInputValue={selectedTrip?.location}
+                      placeholder='Type the location...'
+                      title='Location *'
+                      type='text'
+                      error={errors.location?.message}
+                    />
                   </FormProvider>
 
-                  <UploadMultipleImage
-                    type='single'
-                    title='Upload cover image *'
-                    fieldName='imageUrl'
-                    imageDefault={defaultCoverImage}
+                  <Controller
+                    name='startDate'
+                    control={control}
+                    render={({ field: { onChange, value } }) => {
+                      return (
+                        <Input
+                          disabled={!selectedTrip}
+                          handleChange={onChange}
+                          value={value}
+                          placeholder=''
+                          title='Start date'
+                          type='date'
+                          min={'1993-01-01'}
+                          error={errors.startDate?.message}
+                          {...register('startDate')}
+                        />
+                      );
+                    }}
                   />
 
-                  <UploadMultipleImage
-                    type='multiple'
-                    title='Upload more images'
-                    fieldName='images'
+                  <Controller
+                    name='endDate'
+                    control={control}
+                    render={({ field: { onChange, value } }) => {
+                      return (
+                        <Input
+                          disabled={!selectedTrip}
+                          handleChange={onChange}
+                          value={value}
+                          placeholder=''
+                          title='End date'
+                          type='date'
+                          min={'1993-01-01'}
+                          error={errors.endDate?.message}
+                          {...register('endDate')}
+                        />
+                      );
+                    }}
                   />
+
+                  <Spacer size={4} />
+
+                  <div>
+                    <Toggle
+                      handleChange={handleLinkChange}
+                      selected={withLink}
+                    />
+                  </div>
+
+                  {withLink && (
+                    <>
+                      <Input
+                        disabled={!selectedTrip}
+                        placeholder='Type link url here'
+                        title='Link url'
+                        type='text'
+                        error={errors.linkUrl?.message}
+                        {...register('linkUrl')}
+                      />
+                      <Input
+                        disabled={!selectedTrip}
+                        placeholder='Type link title here'
+                        title='Link title'
+                        type='text'
+                        error={errors.linkTitle?.message}
+                        {...register('linkTitle')}
+                      />
+                    </>
+                  )}
                 </div>
-              </FormProvider>
-            </GridContainer>
+                <FormProvider {...formMethods}>
+                  <div className='flex flex-col gap-4'>
+                    {/* Star rate */}
+                    <FormProvider {...formMethods}>
+                      <StarRate defaultValue={selectedTrip?.starRate || 0} />
+                    </FormProvider>
 
-            <Button
-              disabled={creating || !selectedTrip}
-              loading={creating}
-              type='submit'
-              onClick={handleSubmit((data) => onSubmit(data))}
-              variant='secondary'
-              classNameCustome='flex justify-center items-center gap-2'
-            >
-              Save changes
-              <Plane size={15} />
-            </Button>
-          </form>
-        </CardContent>
-      </NewTripCard>
-    </Container>
+                    <UploadMultipleImage
+                      type='single'
+                      title='Upload cover image *'
+                      fieldName='imageUrl'
+                      imageDefault={defaultCoverImage}
+                    />
+
+                    <UploadMultipleImage
+                      type='multiple'
+                      title='Upload more images'
+                      fieldName='images'
+                    />
+                  </div>
+                </FormProvider>
+              </GridContainer>
+
+              <Button
+                disabled={creating || !selectedTrip}
+                loading={creating}
+                type='submit'
+                onClick={handleSubmit((data) => onSubmit(data))}
+                variant='secondary'
+                classNameCustome='flex justify-center items-center gap-2'
+              >
+                Save changes
+                <Plane size={15} />
+              </Button>
+            </form>
+          </CardContent>
+        </NewTripCard>
+      </Container>
+    </>
   );
 }
 
