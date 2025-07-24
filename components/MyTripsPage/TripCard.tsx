@@ -24,8 +24,10 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
           <ModalContent
             handleConfirm={() => deleteTripAction(data.id, data.imageId || '')}
           >
-            <h3>Are you sure you want to delete this trip?</h3>
-            <p>This action cannot be undone.</p>
+            <h3 className='dark:text-black'>
+              Are you sure you want to delete this trip?
+            </h3>
+            <p className='dark:text-black'>This action cannot be undone.</p>
           </ModalContent>
         </ModalProvider>
 

@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { getServerUserSession } from '@/lib/getServerUserSession';
 import { CheckCircle, Clock, Plane } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 
 export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();
@@ -20,26 +21,35 @@ export async function MyTripsStats() {
       <div className='flex gap-6 flex-wrap flex-col'>
         <h3>Welcome back {session?.user?.name}</h3>
 
-        <div className='flex gap-6 flex-wrap'>
-          <Link href={'/my-trips?type=all'}>
-            <div className='flex items-center gap-2 p-4 cursor-pointer bg-green-200  rounded-md hover:bg-green-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
-              <Plane size={20} />
-              <h5 className='dark:text-black'>Trips : {data?.all}</h5>
-            </div>
-          </Link>
+        <div className='flex items-end justify-between'>
+          <div className='flex gap-6 flex-wrap'>
+            <Link href={'/my-trips?type=all'}>
+              <div className='flex items-center gap-2 p-4 cursor-pointer bg-green-200  rounded-md hover:bg-green-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
+                <Plane size={20} />
+                <h5 className='dark:text-black'>Trips : {data?.all}</h5>
+              </div>
+            </Link>
 
-          <Link href={'/my-trips?type=planned'}>
-            <div className='flex items-center gap-2  p-4 cursor-pointer bg-yellow-200 rounded-md hover:bg-yellow-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
-              <Clock size={20} />
-              <h5 className='dark:text-black'>Planned : {data?.planned}</h5>
-            </div>
-          </Link>
+            <Link href={'/my-trips?type=planned'}>
+              <div className='flex items-center gap-2  p-4 cursor-pointer bg-yellow-200 rounded-md hover:bg-yellow-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
+                <Clock size={20} />
+                <h5 className='dark:text-black'>Planned : {data?.planned}</h5>
+              </div>
+            </Link>
 
-          <Link href={'/my-trips?type=completed'}>
-            <div className='flex items-center gap-2  p-4 cursor-pointer bg-purple-200 rounded-md hover:bg-purple-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
-              <CheckCircle size={20} />
-              <h5 className='dark:text-black'>Completed : {data?.completed}</h5>
-            </div>
+            <Link href={'/my-trips?type=completed'}>
+              <div className='flex items-center gap-2  p-4 cursor-pointer bg-purple-200 rounded-md hover:bg-purple-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
+                <CheckCircle size={20} />
+                <h5 className='dark:text-black'>
+                  Completed : {data?.completed}
+                </h5>
+              </div>
+            </Link>
+          </div>
+          <Link href={'/my-trips/new-trip'}>
+            <Button classNameCustome='px-12 flex items-center gap-2'>
+              New trip <Plane size={15} />
+            </Button>
           </Link>
         </div>
       </div>

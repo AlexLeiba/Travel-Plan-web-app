@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className=' bg-white text-white border-t border-black shadow-md flex items-center '>
+    <footer className=' bg-white dark:bg-black dark:border-1 dark:border-t-white text-white border-t border-black shadow-md flex items-center '>
       <div className='p-4 max-w-5xl mx-auto flex items-center justify-between w-full text-black'>
         <Logo />
-        <div className='flex gap-4'>
+        <div className='flex gap-4 dark:text-white'>
           <p>Alexandru Leiba Lapteacru</p>
           <Link target='_blank' href={'https://github.com/alexLeiba'}>
             <Github />

@@ -249,7 +249,7 @@ export function UploadMultipleImage({
                 htmlFor={'upload'}
                 className='flex justify-center items-center flex-col cursor-pointer'
               >
-                <p className='text-center text-gray-600 mb-2 font-medium'>
+                <p className='text-center text-gray-600 dark:text-gray-400 mb-2 font-medium'>
                   {title}
                 </p>
                 {type === 'multiple' ? (

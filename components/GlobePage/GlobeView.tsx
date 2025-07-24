@@ -84,8 +84,12 @@ export default function GlobeView({ locationsData: { data } }: Props) {
       </div>
       <div className='flex flex-col gap-1 absolute top-[20px] z-20 right-5 bg-white rounded-md p-2'>
         <h4 className='font-bold'>You visited</h4>
-        <p>Countries : {locationsData.visitedCountries.length}</p>
-        <p>Cities: {locationsData.visitedCities.length}</p>
+        <p className='dark:text-black'>
+          Countries : {locationsData.visitedCountries.length}
+        </p>
+        <p className='dark:text-black'>
+          Cities: {locationsData.visitedCities.length}
+        </p>
       </div>
       <Globe
         ref={globeRef}

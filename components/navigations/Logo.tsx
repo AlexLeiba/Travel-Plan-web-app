@@ -5,7 +5,7 @@ import Link from 'next/link';
 export function Logo() {
   return (
     <Link href={'/'} className='flex items-center justify-center'>
-      <MapPinned />
+      <MapPinned className='text-green-500' />
       <p className='font-bold'>Travel-Plan</p>
     </Link>
   );

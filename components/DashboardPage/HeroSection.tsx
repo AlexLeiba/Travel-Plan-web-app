@@ -18,7 +18,7 @@ export function HeroSection() {
         <p>Enjoy the travel experience each time you visit your profile</p>
         <p>Keep track of all visited places, and plan your next trips :)</p>
         <p>
-          The <b>theme</b> will adapt to your system preferences
+          The <b>theme</b> will be adopted to your system preferences
         </p>
 
         <Spacer size={8} />
