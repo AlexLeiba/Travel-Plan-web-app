@@ -18,7 +18,7 @@ export const authOptions = NextAuth({
     sessionToken: {
       name: 'next-auth.session-token',
       options: {
-        sameSite: 'lax', // to be able to use the session in cross-site requests
+        sameSite: 'lax', // to be able to use the session in cross-site requests , only on GET request will be sent cookies
         secure: process.env.NODE_ENV === 'production', // only send the session cookie over HTTPS if true
         httpOnly: true, // only send the session cookie over HTTP if true
         path: '/', // the path to which the session cookie will be saved
@@ -36,11 +36,11 @@ export const authOptions = NextAuth({
     //     : '',
     // }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID
-        ? process.env.GOOGLE_CLIENT_ID
+      clientId: process.env.GOOGLE_CLIENT_ID!
+        ? process.env.GOOGLE_CLIENT_ID!
         : '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        ? process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        ? process.env.GOOGLE_CLIENT_SECRET!
         : '',
     }),
   ],
