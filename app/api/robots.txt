@@ -1,3 +1,11 @@
 User-agent: *
+Disallow: /globe/
+Disallow: /dashboard/
+Disallow: /my-trips/
+Disallow: /my-trips/new-trip
+Disallow: /my-trips/edit-trip
+
 Allow: /
+
+
 Sitemap: https://travel-plan-zeta.vercel.app/api/sitemap.xml
