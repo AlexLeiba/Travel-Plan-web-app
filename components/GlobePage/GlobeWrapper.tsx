@@ -21,5 +21,12 @@ type Props = {
       };
 };
 export function GlobeWrapper(locationsData: Props) {
+  if (locationsData.locationsData.error) {
+    return (
+      <p className='text-red-500 text-center'>
+        {locationsData.locationsData.error}
+      </p>
+    );
+  }
   return <GlobeView locationsData={locationsData.locationsData} />;
 }

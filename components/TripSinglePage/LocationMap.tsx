@@ -19,10 +19,13 @@ type Props = {
   title: string;
 };
 export default function LocationMap({ locationCoordinates, title }: Props) {
-  if (!locationCoordinates) return;
-  <div>
-    <p>Location not found</p>
-  </div>;
+  if (!locationCoordinates) {
+    return (
+      <div>
+        <p>Location not found</p>
+      </div>
+    );
+  }
   return (
     <div className='w-full h-[400px] rounded-md overflow-hidden border-1 border-gray-300'>
       <MapContainer

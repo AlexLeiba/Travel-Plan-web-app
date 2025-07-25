@@ -3,7 +3,6 @@
 import React, { useMemo } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
-
 import { Button } from '../ui/button';
 import { Loader } from '../ui/loader';
 
@@ -95,13 +94,13 @@ export default function GlobeView({ locationsData: { data } }: Props) {
         ref={globeRef}
         globeImageUrl={
           selectedTab === 'day'
-            ? '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg'
-            : '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg'
+            ? 'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg'
+            : 'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg'
         }
-        bumpImageUrl='//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png'
+        bumpImageUrl='https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png'
         backgroundColor={selectedTab === 'day' ? '#ffffff' : '#000000'}
         backgroundImageUrl={
-          '//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png'
+          'https://cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png'
         }
         pointColor={() => '#9cf9a8'}
         labelColor={() => '#ffffff'}
