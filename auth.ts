@@ -16,7 +16,7 @@ export const authOptions = NextAuth({
       name: 'next-auth.session-token',
       options: {
         sameSite: 'lax', // to be able to use the session in cross-site requests , only on GET request will be sent cookies
-        secure: process.env.NODE_ENV === 'production', // only send the session cookie over HTTPS if true
+        // secure: process.env.NODE_ENV === 'production', // only send the session cookie over HTTPS if true
         httpOnly: true, // only send the session cookie over HTTP if true
         path: '/', // the path to which the session cookie will be saved
       },
@@ -24,14 +24,6 @@ export const authOptions = NextAuth({
   },
   secret: process.env.AUTH_SECRET,
   providers: [
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_CLIENT_ID
-    //     ? process.env.GITHUB_CLIENT_ID
-    //     : '',
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET
-    //     ? process.env.GITHUB_CLIENT_SECRET
-    //     : '',
-    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!
         ? process.env.GOOGLE_CLIENT_ID!
