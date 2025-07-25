@@ -8,4 +8,4 @@ Disallow: /my-trips/edit-trip
 Allow: /
 
 
-Sitemap: https://travel-plan-zeta.vercel.app/api/sitemap.xml
+Sitemap: https://travel-plan-zeta.vercel.app/sitemap.xml
