@@ -65,7 +65,7 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
 
         <div className='flex flex-1 flex-col justify-between p-4'>
           <div className='mr-8'>
-            <h5 className='lg:line-clamp-2 line-clamp-1'>{data.title}</h5>
+            <h2 className='lg:line-clamp-2 line-clamp-1'>{data.title}</h2>
             <p className='lg:line-clamp-3 line-clamp-1'>{data.description}</p>
           </div>
 

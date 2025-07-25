@@ -27,6 +27,7 @@ export function Dropdown({ title, type }: Props) {
   return (
     <div>
       <select
+        title={title}
         value={searchParams.get(type) || 'all'}
         className='p-[10px] bg-gray-100 rounded-md outline-none hover:bg-gray-300  cursor-pointer transition-all'
         name={title}
