@@ -22,7 +22,7 @@ export const authOptions = NextAuth({
       },
     },
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET! ? process.env.AUTH_SECRET! : '',
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!
