@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono, Playwrite_HU } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
+import { Footer } from '@/components/navigations/Footer';
+import { Navbar } from '@/components/navigations/Navbar';
+import ClientLayout from './client-layout';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,10 +28,16 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playwrite.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playwrite.variable} antialiased flex flex-col min-h-screen  `}
       >
         <Toaster />
-        {children}
+        <ClientLayout>
+          <Navbar />
+          <main className='flex-grow pt-32 pb-24 bg-[var(--background)] '>
+            {children}
+          </main>
+        </ClientLayout>
+        <Footer />
       </body>
     </html>
   );
