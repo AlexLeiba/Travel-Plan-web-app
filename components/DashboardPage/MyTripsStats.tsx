@@ -11,7 +11,7 @@ export async function MyTripsStats() {
   const session = await getServerUserSession();
 
   if (error) {
-    toast.error(error);
+    return <p className='text-red-500 text-center'>{error}</p>;
   }
   if (!data || (data?.all && data.all === 0)) {
     return <div>No trips stats was found.</div>;

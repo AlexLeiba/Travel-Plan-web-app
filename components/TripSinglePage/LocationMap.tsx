@@ -9,8 +9,8 @@ import L from 'leaflet';
 // Fix missing marker icons in Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: '/pin.png',
-  iconUrl: '',
+  iconRetinaUrl: '',
+  iconUrl: '/pin.png',
   shadowUrl: '',
 });
 
@@ -19,6 +19,10 @@ type Props = {
   title: string;
 };
 export default function LocationMap({ locationCoordinates, title }: Props) {
+  if (!locationCoordinates) return;
+  <div>
+    <p>Location not found</p>
+  </div>;
   return (
     <div className='w-full h-[400px] rounded-md overflow-hidden border-1 border-gray-300'>
       <MapContainer

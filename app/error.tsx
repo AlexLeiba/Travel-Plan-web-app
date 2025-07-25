@@ -7,7 +7,9 @@ function ErrorPage() {
   return (
     <div className='grid place-items-center h-screen'>
       <div className='text-center grid gap-12'>
-        <h1>Ups it seems that something went wrong</h1>
+        <h1 className='dark:text-black'>
+          Ups it seems that something went wrong
+        </h1>
         <Link href='/'>
           <Button size='md'>Go back to home page</Button>
         </Link>

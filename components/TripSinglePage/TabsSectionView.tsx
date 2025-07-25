@@ -1,10 +1,18 @@
 'use client';
-import React, { useState } from 'react';
-import LocationMap from '@/components/TripSinglePage/LocationMap';
+import React, { Suspense, useState } from 'react';
 import { PreviewGallery } from '@/components/TripSinglePage/PreviewGallery';
 import { Spacer } from '@/components/ui/spacer';
 import { Trip } from '@/lib/generated/prisma';
 import { Button } from '../ui/button';
+import dynamic from 'next/dynamic';
+import { Loader } from '../ui/loader';
+
+const LocationMap = dynamic(
+  () => import('@/components/TripSinglePage/LocationMap'),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   tripData: Trip & { images: Array<{ imageId: string; imageUrl: string }> };
@@ -36,13 +44,16 @@ export function TabsSectionView({ tripData }: Props) {
             <Spacer size={12} />
             <p className='font-bold'>Location on map</p>
             <Spacer size={2} />
-            <LocationMap
-              locationCoordinates={[
-                Number(tripData?.lattitude),
-                Number(tripData?.lngitude),
-              ]}
-              title={tripData?.location}
-            />
+
+            <Suspense fallback={<Loader />}>
+              <LocationMap
+                locationCoordinates={[
+                  Number(tripData?.lattitude),
+                  Number(tripData?.lngitude),
+                ]}
+                title={tripData?.location}
+              />
+            </Suspense>
           </>
         ) : (
           <p className='text-gray-500'>

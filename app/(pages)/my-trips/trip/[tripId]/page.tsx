@@ -1,6 +1,7 @@
 import { Container } from '@/components/grid/Container';
 import { PreviewStarRate } from '@/components/TripSinglePage/PreviewStarRate';
 import { TabsSectionView } from '@/components/TripSinglePage/TabsSectionView';
+import { Loader } from '@/components/ui/loader';
 import { Spacer } from '@/components/ui/spacer';
 import { getSingleTripAction } from '@/lib/server-actions/get-single-trip';
 import { Edit } from 'lucide-react';
@@ -22,7 +23,16 @@ async function SingleTripPage({
 }) {
   const paramTripId = (await params).tripId;
 
-  const { data: tripData } = await getSingleTripAction({ tripId: paramTripId });
+  const { data: tripData, error } = await getSingleTripAction({
+    tripId: paramTripId,
+  });
+
+  if (!tripData && !error) {
+    return <Loader />;
+  }
+  if (error) {
+    return <p className='text-red-500 text-center'>{error}</p>;
+  }
 
   return (
     <Container>

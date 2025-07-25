@@ -15,6 +15,10 @@ export async function MyTrips({
 }: Props) {
   const trips = await getTripsAction({ type, search, page, order });
 
+  if (trips.error) {
+    return <p className='text-red-500 text-center'>{trips.error}</p>;
+  }
+
   return (
     <div className=''>
       <TripsCardList trips={trips || []} />
