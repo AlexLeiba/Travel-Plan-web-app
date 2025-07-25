@@ -1,5 +1,5 @@
 export async function GET() {
-  const baseUrl = 'https://localhost:3000';
+  const baseUrl = 'https://travel-plan-chi-flame.vercel.app/';
 
   const allRoutes = ['/'];
 

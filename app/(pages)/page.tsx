@@ -5,7 +5,7 @@ import { Spacer } from '@/components/ui/spacer';
 import { CAROUSEL_DATA } from '@/lib/consts';
 import { Metadata } from 'next';
 
-const baseUrl = 'https://localhost:3000';
+const baseUrl = 'https://travel-plan-chi-flame.vercel.app/';
 
 export const metadata: Metadata = {
   title: 'Travel-Plan',
