@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
-  secret: process.env.AUTH_SECRET || '',
+  secret: process.env.NEXTAUTH_SECRET || '',
   providers: [
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID || '',
