@@ -12,24 +12,22 @@ export const authOptions = NextAuth({
   },
   cookies: {
     //to configure cookies
-    // sessionToken: {
-    //   name: 'next-auth.session-token',
-    //   options: {
-    //     sameSite: 'lax', // to be able to use the session in cross-site requests , only on GET request will be sent cookies
-    //     // secure: process.env.NODE_ENV === 'production', // only send the session cookie over HTTPS if true
-    //     httpOnly: true, // only send the session cookie over HTTP if true
-    //     path: '/', // the path to which the session cookie will be saved
-    //   },
-    // },
+    sessionToken: {
+      name: 'next-auth.session-token',
+      options: {
+        sameSite: 'lax', // to be able to use the session in cross-site requests , only on GET request will be sent cookies
+        secure: process.env.NODE_ENV === 'production', // only send the session cookie over HTTPS if true
+        httpOnly: true, // only send the session cookie over HTTP if true
+        path: '/', // the path to which the session cookie will be saved
+      },
+    },
   },
   secret: process.env.AUTH_SECRET! ? process.env.AUTH_SECRET! : '',
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!
-        ? process.env.GOOGLE_CLIENT_ID!
-        : '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-        ? process.env.GOOGLE_CLIENT_SECRET!
+      clientId: process.env.AUTH_GOOGLE_ID! ? process.env.AUTH_GOOGLE_ID! : '',
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!
+        ? process.env.AUTH_GOOGLE_SECRET!
         : '',
     }),
   ],
