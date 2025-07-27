@@ -1,10 +1,33 @@
-// import { prisma } from '@/lib/prisma';
-// import NextAuth from 'next-auth';
-// import GoogleProvider from 'next-auth/providers/google';
-// import { PrismaAdapter } from '@auth/prisma-adapter';
-import NextAuth from 'next-auth';
-import { authOptions } from '@/auth';
+import { prisma } from '@/lib/prisma';
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 
-const handler = NextAuth(authOptions);
+import { PrismaAdapter } from '@auth/prisma-adapter';
 
-export { handler as GET, handler as POST };
+export const authOptions: NextAuthOptions = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 24 * 30,
+  },
+  cookies: {
+    sessionToken: {
+      name: 'next-auth.session-token',
+      options: {
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        path: '/',
+      },
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET || '',
+  providers: [
+    GoogleProvider({
+      clientId: process.env.AUTH_GOOGLE_ID || '',
+      clientSecret: process.env.AUTH_GOOGLE_SECRET || '',
+    }),
+  ],
+});
+
+export { authOptions as GET, authOptions as POST };
