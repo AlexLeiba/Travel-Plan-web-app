@@ -3,11 +3,12 @@
 import { prisma } from '../prisma';
 import { Trip } from '../generated/prisma';
 import { TripSchemaType } from '../schemas';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from '@/auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+// import { getServerSession } from 'next-auth';
 
 export async function createTripAction(formData: TripSchemaType) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   if (!session || !session.user || !session.user.email) {
     throw new Error('You must be logged in to create a trip');

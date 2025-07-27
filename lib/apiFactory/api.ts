@@ -1,7 +1,8 @@
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from '@/auth';
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export const api = () => {
   return {
@@ -33,7 +34,8 @@ async function uploadImage(imageUrl: string) {
 }
 
 async function deleteImage(imageId: string) {
-  const session = await getServerSession(authOptions);
+  const session = getSession();
+
   if (!session) {
     throw new Error('User not logged in');
   }

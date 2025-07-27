@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { ALLOWED_FORMATS } from '@/lib/cloudinary';
-import { authOptions } from '../auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from '@/auth';
+// import { authOptions } from '../auth/[...nextauth]/route';
+// import { getServerSession } from 'next-auth';
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json({ error: 'User not found' }, { status: 400 });
   }
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   if (!session || !session.user || !session.user.email) {
     return NextResponse.json({ error: 'User not found' }, { status: 400 });
   }

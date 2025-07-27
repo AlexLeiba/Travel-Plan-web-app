@@ -3,13 +3,13 @@ import { getTripsStatsAction } from '@/lib/server-actions/get-trips-stats';
 import { CheckCircle, Clock, Plane } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from '@/auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+// import { getServerSession } from 'next-auth';
 
 export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();
-  const session = await getServerSession(authOptions);
-
+  const session = await getServerSession();
   if (error) {
     return <p className='text-red-500 text-center'>{error}</p>;
   }

@@ -2,8 +2,9 @@
 
 import { prisma } from '../prisma';
 import { Trip } from '../generated/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from '@/auth';
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function getSingleTripAction({
   tripId,
@@ -15,7 +16,7 @@ export async function getSingleTripAction({
     | null;
   error?: string;
 }> {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   if (!session || !session.user || !session.user.email) {
     throw new Error('You must be logged in to get trip');
   }

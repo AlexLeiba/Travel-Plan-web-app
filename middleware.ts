@@ -34,3 +34,5 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/my-trips/:path*', '/globe/:path*', '/dashboard/:path*'],
 };
+
+// export { auth as middleware } from '@/auth';
