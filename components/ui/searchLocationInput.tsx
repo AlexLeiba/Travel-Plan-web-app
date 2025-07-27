@@ -48,6 +48,7 @@ export function SearchLocationInput({
         setResults(results);
       } catch (error) {
         toast.error('Failed to get location');
+        console.log('🚀 ~ getLocation ~ error:', error);
       } finally {
         setLoading(false);
       }

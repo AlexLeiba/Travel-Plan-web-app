@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
               font-src 'self' https://fonts.gstatic.com ;
               img-src 'self' data: blob: https:  https://cdn.jsdelivr.net https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org;
-              connect-src 'self' https://cdn.jsdelivr.net https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org;
+              connect-src 'self' //cdn.jsdelivr.net https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org https://nominatim.openstreetmap.org;
               object-src 'none';
               frame-ancestors 'none';
               base-uri 'none';
