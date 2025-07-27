@@ -2,10 +2,11 @@
 import React, { Suspense, useState } from 'react';
 import { PreviewGallery } from '@/components/TripSinglePage/PreviewGallery';
 import { Spacer } from '@/components/ui/spacer';
-import { Trip } from '@/lib/generated/prisma';
+// import { Trip } from '@/lib/generated/prisma';
 import { Button } from '../ui/button';
 import dynamic from 'next/dynamic';
 import { Loader } from '../ui/loader';
+import { Trip } from '@prisma/client';
 
 const LocationMap = dynamic(
   () => import('@/components/TripSinglePage/LocationMap'),

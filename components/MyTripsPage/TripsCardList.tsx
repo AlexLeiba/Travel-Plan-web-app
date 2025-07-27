@@ -1,10 +1,11 @@
 'use client';
 
-import { Trip } from '@/lib/generated/prisma';
+// import { Trip } from '@/lib/generated/prisma';
 import { TripCard } from './TripCard';
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '../ui/loader';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Trip } from '@prisma/client';
 
 type Props = {
   trips: { data: Trip[] | null; totalTrips: number };

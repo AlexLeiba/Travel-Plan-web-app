@@ -10,13 +10,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { TripSchema, TripSchemaType } from '@/lib/schemas';
 import { Plane } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { Trip } from '@/lib/generated/prisma';
 import { parseDateInDefaultFormat } from '@/lib/parseDateInDefaultFormat';
 import { editTripAction } from '@/lib/server-actions/edit-trip';
 import { UploadMultipleImage } from '@/components/ui/UploadMultipleImages';
 import { Toggle } from '@/components/ui/toggle';
 import { StarRate } from '@/components/ui/starRate';
 import { SearchLocationInput } from '@/components/ui/searchLocationInput';
+import { Trip } from '@prisma/client';
 
 export function EditTripForm({
   data: { data: tripData, error },

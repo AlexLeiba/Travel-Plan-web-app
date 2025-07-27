@@ -1,11 +1,12 @@
 'use client';
-import { Trip } from '@/lib/generated/prisma';
+// import { Trip } from '@/lib/generated/prisma';
 import { Edit, Eye, Images, Pin, X } from 'lucide-react';
 import Image from 'next/image';
 import { ModalContent, ModalProvider, ModalTrigger } from '../ui/modal';
 import Link from 'next/link';
 import { deleteTripAction } from '@/lib/server-actions/delete-trip';
 import { PreviewStarRate } from '../TripSinglePage/PreviewStarRate';
+import { Trip } from '@prisma/client';
 
 export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
   return (
