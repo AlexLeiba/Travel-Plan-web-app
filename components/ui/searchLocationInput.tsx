@@ -9,6 +9,7 @@ import { Loader } from './loader';
 import { useFormContext } from 'react-hook-form';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/dist/geosearch.css';
+import toast from 'react-hot-toast';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -39,13 +40,17 @@ export function SearchLocationInput({
   useEffect(() => {
     async function getLocation() {
       setLoading(true);
-      const provider = new OpenStreetMapProvider();
+      try {
+        const provider = new OpenStreetMapProvider();
 
-      const results = await provider.search({ query: inputValue });
+        const results = await provider?.search({ query: inputValue });
 
-      setResults(results);
-
-      setLoading(false);
+        setResults(results);
+      } catch (error) {
+        toast.error('Failed to get location');
+      } finally {
+        setLoading(false);
+      }
     }
 
     const timeoutId = setTimeout(() => {
