@@ -1,7 +1,8 @@
 'use server';
 
+import { Trip } from '@prisma/client';
 import { prisma } from '../../prisma';
-import { Trip } from '../generated/prisma';
+// import { Trip } from '../generated/prisma';
 import { TripSchemaType } from '../schemas';
 import { getServerSession } from '@/auth';
 // import { authOptions } from '@/app/api/auth/[...nextauth]/route';
