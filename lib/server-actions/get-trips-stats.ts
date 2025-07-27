@@ -1,10 +1,11 @@
 'use server';
 
-import { getServerUserSession } from '../getServerUserSession';
+import { getServerSession } from 'next-auth';
 import { prisma } from '../prisma';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function getTripsStatsAction() {
-  const session = await getServerUserSession();
+  const session = await getServerSession(authOptions);
   const currentDate = new Date();
 
   if (!session || !session?.user || !session?.user?.email) {

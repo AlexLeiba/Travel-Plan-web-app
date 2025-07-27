@@ -2,7 +2,8 @@
 
 import { prisma } from '../prisma';
 import { Trip } from '../generated/prisma';
-import { getServerUserSession } from '../getServerUserSession';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 type Props = {
   type: 'planned' | 'completed' | 'all';
@@ -22,7 +23,7 @@ export async function getTripsAction({
   error?: string;
 }> {
   const currentDate = new Date();
-  const session = await getServerUserSession();
+  const session = await getServerSession(authOptions);
   const tripsPerPage = 5;
 
   if (!session || !session.user || !session.user.email) {

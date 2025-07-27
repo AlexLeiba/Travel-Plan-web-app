@@ -1,10 +1,11 @@
 'use server';
 
-import { getServerUserSession } from '../getServerUserSession';
+import { getServerSession } from 'next-auth';
 import { prisma } from '../prisma';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function getLocationsAction() {
-  const session = await getServerUserSession();
+  const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.email) {
     throw new Error('You must be logged in to get locations');
   }
