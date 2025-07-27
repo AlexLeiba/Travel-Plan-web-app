@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '../prisma';
+import { prisma } from '../../prisma';
 import { Trip } from '../generated/prisma';
 import { getServerSession } from '@/auth';
 // import { getServerSession } from 'next-auth';

@@ -1,7 +1,7 @@
 'use server';
 import { v2 as cloudinary } from 'cloudinary';
 
-import { prisma } from '../prisma';
+import { prisma } from '../../prisma';
 import { Trip } from '../generated/prisma';
 import { revalidatePath } from 'next/cache';
 import { getServerSession } from '@/auth';
