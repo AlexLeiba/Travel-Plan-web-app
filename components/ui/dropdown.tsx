@@ -20,7 +20,6 @@ export function Dropdown({ title, type }: Props) {
       router.replace(`?${params.toString()}`);
     } else {
       params.set('order', v);
-      // params.set('page', '1');
       router.replace(`?${params.toString()}`);
     }
   }

@@ -41,19 +41,6 @@ export const TripSchema = z
 
     isLinkSelected: z.boolean().optional(),
   })
-  // .refine(
-  //   (data) => {
-  //     const startDate = new Date(data.startDate).getTime();
-  //     const endDate = new Date(data.endDate).getTime();
-  //     console.log('🚀 ~ .refine ~ startDate:', startDate, endDate);
-
-  //     return startDate >= endDate;
-  //   },
-  //   {
-  //     path: ['startDate', 'endDate'],
-  //     message: 'Start date must be before the End date',
-  //   }
-  // )
 
   .and(discriminatedLinkSchema);
 

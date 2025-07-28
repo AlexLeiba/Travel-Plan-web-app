@@ -2,12 +2,9 @@
 import { v2 as cloudinary } from 'cloudinary';
 
 import { prisma } from '../../prisma';
-// import { Trip } from '../generated/prisma';
 import { revalidatePath } from 'next/cache';
 import { getServerSession } from '@/auth';
 import { Trip } from '@prisma/client';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-// import { getServerSession } from 'next-auth';
 
 export async function deleteTripAction(tripId: string, imageId: string) {
   const session = await getServerSession();

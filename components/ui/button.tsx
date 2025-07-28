@@ -31,13 +31,6 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: 'primary',
     },
-    //  compoundVariants: [ //Based on cva props to change the UI conditionally (Each key in obj is a condition, and the value is the UI to be displayed if the condition is true)
-    //   {
-    //     variant: 'outline',
-    //     size: 'large',
-    //     className: 'border-2',
-    //   },
-    // ],
   }
 );
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {

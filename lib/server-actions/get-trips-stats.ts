@@ -1,9 +1,7 @@
 'use server';
 
 import { getServerSession } from '@/auth';
-// import { getServerSession } from 'next-auth';
 import { prisma } from '../../prisma';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';11
 
 export async function getTripsStatsAction() {
   const session = await getServerSession();

@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono, Playwrite_HU } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
-import './globals.css';
 import { Footer } from '@/components/navigations/Footer';
 import { Navbar } from '@/components/navigations/Navbar';
 import ClientLayout from './client-layout';
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

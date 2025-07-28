@@ -2,11 +2,8 @@
 
 import { Trip } from '@prisma/client';
 import { prisma } from '../../prisma';
-// import { Trip } from '../generated/prisma';
 import { TripSchemaType } from '../schemas';
 import { getServerSession } from '@/auth';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-// import { getServerSession } from 'next-auth';
 
 export async function editTripAction(formData: TripSchemaType, tripId: string) {
   const session = await getServerSession();

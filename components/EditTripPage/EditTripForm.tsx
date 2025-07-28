@@ -48,12 +48,12 @@ export function EditTripForm({
     mode: 'onChange',
 
     defaultValues: {
-      title: tripData?.title || '',
-      description: tripData?.description || '',
-      location: tripData?.location || '',
+      title: '',
+      description: '',
+      location: '',
       startDate: '',
       endDate: '',
-      imageUrl: tripData?.imageUrl || '', // Initialize with null (no file selected)
+      imageUrl: '',
       linkUrl: '',
       linkTitle: '',
     },
@@ -73,13 +73,12 @@ export function EditTripForm({
       if (error) {
         return toast.error(error);
       }
-      // const response = await axios.get('/api/trips?id=' + tripId);
 
-      // settripData(response.data.data);
       if (!tripData) {
         return;
       }
 
+      //SET DEFAULT VALUES IN FORM
       setValue('title', tripData.title);
       setValue('description', tripData.description);
       setValue('location', tripData.location);
@@ -214,7 +213,7 @@ export function EditTripForm({
                     placeholder=''
                     title='Start date'
                     type='date'
-                    min={'1993-01-01'}
+                    min={'1980-01-01'}
                     error={errors.startDate?.message}
                     {...register('startDate')}
                   />
@@ -234,7 +233,7 @@ export function EditTripForm({
                     placeholder=''
                     title='End date'
                     type='date'
-                    min={'1993-01-01'}
+                    min={'1980-01-01'}
                     error={errors.endDate?.message}
                     {...register('endDate')}
                   />

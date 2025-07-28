@@ -9,7 +9,7 @@ type Props = {
   type: 'navBar' | 'landingPage';
 };
 export function AuthButton({ type }: Props) {
-  const { data: session } = useSession(); //getSession in async function to get session
+  const { data: session } = useSession();
   return (
     <>
       {session?.user?.email ? (
@@ -38,8 +38,6 @@ export function AuthButton({ type }: Props) {
           className='flex dark:border-1 dark:border-white bg-black text-white rounded-md px-4 py-2 items-center gap-2 cursor-pointer hover:opacity-80'
           onClick={() => signIn()}
         >
-          {/* <Github size={18} color='white' /> */}
-
           <Image
             src={'/google-color.webp'}
             alt='google'

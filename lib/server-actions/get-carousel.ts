@@ -1,9 +1,7 @@
 'use server';
 
 import { getServerSession } from '@/auth';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { prisma } from '../../prisma';
-// import { getServerSession } from 'next-auth';
 
 export async function getCarouselAction() {
   const session = await getServerSession();

@@ -1,9 +1,7 @@
 'use server';
 
 import { getServerSession } from '@/auth';
-// import { getServerSession } from 'next-auth';
 import { prisma } from '../../prisma';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';111
 
 export async function getLocationsAction() {
   const session = await getServerSession();
