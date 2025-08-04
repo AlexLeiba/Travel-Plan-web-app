@@ -45,15 +45,15 @@ async function MyTripsPage({
       </div>
       <Spacer sm={6} md={6} lg={12} />
 
-      <div className='flex justify-between items-center gap-4 flex-wrap'>
-        <div className='flex items-center gap-8'>
+      <div className='flex justify-between md:items-center gap-4 md:flex-row  flex-col'>
+        <div className='flex items-center gap-8 flex-wrap'>
           <Dropdown title='Type' type='type' />
           <Dropdown title='Order' type='order' />
-          <InputSearch title='Search' placeholder='Search trips' />
         </div>
+        <InputSearch title='Search' placeholder='Search trips' />
 
         <Link href={'/my-trips/new-trip'}>
-          <Button classNameCustome='px-12 flex items-center gap-2'>
+          <Button classNameCustome='px-12 flex items-center gap-2 justify-center'>
             New trip <Plane size={15} />
           </Button>
         </Link>
