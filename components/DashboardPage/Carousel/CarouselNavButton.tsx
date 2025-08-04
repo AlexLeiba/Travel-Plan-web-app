@@ -27,7 +27,7 @@ export function NavButton({
       title={direction}
       className={cn(
         direction === 'next' ? 'right-4' : 'left-4',
-        'absolute z-50 cursor-pointer p-2 top-1/2 transform -translate-y-1/2 opacity-50 bg-white rounded-full shadow-md'
+        'absolute z-10 cursor-pointer p-2 top-1/2 transform -translate-y-1/2 opacity-50 bg-white rounded-full shadow-md'
       )}
       onClick={handleMove}
     >

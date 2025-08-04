@@ -15,7 +15,7 @@ export function AuthButton({ type }: Props) {
       {session?.user?.email ? (
         type === 'navBar' ? (
           <button
-            className='flex bg-black dark:border-1 dark:border-white text-white rounded-md px-4 py-2 items-center gap-2 cursor-pointer hover:opacity-80'
+            className='flex bg-black dark:border-1 dark:border-white text-white rounded-md md:px-4 sm:px-16 py-2 items-center gap-2 cursor-pointer hover:opacity-80'
             onClick={() => signOut()}
           >
             <Image
@@ -35,7 +35,7 @@ export function AuthButton({ type }: Props) {
         )
       ) : (
         <button
-          className='flex dark:border-1 dark:border-white bg-black text-white rounded-md px-4 py-2 items-center gap-2 cursor-pointer hover:opacity-80'
+          className='flex dark:border-1 dark:border-white bg-black text-white rounded-md md:px-4 sm:px-16 py-2 items-center gap-2 cursor-pointer hover:opacity-80'
           onClick={() => signIn()}
         >
           <Image
