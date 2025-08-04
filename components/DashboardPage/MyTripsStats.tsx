@@ -21,7 +21,7 @@ export async function MyTripsStats() {
       <div className='flex gap-6 flex-wrap flex-col'>
         <h2>Welcome back {session?.user?.name}</h2>
 
-        <div className='flex items-end justify-between'>
+        <div className=' lg:items-end justify-between lg:flex-row flex md:flex-col md:items-start flex-col gap-12'>
           <div className='flex gap-6 flex-wrap'>
             <Link href={'/my-trips?type=all'}>
               <div className='flex items-center gap-2 p-4 cursor-pointer bg-green-200  rounded-md hover:bg-green-400 hover:scale-105 scale-100 transition-all duration-300 ease-in-out'>
@@ -47,7 +47,7 @@ export async function MyTripsStats() {
             </Link>
           </div>
           <Link href={'/my-trips/new-trip'}>
-            <Button classNameCustome='px-12 flex items-center gap-2'>
+            <Button classNameCustome='px-12 flex items-center gap-2 justify-center'>
               New trip <Plane size={15} />
             </Button>
           </Link>
