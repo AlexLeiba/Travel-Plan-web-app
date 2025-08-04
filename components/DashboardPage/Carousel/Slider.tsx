@@ -17,7 +17,7 @@ export function Slider({ carouselData, title }: Props) {
         {title || 'Your Trips Gallery'}
       </h5>
       <Spacer sm={6} md={6} lg={6} />
-      <div className='w-full rounded-md h-[600px] flex overflow-hidden relative border-1 border-gray-500 '>
+      <div className='w-full rounded-md  flex overflow-hidden relative border-1 border-gray-500 '>
         <NavButton
           direction='prev'
           setCurrentIndex={setCurrentIndex}

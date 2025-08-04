@@ -3,7 +3,7 @@ type Props = {
 };
 export function NewTripCard({ children }: Props) {
   return (
-    <div className='border-0 border-gray-300 shadow-sm rounded-md px-8 py-4 space-y-4'>
+    <div className='border-0 border-gray-300 shadow-sm rounded-md  py-4 space-y-4'>
       {children}
     </div>
   );

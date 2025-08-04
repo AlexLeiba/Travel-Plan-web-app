@@ -100,7 +100,7 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
                 <div></div>
               )}
 
-              <div className='flex justify-between items-center gap-4'>
+              <div className='flex justify-between md:items-center gap-4 md:flex-row flex-col items-end'>
                 <p className='body-sm'>
                   <span className='font-medium'>From:</span>{' '}
                   {new Date(data.startDate).toLocaleDateString()}
