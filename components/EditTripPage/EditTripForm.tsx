@@ -172,7 +172,7 @@ export function EditTripForm({
         className='flex flex-col gap-4'
         onSubmit={handleSubmit(onSubmit)}
       >
-        <GridContainer cols={2} gap={10}>
+        <GridContainer gap={10} wrap className='md:grid-cols-2 sm:grid-cols-1'>
           <div className='flex flex-col gap-4'>
             <Input
               disabled={!tripData}

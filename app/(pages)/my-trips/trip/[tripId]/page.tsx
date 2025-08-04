@@ -37,11 +37,11 @@ async function SingleTripPage({
   return (
     <Container>
       <div className='flex justify-between items-center'>
-        <div className='flex justify-between items-center w-[80%]'>
-          <h2 className='line-clamp-2 w-[75%]'>{tripData?.title}</h2>
+        <div className='flex justify-between items-center md:w-[80%] w-full md:flex-row flex-col gap-6'>
+          <h2 className='line-clamp-2 md:w-[75%] w-full'>{tripData?.title}</h2>
 
           {tripData && tripData.starRate !== null && tripData?.starRate > 0 && (
-            <div className='w-[20%]'>
+            <div className='md:w-[20%] w-full'>
               <PreviewStarRate rate={tripData?.starRate} />
             </div>
           )}
@@ -54,15 +54,15 @@ async function SingleTripPage({
         </Link>
       </div>
       <Spacer size={2} />
-      <div className='flex gap-4 '>
+      <div className='flex gap-4 md:flex-row flex-col'>
         <Image
           src={tripData?.imageUrl || ''}
           alt='image'
           width={800}
           height={600}
-          className='object-cover object-center   rounded-md aspect-video w-[80%]'
+          className='object-cover object-center   rounded-md aspect-video md:w-[80%] w-full'
         />
-        <div className='flex flex-col gap-4 w-[20%]'>
+        <div className='flex flex-col gap-4 md:w-[20%] w-full'>
           <div>
             <p className='font-bold'>Location</p>
             <p>{tripData?.location}</p>
