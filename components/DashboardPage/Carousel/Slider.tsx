@@ -46,7 +46,7 @@ export function Slider({ carouselData, title }: Props) {
               alt='image'
               width={1000}
               height={600}
-              className='object-cover object-center  w-[992px] '
+              className='object-cover object-center  w-[992px]  '
               key={index}
             />
             <h5 className='text-shadow-lg text-white text-shadow-black font-medium absolute bottom-12 z-40 left-8'>

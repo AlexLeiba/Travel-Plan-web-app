@@ -4,7 +4,7 @@ import { Spacer } from '../ui/spacer';
 
 export function HeroSection() {
   return (
-    <div className='space-y-10 flex  items-center justify-center'>
+    <div className='space-y-10 lg:flex lg:flex-row  items-center justify-center  md:flex-col '>
       <div>
         <h1 className='font-[family-name:var(--font-playwrite)]'>
           Travel , Plan and Enjoy your trips
@@ -28,12 +28,14 @@ export function HeroSection() {
       </div>
 
       <Image
-        className='w-full object-cover '
+        className='w-full object-cover hidden md:h-[600px] md:block'
         src={'/travel.png'}
         alt='hero'
         width={600}
         height={600}
       />
+
+      <Spacer md={6} />
     </div>
   );
 }
