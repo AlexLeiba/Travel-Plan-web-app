@@ -45,7 +45,7 @@ async function MyTripsPage({
       </div>
       <Spacer sm={6} md={6} lg={12} />
 
-      <div className='flex justify-between items-center gap-4'>
+      <div className='flex justify-between items-center gap-4 flex-wrap'>
         <div className='flex items-center gap-8'>
           <Dropdown title='Type' type='type' />
           <Dropdown title='Order' type='order' />

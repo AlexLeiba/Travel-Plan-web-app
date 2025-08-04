@@ -11,9 +11,9 @@ import { Trip } from '@prisma/client';
 export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
   return (
     <>
-      <div className=' bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px] max-h-[400px]  overflow-hidden relative lg:flex-row flex-col '>
+      <div className=' bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px]   overflow-hidden relative lg:flex-row flex-col '>
         <ModalProvider>
-          <ModalTrigger customeClassName='absolute right-1 top-1'>
+          <ModalTrigger customeClassName='absolute right-1 top-1 z-20'>
             <button
               title='Delete trip'
               className='p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer'
@@ -34,7 +34,7 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
 
         <Link
           href={`/my-trips/edit-trip/${data.id}`}
-          className='absolute right-3 top-12'
+          className='absolute right-3 top-12 z-20'
           title='Edit trip'
         >
           <div className='p-1 transition-all text-gray-100 hover:bg-green-500 hover:text-white rounded-full bg-black/30 flex items-center justify-center  cursor-pointer'>
@@ -44,7 +44,7 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
         <Link
           title='View trip'
           href={`/my-trips/trip/${data.id}`}
-          className='absolute right-3 top-21'
+          className='absolute right-3 top-21 z-20'
         >
           <div className='p-1 transition-all text-gray-100 hover:text-white hover:bg-green-500 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer'>
             <Eye />

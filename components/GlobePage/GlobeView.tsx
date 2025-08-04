@@ -64,7 +64,7 @@ export default function GlobeView({ locationsData: { data } }: Props) {
     );
   }
   return (
-    <div className='w-full h-full relative rounded-4xl overflow-hidden'>
+    <div className='w-full h-full relative rounded-4xl overflow-hidden flex items-center justify-center'>
       <div className='flex gap-1 absolute top-[20px] z-20 left-4'>
         <Button
           classNameCustome='w-full px-12'
