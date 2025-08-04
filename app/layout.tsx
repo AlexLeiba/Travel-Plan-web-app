@@ -33,7 +33,7 @@ export default async function RootLayout({
         <Toaster />
         <ClientLayout>
           <Navbar />
-          <main className='flex-grow pt-32 pb-24 bg-[var(--background)] '>
+          <main className='flex-grow md:pt-32 pt-24 pb-24 bg-[var(--background)] '>
             {children}
           </main>
         </ClientLayout>
