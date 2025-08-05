@@ -34,7 +34,7 @@ export function DropdownMenu() {
           />
         </div>
       ) : (
-        <div className='bg-black fixed inset-0 z-50 flex flex-col items-center justify-between'>
+        <div className=' bg-white dark:bg-black fixed inset-0 z-50 flex flex-col items-center justify-between'>
           <div className='flex justify-end items-center w-full pr-4 pt-4'>
             <SquareX
               onClick={() => setDropdown(!dropdown)}
