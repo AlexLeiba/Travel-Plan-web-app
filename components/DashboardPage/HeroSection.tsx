@@ -1,6 +1,11 @@
 import Image from 'next/image';
-import { AuthButton } from '../ui/authButton';
 import { Spacer } from '../ui/spacer';
+import dynamic from 'next/dynamic';
+import { lazy, Suspense } from 'react';
+
+const AuthButton = lazy(() =>
+  import('../ui/authButton').then((mod) => ({ default: mod.AuthButton }))
+);
 
 export function HeroSection() {
   return (
@@ -23,7 +28,9 @@ export function HeroSection() {
 
         <Spacer size={8} />
         <div className='flex gap-8 items-center w-full'>
-          <AuthButton type='landingPage' />
+          <Suspense>
+            <AuthButton type='landingPage' />
+          </Suspense>
         </div>
       </div>
 

@@ -3,9 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utilities';
 import { AuthButton } from '../ui/authButton';
-import { useState } from 'react';
 import { DropdownMenu } from './DropdownMenu';
-import { SquareMenu } from 'lucide-react';
 
 export const links = [
   // { name: 'Home', href: '/' },
