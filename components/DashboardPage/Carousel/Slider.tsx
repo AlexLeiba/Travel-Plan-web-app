@@ -1,8 +1,8 @@
-'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import { Spacer } from '../../ui/spacer';
-import { NavButton } from './CarouselNavButton';
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import { Spacer } from "../../ui/spacer";
+import { NavButton } from "./CarouselNavButton";
 
 type Props = {
   carouselData: { imageUrl: string; title: string }[];
@@ -12,19 +12,19 @@ type Props = {
 export function Slider({ carouselData, title }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
-    <div className=''>
-      <h5 className='font-[family-name:var(--font-playwrite)] font-bold'>
-        {title || 'Your Trips Gallery'}
+    <div className="">
+      <h5 className="font-[family-name:var(--font-playwrite)] font-bold">
+        {title || "Your Trips Gallery"}
       </h5>
       <Spacer sm={6} md={6} lg={6} />
-      <div className='w-full rounded-md  flex overflow-hidden relative border-1 border-gray-500 '>
+      <div className="w-full rounded-md  flex overflow-hidden relative border-1 border-gray-500 ">
         <NavButton
-          direction='prev'
+          direction="prev"
           setCurrentIndex={setCurrentIndex}
           length={carouselData.length}
         />
         <NavButton
-          direction='next'
+          direction="next"
           setCurrentIndex={setCurrentIndex}
           length={carouselData.length}
         />
@@ -32,9 +32,9 @@ export function Slider({ carouselData, title }: Props) {
         {carouselData?.map((image, index) => (
           <div
             key={image.imageUrl + index}
-            className='transition-transform duration-500 ease-in-out '
+            className="transition-transform duration-500 ease-in-out "
             style={{
-              minWidth: '100vw',
+              minWidth: "100vw",
               transform: `translateX(${
                 currentIndex === 0 ? 0 : -currentIndex * 100
               }vw)`,
@@ -43,13 +43,13 @@ export function Slider({ carouselData, title }: Props) {
             <Image
               quality={100}
               src={image.imageUrl}
-              alt='image'
+              alt="image"
               width={1000}
               height={600}
-              className='object-cover object-center  w-[992px]  '
+              className="object-cover object-center  w-[992px] aspect-video "
               key={index}
             />
-            <h5 className='text-shadow-lg text-white text-shadow-black font-medium absolute bottom-12 z-40 left-8'>
+            <h5 className="text-shadow-lg text-white text-shadow-black font-medium absolute bottom-12 z-40 left-8">
               {image.title}
             </h5>
           </div>
