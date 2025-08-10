@@ -90,6 +90,8 @@ id String @id @default(cuid())
   lattitude String
   lngitude String
 
+  favorite Boolean @default(false)
+
 
   startDate DateTime
   endDate DateTime

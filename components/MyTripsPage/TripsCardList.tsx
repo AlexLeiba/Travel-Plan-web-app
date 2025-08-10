@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-// import { Trip } from '@/lib/generated/prisma';
-import { TripCard } from './TripCard';
-import { useEffect, useRef, useState } from 'react';
-import { Loader } from '../ui/loader';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Trip } from '@prisma/client';
+import { TripCard } from "./TripCard";
+import { useEffect, useRef, useState } from "react";
+import { Loader } from "../ui/loader";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Trip } from "@prisma/client";
 
 type Props = {
   trips: { data: Trip[] | null; totalTrips: number };
@@ -23,7 +22,7 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
     // HANDLE INTERSECTION OBSERVER
     const observer = new IntersectionObserver(
       ([entries]) => {
-        const searchParam = searchParams.get('search');
+        const searchParam = searchParams.get("search");
         if (
           entries.isIntersecting &&
           data &&
@@ -32,12 +31,12 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
         ) {
           setIntersepted(entries.isIntersecting);
           const searchParamsObj = new URLSearchParams(searchParams);
-          const page = searchParamsObj.get('page');
+          const page = searchParamsObj.get("page");
           if (page) {
             const newPage = Number(page) + 1;
-            searchParamsObj.set('page', newPage.toString());
+            searchParamsObj.set("page", newPage.toString());
           } else {
-            searchParamsObj.set('page', '2');
+            searchParamsObj.set("page", "2");
           }
           router.replace(`?${searchParamsObj.toString()}`);
         } else {
@@ -46,7 +45,7 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
       },
       {
         root: null,
-        rootMargin: '0px',
+        rootMargin: "0px",
         threshold: 0.5, // 0.5 = 50% is visible
       }
     );
@@ -63,25 +62,25 @@ export function TripsCardList({ trips: { data, totalTrips } }: Props) {
   if (!data)
     return (
       <div>
-        <p className='dark:text-white'>No trips was found</p>
+        <p className="dark:text-white">No trips was found</p>
       </div>
     );
 
   return (
-    <div className='grid grid-cols-1 gap-4'>
-      <p>{data.length + ' ' + '/' + ' ' + totalTrips} trips</p>
+    <div className="grid grid-cols-1 gap-4">
+      <p>{data.length + " " + "/" + " " + totalTrips} trips</p>
       {data && data.length > 0 ? (
         data.map((trip) => {
           return <TripCard key={trip.id} data={trip} />;
         })
       ) : (
         <div>
-          <p className='dark:text-white'>No trips was found</p>
+          <p className="dark:text-white">No trips was found</p>
         </div>
       )}
 
-      <div className='mt-8' ref={observeRefElement}>
-        {intersepted && <Loader color='black' />}
+      <div className="mt-8" ref={observeRefElement}>
+        {intersepted && <Loader color="black" />}
       </div>
     </div>
   );

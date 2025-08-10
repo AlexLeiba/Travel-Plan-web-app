@@ -1,112 +1,144 @@
-'use client';
+"use client";
 // import { Trip } from '@/lib/generated/prisma';
-import { Edit, Eye, Images, Pin, X } from 'lucide-react';
-import Image from 'next/image';
-import { ModalContent, ModalProvider, ModalTrigger } from '../ui/modal';
-import Link from 'next/link';
-import { deleteTripAction } from '@/lib/server-actions/delete-trip';
-import { PreviewStarRate } from '../TripSinglePage/PreviewStarRate';
-import { Trip } from '@prisma/client';
+import { Edit, Eye, Heart, Images, Pin, X } from "lucide-react";
+import Image from "next/image";
+import { ModalContent, ModalProvider, ModalTrigger } from "../ui/modal";
+import Link from "next/link";
+import { deleteTripAction } from "@/lib/server-actions/delete-trip";
+import { PreviewStarRate } from "../TripSinglePage/PreviewStarRate";
+import { Trip } from "@prisma/client";
+import { favoriteTripAction } from "@/lib/server-actions/favorite-trip";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { Loader } from "../ui/loader";
 
 export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
+  async function handleSetAsFavorite(tripId: string) {
+    setFavoriteLoading(true);
+    const { error } = await favoriteTripAction(tripId);
+
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Trip was set as favorite successfully!");
+    }
+    setFavoriteLoading(false);
+  }
   return (
     <>
-      <div className=' bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px]   overflow-hidden relative lg:flex-row flex-col '>
+      <div className=" bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px]   overflow-hidden relative lg:flex-row flex-col ">
         <ModalProvider>
-          <ModalTrigger customeClassName='absolute right-1 top-1 z-20'>
+          <ModalTrigger customeClassName="absolute right-1 top-1 z-20">
             <button
-              title='Delete trip'
-              className='p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer'
+              title="Delete trip"
+              className="p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer"
             >
               <X />
             </button>
           </ModalTrigger>
 
           <ModalContent
-            handleConfirm={() => deleteTripAction(data.id, data.imageId || '')}
+            handleConfirm={() => deleteTripAction(data.id, data.imageId || "")}
           >
-            <h3 className='dark:text-black'>
+            <h3 className="dark:text-black">
               Are you sure you want to delete this trip?
             </h3>
-            <p className='dark:text-black'>This action cannot be undone.</p>
+            <p className="dark:text-black">This action cannot be undone.</p>
           </ModalContent>
         </ModalProvider>
 
         <Link
           href={`/my-trips/edit-trip/${data.id}`}
-          className='absolute right-3 top-12 z-20'
-          title='Edit trip'
+          className="absolute right-3 top-12 z-20"
+          title="Edit trip"
         >
-          <div className='p-1 transition-all text-gray-100 hover:bg-green-500 hover:text-white rounded-full bg-black/30 flex items-center justify-center  cursor-pointer'>
+          <div className="p-1 transition-all text-gray-100 hover:bg-green-500 hover:text-white rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
             <Edit />
           </div>
         </Link>
         <Link
-          title='View trip'
+          title="View trip"
           href={`/my-trips/trip/${data.id}`}
-          className='absolute right-3 top-21 z-20'
+          className="absolute right-3 top-21 z-20"
         >
-          <div className='p-1 transition-all text-gray-100 hover:text-white hover:bg-green-500 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer'>
+          <div className="p-1 transition-all text-gray-100 hover:text-white hover:bg-green-500 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
             <Eye />
           </div>
         </Link>
 
-        <div className='flex flex-1 relative'>
-          <div className='absolute top-2 left-2 flex items-center gap-2'>
+        <div
+          onClick={() => !favoriteLoading && handleSetAsFavorite(data.id)}
+          title="Favorite trip"
+          className="absolute right-3 top-32 z-20"
+        >
+          <div className="p-1 transition-all  hover:bg-red-800 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
+            {favoriteLoading ? (
+              <Loader color="black" />
+            ) : data.favorite ? (
+              <Heart className="text-red-500" />
+            ) : (
+              <Heart />
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-1 relative">
+          <div className="absolute top-2 left-2 flex items-center gap-2">
             <PreviewStarRate rate={data?.starRate || 0} />
           </div>
           <Image
-            className='object-center object-cover lg:h-full h-[250px] w-full'
-            src={data.imageUrl || ''}
-            alt='image'
+            className="object-center object-cover lg:h-full h-[250px] w-full"
+            src={data.imageUrl || ""}
+            alt="image"
             width={800}
             height={600}
           />
         </div>
 
-        <div className='flex flex-1 flex-col justify-between p-4'>
-          <div className='mr-8'>
-            <h2 className='lg:line-clamp-2 line-clamp-1'>{data.title}</h2>
-            <p className='lg:line-clamp-3 line-clamp-1'>{data.description}</p>
+        <div className="flex flex-1 flex-col justify-between p-4">
+          <div className="mr-8">
+            <h2 className="lg:line-clamp-2 line-clamp-1">{data.title}</h2>
+            <p className="lg:line-clamp-3 line-clamp-1">{data.description}</p>
           </div>
 
-          <div className='flex flex-col items-end gap-2'>
+          <div className="flex flex-col items-end gap-2">
             {data.images && data.images?.length > 0 && (
-              <Images className='text-yellow-500' />
+              <Images className="text-yellow-500" />
             )}
-            <div className='flex items-center gap-2'>
-              <p className='text-gray-500 dark:text-gray-50 body-sm'>
+            <div className="flex items-center gap-2">
+              <p className="text-gray-500 dark:text-gray-50 body-sm">
                 {data.location.length > 40
-                  ? data.location.substring(0, 40) + '...'
+                  ? data.location.substring(0, 40) + "..."
                   : data.location}
               </p>
-              <Pin className='text-gray-500 dark:text-gray-50' />
+              <Pin className="text-gray-500 dark:text-gray-50" />
             </div>
 
-            <div className='flex justify-between gap-8 '>
+            <div className="flex justify-between gap-8 ">
               {data.linkUrl ? (
                 <Link
                   href={data.linkUrl}
-                  target='_blank'
-                  className='text-green-700 hover:underline '
+                  target="_blank"
+                  className="text-green-700 hover:underline "
                 >
-                  <div className='px-2 bg-black text-white rounded-full'>
+                  <div className="px-2 bg-black text-white rounded-full">
                     {data.linkTitle && data.linkTitle?.length > 25
-                      ? data.linkTitle?.substring(0, 22) + '...'
-                      : data.linkTitle || 'Link'}
+                      ? data.linkTitle?.substring(0, 22) + "..."
+                      : data.linkTitle || "Link"}
                   </div>
                 </Link>
               ) : (
                 <div></div>
               )}
 
-              <div className='flex justify-between md:items-center gap-4 md:flex-row flex-col items-end'>
-                <p className='body-sm'>
-                  <span className='font-medium'>From:</span>{' '}
+              <div className="flex justify-between md:items-center gap-4 md:flex-row flex-col items-end">
+                <p className="body-sm">
+                  <span className="font-medium">From:</span>{" "}
                   {new Date(data.startDate).toLocaleDateString()}
                 </p>
-                <p className='body-sm'>
-                  <span className='font-medium'>To:</span>{' '}
+                <p className="body-sm">
+                  <span className="font-medium">To:</span>{" "}
                   {new Date(data.endDate).toLocaleDateString()}
                 </p>
               </div>
