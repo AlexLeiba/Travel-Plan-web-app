@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       "cdn.jsdelivr.net",
       "a.tile.openstreetmap.org",
       "b.tile.openstreetmap.org",
-      "api.openweathermap.org",
+      "openweathermap.org",
     ], //if the images comes from external source to allow (specify the domain allowed here)
   },
 

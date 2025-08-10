@@ -1,9 +1,7 @@
-"use client";
 import { Spacer } from "@/components/ui/spacer";
 import { Trip } from "@prisma/client";
-import { Sun } from "lucide-react";
-import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
+import { NextTripWeather } from "./NextTripWeather";
 
 type Props = {
   data: Trip & {
@@ -11,39 +9,23 @@ type Props = {
     nextTripDays: number;
     nextTripMonths: number;
   };
-  weatherData: any;
 };
-export function NextTripStats({ data, weatherData }: Props) {
-  const weather = weatherData?.weather[0]?.main;
-  const icon = weatherData?.weather[0]?.icon;
-  const temp = Math.round(weatherData?.main?.temp);
-
-  const weatherIconUrl = getIcon(icon);
+export function NextTripStats({ data }: Props) {
   return (
     <div className="dark:text-white">
       <div className="">
         <div className="flex items-end">
           <h4 className=" text-2xl">
             <span className="text-gray-300">Next trip: </span>{" "}
-            {weatherData.name} ,{" "}
+            {data.location.split(",")[0]} ,{" "}
           </h4>
           <p className="text-gray-300">
             {new Date(data.startDate).toDateString()}
           </p>
         </div>
-        <div className="flex gap-2 items-center">
-          <p className="text-gray-300">{temp} °C </p>
-          <p>{weather}</p>
-
-          {weatherIconUrl && (
-            <Image
-              src={weatherIconUrl}
-              alt="weather-icon"
-              width={50}
-              height={50}
-            />
-          )}
-        </div>
+        <Suspense>
+          <NextTripWeather lat={data.lattitude} long={data.lngitude} />
+        </Suspense>
       </div>
       <Spacer size={2} />
       <div className=" flex gap-2 ">
@@ -78,8 +60,4 @@ export function NextTripStats({ data, weatherData }: Props) {
       </div>
     </div>
   );
-}
-function getIcon(icon: string) {
-  const urlIcon = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-  return urlIcon;
 }

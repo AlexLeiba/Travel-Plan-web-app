@@ -10,34 +10,21 @@ export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();
   const session = await getServerSession();
 
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${data?.nextTrip.lattitude}&lon=${data?.nextTrip.lngitude}&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`
-  );
-
-  if (!response.ok) {
-    console.log("first", response);
+  if (error)
     return (
-      <p className="text-red-500 text-center">
-        Something went wrong with the weather Api
-        {response.status}
-        {response.statusText}
-      </p>
+      <p className="text-red-500">Something went wrong, please try again</p>
     );
-  }
-  const responseWeatherApi = await response.json();
-  console.log("first", responseWeatherApi, response);
-  if (error) {
-    return <p className="text-red-500 text-center">{error}</p>;
-  }
+
   if (!data || (data?.nextTrip.all && data.nextTrip.all === 0)) {
     return <div>No trips stats was found.</div>;
   }
+
   return (
     <div>
       <div className="flex gap-6 flex-wrap flex-col">
         <p className="text-gray-300">Welcome back {session?.user?.name}</p>
 
-        <NextTripStats data={data.nextTrip} weatherData={responseWeatherApi} />
+        <NextTripStats data={data.nextTrip} />
 
         <div className=" lg:items-end justify-between lg:flex-row flex md:flex-col md:items-start flex-col gap-12">
           <div className="flex gap-2 flex-wrap">
