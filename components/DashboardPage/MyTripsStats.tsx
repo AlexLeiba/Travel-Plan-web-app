@@ -12,7 +12,9 @@ export async function MyTripsStats() {
 
   if (error)
     return (
-      <p className="text-red-500">Something went wrong, please try again</p>
+      <p className="text-red-500">
+        Something went wrong, please try again {error}
+      </p>
     );
 
   if (!data || (data?.nextTrip.all && data.nextTrip.all === 0)) {
