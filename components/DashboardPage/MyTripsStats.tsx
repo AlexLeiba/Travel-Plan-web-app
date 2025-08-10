@@ -18,6 +18,8 @@ export async function MyTripsStats() {
     return (
       <p className="text-red-500 text-center">
         Something went wrong with the weather Api
+        {response.status}
+        {response.statusText}
       </p>
     );
   }

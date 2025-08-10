@@ -9,8 +9,7 @@ const nextConfig: NextConfig = {
       "cdn.jsdelivr.net",
       "a.tile.openstreetmap.org",
       "b.tile.openstreetmap.org",
-      "c.tile.openstreetmap.org",
-      "openweathermap.org",
+      "api.openweathermap.org",
     ], //if the images comes from external source to allow (specify the domain allowed here)
   },
 
@@ -29,7 +28,7 @@ const nextConfig: NextConfig = {
               font-src 'self' https://fonts.gstatic.com ;
               img-src 'self' data: blob: https:  https://cdn.jsdelivr.net https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org;
               connect-src 'self' https//cdn.jsdelivr.net https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org https://nominatim.openstreetmap.org 
-              api.openweathermap.org;
+              api.openweathermap.org ;
               object-src 'none';
               frame-ancestors 'none';
               base-uri 'none';
