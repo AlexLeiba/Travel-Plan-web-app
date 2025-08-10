@@ -33,7 +33,7 @@ export async function getTripsStatsAction() {
     }
 
     const plannedTrips = trips.filter(
-      (trip) => trip.startDate.getTime() >= currentDate
+      (trip) => new Date(trip.startDate).getTime() >= currentDate
     );
 
     const favoriteTrips = trips.filter((trip) => trip.favorite).length;
