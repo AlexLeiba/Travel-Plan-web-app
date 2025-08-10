@@ -15,6 +15,7 @@ export async function MyTripsStats() {
   );
 
   if (!response.ok) {
+    console.log("first", response);
     return (
       <p className="text-red-500 text-center">
         Something went wrong with the weather Api
