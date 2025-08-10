@@ -14,7 +14,6 @@ type Props = {
 export async function MyTrips({
   params: { type, search, page, order, favorite },
 }: Props) {
-  console.log("first", favorite, order, search, page);
   const trips = await getTripsAction({ type, search, page, order, favorite });
 
   if (trips.error) {

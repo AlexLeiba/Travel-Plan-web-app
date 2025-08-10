@@ -22,7 +22,7 @@ export async function MyTripsStats() {
     );
   }
   const responseWeatherApi = await response.json();
-
+  console.log("first", responseWeatherApi, response);
   if (error) {
     return <p className="text-red-500 text-center">{error}</p>;
   }
