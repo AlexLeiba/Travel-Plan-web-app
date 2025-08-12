@@ -37,37 +37,58 @@ export async function getTripsStatsAction() {
     );
 
     const favoriteTrips = trips.filter((trip) => trip.favorite).length;
-    const plannedTripsCopy: Trip[] = JSON.parse(JSON.stringify(plannedTrips));
-
-    const nextTrip: Trip = plannedTripsCopy.sort((a, b) => {
-      const startDateToDateTypeA = new Date(a.startDate).getTime();
-      const startDateToDateTypeB = new Date(b.startDate).getTime();
-
-      return startDateToDateTypeA - startDateToDateTypeB;
-    })[0];
-
-    const nextTripDateInMilliseconds = new Date(nextTrip.startDate).getTime();
-
-    const { months, weeks, days } = preciseTimeUntil(
-      nextTripDateInMilliseconds,
-      currentDate
-    );
+    const plannedTripsCopy: Trip[] = structuredClone(plannedTrips);
 
     const completedTrips = trips.length - plannedTrips.length;
     const allTrips = trips.length;
 
+    if (plannedTripsCopy.length > 0) {
+      const sortByTheFirstNearestTrip: Trip = plannedTripsCopy.sort((a, b) => {
+        const startDateToDateTypeA = new Date(a.startDate).getTime();
+        const startDateToDateTypeB = new Date(b.startDate).getTime();
+
+        return startDateToDateTypeA - startDateToDateTypeB;
+      })[0];
+
+      const nextTripDateInMilliseconds = new Date(
+        sortByTheFirstNearestTrip.startDate
+      ).getTime();
+
+      const { months, weeks, days } = preciseTimeUntil(
+        nextTripDateInMilliseconds,
+        currentDate
+      );
+
+      return {
+        data: {
+          ...sortByTheFirstNearestTrip,
+          planned: plannedTrips.length,
+          completed: completedTrips,
+          nextTrip: {
+            favoriteTrips: favoriteTrips,
+            all: allTrips,
+
+            nextTripWeeks: weeks,
+            nextTripDays: days,
+            nextTripMonths: months,
+          },
+          error: undefined,
+        },
+      };
+    }
+
     return {
       data: {
+        ...trips[0],
         planned: plannedTrips.length,
         completed: completedTrips,
         nextTrip: {
-          ...nextTrip,
           favoriteTrips: favoriteTrips,
           all: allTrips,
 
-          nextTripWeeks: weeks,
-          nextTripDays: days,
-          nextTripMonths: months,
+          nextTripWeeks: 0,
+          nextTripDays: 0,
+          nextTripMonths: 0,
         },
         error: undefined,
       },

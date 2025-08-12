@@ -13,7 +13,9 @@ export async function NextTripWeather({
   );
 
   if (!response.ok) {
-    return <p className="dark:text-white text-center">No weather data.</p>;
+    return (
+      <p className="dark:text-white text-center">No weather data was found.</p>
+    );
   }
   const responseWeatherApi = await response.json();
 

@@ -12,9 +12,7 @@ export async function MyTripsStats() {
 
   if (error)
     return (
-      <p className="text-red-500">
-        Something went wrong, please try again {error}
-      </p>
+      <p className="text-red-500">Something went wrong, please try again</p>
     );
 
   if (!data || (data?.nextTrip.all && data.nextTrip.all === 0)) {
@@ -24,9 +22,11 @@ export async function MyTripsStats() {
   return (
     <div>
       <div className="flex gap-6 flex-wrap flex-col">
-        <p className="text-gray-300">Welcome back {session?.user?.name}</p>
+        <h4 className="text-2xl text-gray-300">
+          Welcome back {session?.user?.name}
+        </h4>
 
-        <NextTripStats data={data.nextTrip} />
+        <NextTripStats data={data} />
 
         <div className=" lg:items-end justify-between lg:flex-row flex md:flex-col md:items-start flex-col gap-12">
           <div className="flex gap-2 flex-wrap">
@@ -76,11 +76,6 @@ export async function MyTripsStats() {
               </div>
             </Link>
           </div>
-          <Link href={"/my-trips/new-trip"}>
-            <Button classNameCustome="px-12 flex items-center gap-2 justify-center">
-              New trip <Plane size={15} />
-            </Button>
-          </Link>
         </div>
       </div>
     </div>
