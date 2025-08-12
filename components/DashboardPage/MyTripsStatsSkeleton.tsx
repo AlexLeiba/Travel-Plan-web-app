@@ -1,20 +1,31 @@
-import { SORT_OPTIONS } from '@/lib/consts';
+import { SORT_OPTIONS } from "@/lib/consts";
+import { NextTripStats } from "./NextTripStats/NextTripStats";
+
+const TRIP_STATS = new Array(4).fill(null);
 
 export function MyTripsStatsSkeleton() {
   return (
-    <div>
-      <div className='flex gap-6 flex-wrap flex-col'>
-        <div className='animate-pulse h-6 bg-gray-200 w-[100px]'></div>
+    <div className="flex gap-6 flex-wrap flex-col">
+      <div className="h-8 animate-pulse bg-gray-700 w-[400px]"></div>
+      <div className="h-10 animate-pulse bg-gray-700 w-[400px]"></div>
+      <div className="flex gap-2 flex-wrap">
+        {TRIP_STATS.map((_, index) => {
+          return (
+            <div key={index + "next"}>
+              <div className="font-normal animate-pulse size-[80px] p-1 bg-gray-700 flex flex-col justify-between relative"></div>
+            </div>
+          );
+        })}
+      </div>
 
-        <div className='flex gap-6 flex-wrap'>
-          {SORT_OPTIONS.slice(0, 3).map((option) => {
-            return (
-              <div key={option}>
-                <div className=' w-[150px] h-[64px]  flex items-center gap-2 p-4 cursor-pointer bg-gray-200 rounded-md animate-pulse  '></div>
-              </div>
-            );
-          })}
-        </div>
+      <div className="flex gap-3 flex-wrap">
+        {TRIP_STATS.map((_, index) => {
+          return (
+            <div key={index + "trip"}>
+              <div className="font-normal animate-pulse size-[110px] p-1 bg-gray-800 flex flex-col justify-between relative"></div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

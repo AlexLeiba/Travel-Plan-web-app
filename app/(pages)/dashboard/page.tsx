@@ -16,8 +16,6 @@ export default async function Dashboard() {
   return (
     <>
       <Container>
-        <Spacer sm={6} md={6} lg={12} />
-
         <Suspense fallback={<MyTripsStatsSkeleton />}>
           <MyTripsStats />
         </Suspense>

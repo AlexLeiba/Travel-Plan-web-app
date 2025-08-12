@@ -22,7 +22,7 @@ export async function MyTripsStats() {
   return (
     <div>
       <div className="flex gap-6 flex-wrap flex-col">
-        <h4 className="text-2xl text-gray-300">
+        <h4 className="text-3xl text-gray-300">
           Welcome back {session?.user?.name}
         </h4>
 
