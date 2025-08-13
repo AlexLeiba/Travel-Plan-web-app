@@ -16,7 +16,7 @@ export async function MyTripsStats() {
     );
 
   if (!data || (data?.nextTrip.all && data.nextTrip.all === 0)) {
-    return <div>No trips stats was found.</div>;
+    return <p>No trips stats was found.</p>;
   }
 
   return (

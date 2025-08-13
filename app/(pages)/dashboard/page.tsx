@@ -20,7 +20,7 @@ export default async function Dashboard() {
           <MyTripsStats />
         </Suspense>
 
-        <Spacer sm={6} md={6} lg={6} />
+        <Spacer sm={8} md={8} lg={8} />
 
         <Suspense fallback={<CarouselSkeleton />}>
           <Carousel />
