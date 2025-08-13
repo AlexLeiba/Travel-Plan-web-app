@@ -17,6 +17,7 @@ type Props = {
   };
 };
 export function NextTripStats({ data }: Props) {
+  console.log("🚀 ~ NextTripStats ~ data:", data);
   return (
     <div className="dark:text-white">
       <div className="flex items-end">

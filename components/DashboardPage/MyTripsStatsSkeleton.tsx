@@ -1,13 +1,10 @@
-import { SORT_OPTIONS } from "@/lib/consts";
-import { NextTripStats } from "./NextTripStats/NextTripStats";
-
 const TRIP_STATS = new Array(4).fill(null);
 
 export function MyTripsStatsSkeleton() {
   return (
     <div className="flex gap-6 flex-wrap flex-col">
-      <div className="h-8 animate-pulse bg-gray-700 w-[400px]"></div>
-      <div className="h-10 animate-pulse bg-gray-700 w-[400px]"></div>
+      <div className="h-8 animate-pulse bg-gray-700 w-[200px]"></div>
+      <div className="h-10 animate-pulse bg-gray-700 w-[200px]"></div>
       <div className="flex gap-2 flex-wrap">
         {TRIP_STATS.map((_, index) => {
           return (
