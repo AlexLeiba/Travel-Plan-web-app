@@ -31,7 +31,7 @@ async function MyTripsPage({
   return (
     <Container>
       <div className="flex items-end gap-4">
-        <h1>My trips </h1>
+        <h2 className="font-[family-name:var(--font-playwrite)]">My trips </h2>
         <div className="flex items-center gap-2">
           <p>
             {paramType.type &&
