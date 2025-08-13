@@ -19,14 +19,9 @@ export async function NextTripWeather({
     );
   }
   const responseWeatherApi = await response.json();
-  console.log("🚀 ~ NextTripWeather ~ responseWeatherApi:", responseWeatherApi);
-
   const weather = responseWeatherApi?.weather[0]?.main;
   const icon = responseWeatherApi?.weather[0]?.icon;
   const temp = Math.round(responseWeatherApi?.main?.temp);
-  const timezoneOffsetInSeconds = responseWeatherApi?.timezone
-    ? responseWeatherApi?.timezone
-    : 0;
   const country = responseWeatherApi?.sys?.country;
 
   const weatherIconUrl = getIcon(icon);

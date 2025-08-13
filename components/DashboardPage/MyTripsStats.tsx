@@ -1,8 +1,6 @@
 import React from "react";
 import { getTripsStatsAction } from "@/lib/server-actions/get-trips-stats";
-import { Plane } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { getServerSession } from "@/auth";
 import { NextTripStats } from "./NextTripStats/NextTripStats";
 
