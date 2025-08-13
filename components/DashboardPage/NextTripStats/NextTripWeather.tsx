@@ -40,12 +40,12 @@ export async function NextTripWeather({
 
   return (
     <div className="flex gap-2 items-center">
-      <p className="text-gray-300">{temp} °C </p>
+      <p className="dark:text-gray-300 text-gray-600">{temp} °C </p>
       <p>{weather}</p>
       {weatherIconUrl && (
         <Image src={weatherIconUrl} alt="weather-icon" width={50} height={50} />
       )}
-      <p className="text-xl text-gray-300">{updateTime()}</p>
+      <p className="text-xl dark:text-gray-300 text-gray-600">{updateTime()}</p>
       <p></p>
     </div>
   );

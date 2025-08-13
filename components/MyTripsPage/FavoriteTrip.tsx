@@ -22,12 +22,12 @@ export function FavoriteTrip() {
       role="button"
       onKeyDown={(e) => e.key === "Enter" && handleFavoriteTrip()}
       onClick={handleFavoriteTrip}
-      className="border border-white rounded-md p-2 cursor-pointer"
+      className="border dark:border-white border-gray-400 rounded-md p-2 cursor-pointer hover:opacity-60"
     >
       {favoriteState === `true` ? (
-        <Heart size={20} className="text-red-500" />
+        <Heart size={20} className="text-red-500 " />
       ) : (
-        <Heart size={20} className="text-white" />
+        <Heart size={20} className="dark:text-white text-gray-600" />
       )}
     </div>
   );
