@@ -1,26 +1,32 @@
-import { NextResponse } from 'next/server';
-import { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   // ⛔️ Bypass NextAuth routes
-  if (pathname.startsWith('/api/auth')) return NextResponse.next();
+
+  if (pathname.startsWith("/api/auth")) return NextResponse.next();
 
   // Retrieve the token from cookies
   const token =
-    req.cookies.get('next-auth.session-token')?.value || // dev
-    req.cookies.get('__Secure-next-auth.session-token')?.value; // prod
+    req.cookies.get("next-auth.session-token")?.value || // dev
+    req.cookies.get("__Secure-next-auth.session-token")?.value; // prod
 
   if (!token) {
-    const loginUrl = new URL('/', req.url);
+    const loginUrl = new URL("/", req.url);
 
     return NextResponse.redirect(loginUrl);
+  }
+
+  if (token && pathname === "/") {
+    const dashboardUrl = new URL("/dashboard", req.url);
+    return NextResponse.redirect(dashboardUrl);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/my-trips/:path*', '/globe/:path*', '/dashboard/:path*'],
+  matcher: ["/my-trips/:path*", "/globe/:path*", "/dashboard/:path*"],
 };
