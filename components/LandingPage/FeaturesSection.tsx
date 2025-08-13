@@ -6,9 +6,9 @@ import { Spacer } from "../ui/spacer";
 export function FeaturesSection() {
   return (
     <div id="features">
-      <Spacer size={20} />
+      <Spacer lg={20} md={20} sm={16} />
       <h5 className="font-[family-name:var(--font-playwrite)] font-bold">
-        Features
+        App Features
       </h5>
       <Spacer sm={6} md={6} lg={6} />
       <ul className="dark:text-white">
