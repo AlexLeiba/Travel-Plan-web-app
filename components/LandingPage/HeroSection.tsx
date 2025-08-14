@@ -11,7 +11,7 @@ const AuthButton = lazy(() =>
 
 export function HeroSection() {
   return (
-    <div className="space-y-10 lg:flex lg:flex-row  items-center justify-center  md:flex-col ">
+    <div className="space-y-6 lg:flex lg:flex-row  items-center justify-center  md:flex-col ">
       <div>
         <h1 className="font-[family-name:var(--font-playwrite)]">
           Travel , Plan and Enjoy your trips
