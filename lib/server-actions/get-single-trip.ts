@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { Trip } from '@prisma/client';
-import { prisma } from '../../prisma';
-import { getServerSession } from '@/auth';
+import { Trip } from "@prisma/client";
+import { prisma } from "../../prisma";
+import { getServerSession } from "@/lib/auth";
 
 export async function getSingleTripAction({
   tripId,
@@ -16,17 +16,17 @@ export async function getSingleTripAction({
 }> {
   const session = await getServerSession();
   if (!session || !session.user || !session.user.email) {
-    throw new Error('You must be logged in to get trip');
+    throw new Error("You must be logged in to get trip");
   }
   try {
     const foundUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email || '',
+        email: session.user.email || "",
       },
     });
 
     if (!foundUser) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     const trip = await prisma.trip.findFirst({
@@ -40,7 +40,7 @@ export async function getSingleTripAction({
     });
 
     if (!trip) {
-      throw new Error('No trip was found');
+      throw new Error("No trip was found");
     }
 
     return {

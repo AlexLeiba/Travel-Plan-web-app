@@ -1,41 +1,41 @@
-'use server';
-import { v2 as cloudinary } from 'cloudinary';
+"use server";
+import { v2 as cloudinary } from "cloudinary";
 
-import { prisma } from '../../prisma';
-import { revalidatePath } from 'next/cache';
-import { getServerSession } from '@/auth';
-import { Trip } from '@prisma/client';
+import { prisma } from "../../prisma";
+import { revalidatePath } from "next/cache";
+import { getServerSession } from "@/lib/auth";
+import { Trip } from "@prisma/client";
 
 export async function deleteTripAction(tripId: string, imageId: string) {
   const session = await getServerSession();
 
   if (!session || !session.user || !session.user.email) {
-    throw new Error('You must be logged in to delet a trip');
+    throw new Error("You must be logged in to delet a trip");
   }
 
   try {
     const foundUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email || '',
+        email: session.user.email || "",
       },
     });
 
     if (!foundUser) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     if (!imageId) {
-      throw new Error('Image Id is required');
+      throw new Error("Image Id is required");
     }
 
     const deleteImage = await cloudinary.uploader.destroy(imageId, {
-      resource_type: 'image',
+      resource_type: "image",
     });
 
     if (deleteImage.error) {
-      console.log('🚀 ~ DELETE ~ deleteImage.error:', deleteImage.error);
+      console.log("🚀 ~ DELETE ~ deleteImage.error:", deleteImage.error);
 
-      throw new Error('Failed to delete image');
+      throw new Error("Failed to delete image");
     }
 
     const deletedTrip: Trip | null = await prisma.trip.delete({
@@ -46,10 +46,10 @@ export async function deleteTripAction(tripId: string, imageId: string) {
     });
 
     if (!deletedTrip) {
-      throw new Error('Failed to delete trip');
+      throw new Error("Failed to delete trip");
     }
-    revalidatePath('/my-trips');
+    revalidatePath("/my-trips");
   } catch (error: any) {
-    console.error('Error deleting trip:', error);
+    console.error("Error deleting trip:", error);
   }
 }

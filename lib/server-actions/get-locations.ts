@@ -1,22 +1,22 @@
-'use server';
+"use server";
 
-import { getServerSession } from '@/auth';
-import { prisma } from '../../prisma';
+import { getServerSession } from "@/lib/auth";
+import { prisma } from "../../prisma";
 
 export async function getLocationsAction() {
   const session = await getServerSession();
   if (!session || !session.user || !session.user.email) {
-    throw new Error('You must be logged in to get locations');
+    throw new Error("You must be logged in to get locations");
   }
   try {
     const foundUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email || '',
+        email: session.user.email || "",
       },
     });
 
     if (!foundUser) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     const locations = await prisma.trip.findMany({
@@ -31,7 +31,7 @@ export async function getLocationsAction() {
     });
 
     if (!locations) {
-      throw new Error('No locations were found');
+      throw new Error("No locations were found");
     }
 
     return {

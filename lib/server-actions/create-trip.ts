@@ -3,7 +3,7 @@
 import { Trip } from "@prisma/client";
 import { prisma } from "../../prisma";
 import { TripSchemaType } from "../schemas";
-import { getServerSession } from "@/auth";
+import { getServerSession } from "@/lib/auth";
 
 export async function createTripAction(formData: TripSchemaType) {
   const session = await getServerSession();

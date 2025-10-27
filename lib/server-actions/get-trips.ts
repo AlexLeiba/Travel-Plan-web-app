@@ -2,7 +2,7 @@
 
 import { Trip } from "@prisma/client";
 import { prisma } from "../../prisma";
-import { getServerSession } from "@/auth";
+import { getServerSession } from "@/lib/auth";
 
 type Props = {
   type: "planned" | "completed" | "all";

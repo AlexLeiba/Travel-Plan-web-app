@@ -32,5 +32,5 @@
 
 // export { authOptions as GET, authOptions as POST };
 
-import { handlers } from '@/auth'; // Referring to the auth.ts we just created
+import { handlers } from "@/lib/auth"; // Referring to the auth.ts we just created
 export const { GET, POST } = handlers;
