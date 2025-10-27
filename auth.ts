@@ -1,7 +1,7 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma } from '@/prisma';
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/prisma";
 
 // export const authOptions: NextAuthOptions = {
 //   adapter: PrismaAdapter(prisma),
@@ -32,24 +32,24 @@ import { prisma } from '@/prisma';
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
     maxAge: 60 * 60 * 24 * 30, // 30 days
   },
   cookies: {
     sessionToken: {
-      name: 'next-auth.session-token',
+      name: "next-auth.session-token",
       options: {
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
         httpOnly: true,
-        path: '/',
+        path: "/",
       },
     },
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID || '',
-      clientSecret: process.env.AUTH_GOOGLE_SECRET || '',
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
