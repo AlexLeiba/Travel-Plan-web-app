@@ -1,4 +1,4 @@
-import { APP_FEATURES } from "@/lib/consts";
+import { APP_FEATURES } from "@/consts";
 import { features } from "process";
 import React from "react";
 import { Spacer } from "../ui/spacer";

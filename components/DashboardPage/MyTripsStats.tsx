@@ -1,7 +1,7 @@
 import React from "react";
-import { getTripsStatsAction } from "@/lib/server-actions/get-trips-stats";
+import { getTripsStatsAction } from "@/server-actions/get-trips-stats";
 import Link from "next/link";
-import { getServerSession } from "@/lib/auth";
+import { getServerSession } from "next-auth/next";
 import { NextTripStats } from "./NextTripStats/NextTripStats";
 
 export async function MyTripsStats() {

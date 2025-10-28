@@ -2,8 +2,7 @@ import { Slider } from "@/components/DashboardPage/Carousel/Slider";
 import { FeaturesSection } from "@/components/LandingPage/FeaturesSection";
 import { HeroSection } from "@/components/LandingPage/HeroSection";
 import { Container } from "@/components/grid/Container";
-import { Spacer } from "@/components/ui/spacer";
-import { CAROUSEL_DATA } from "@/lib/consts";
+import { CAROUSEL_DATA } from "@/consts";
 import { Metadata } from "next";
 
 const baseUrl = "https://travel-plan-chi-flame.vercel.app/";

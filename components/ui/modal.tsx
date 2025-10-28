@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   createContext,
   Dispatch,
@@ -7,10 +7,10 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { Button } from './button';
-import { cn } from '@/lib/utilities';
-import { X } from 'lucide-react';
+} from "react";
+import { Button } from "./button";
+import { cn } from "@/lib/utilities";
+import { X } from "lucide-react";
 type Props = {
   children: React.ReactNode;
 };
@@ -48,20 +48,18 @@ export function ModalContent({ children, handleConfirm }: ModalContentProps) {
   useEffect(() => {
     if (isVisible) {
       const handleClickOutside = (e: MouseEvent) => {
-        console.log('first');
         if (ref.current && !ref.current.contains(e.target as Node)) {
-          console.log('first2');
           setIsVisible(false);
         }
       };
-      document.addEventListener('click', handleClickOutside);
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+      document.addEventListener("click", handleClickOutside);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
           setIsVisible(false);
         }
       });
       return () => {
-        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener("click", handleClickOutside);
       };
     }
   }, [isVisible]);
@@ -69,34 +67,34 @@ export function ModalContent({ children, handleConfirm }: ModalContentProps) {
   return (
     <div
       className={cn(
-        isVisible ? 'flex' : 'hidden',
-        'fixed z-50 inset-0 bg-black/50 backdrop-blur-sm  items-center justify-center'
+        isVisible ? "flex" : "hidden",
+        "fixed z-50 inset-0 bg-black/50 backdrop-blur-sm  items-center justify-center"
       )}
     >
       <div
         ref={ref}
-        className='bg-white rounded-lg px-4 pt-8 pb-4  h-[200px] shadow-md flex flex-col justify-between relative'
+        className="bg-white rounded-lg px-4 pt-8 pb-4  h-[200px] shadow-md flex flex-col justify-between relative"
       >
         <X
-          role='button'
+          role="button"
           tabIndex={0}
-          onKeyDown={(v) => v.key === 'Enter' && setIsVisible(false)}
+          onKeyDown={(v) => v.key === "Enter" && setIsVisible(false)}
           onClick={() => setIsVisible(false)}
-          className='absolute right-2 top-2 cursor-pointer'
+          className="absolute right-2 top-2 cursor-pointer"
         />
         {children}
-        <div className='flex gap-4 justify-end'>
+        <div className="flex gap-4 justify-end">
           <Button
             handleClick={handleConfirm}
-            variant='secondary'
-            classNameCustome='bg-red-500 hover:bg-red-600 px-4'
+            variant="secondary"
+            classNameCustome="bg-red-500 hover:bg-red-600 px-4"
           >
             Delete
           </Button>
 
           <Button
             handleClick={() => setIsVisible(false)}
-            classNameCustome='px-8'
+            classNameCustome="px-8"
           >
             Cancel
           </Button>

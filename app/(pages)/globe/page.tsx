@@ -1,7 +1,7 @@
 import { GlobeWrapper } from "@/components/GlobePage/GlobeWrapper";
 import { Container } from "@/components/grid/Container";
 import { Spacer } from "@/components/ui/spacer";
-import { getLocationsAction } from "@/lib/server-actions/get-locations";
+import { getLocationsAction } from "@/server-actions/get-locations";
 import React from "react";
 
 export const metadata = {

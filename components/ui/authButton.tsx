@@ -10,6 +10,7 @@ type Props = {
 };
 export function AuthButton({ type }: Props) {
   const { data: session } = useSession();
+
   return (
     <>
       {session?.user?.email ? (

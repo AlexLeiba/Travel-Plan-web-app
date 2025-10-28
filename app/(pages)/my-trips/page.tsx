@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Dropdown } from "@/components/ui/dropdown";
 import { InputSearch } from "@/components/ui/inputSearch";
 import { Spacer } from "@/components/ui/spacer";
-import { Heart, Plane } from "lucide-react";
+import { Plane } from "lucide-react";
 import Link from "next/link";
 import { FavoriteTrip } from "@/components/MyTripsPage/FavoriteTrip";
 

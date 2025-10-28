@@ -4,7 +4,7 @@ import { Spacer } from "@/components/ui/spacer";
 import { Loader } from "@/components/ui/loader";
 import { EditTripForm } from "@/components/EditTripPage/EditTripForm";
 import { Metadata } from "next";
-import { getSingleTripAction } from "@/lib/server-actions/get-single-trip";
+import { getSingleTripAction } from "@/server-actions/get-single-trip";
 
 export const metadata: Metadata = {
   title: "Travel-Plan / Edit trip",

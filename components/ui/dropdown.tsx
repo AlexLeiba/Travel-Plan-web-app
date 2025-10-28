@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { SORT_OPTIONS } from '@/lib/consts';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { SORT_OPTIONS } from "@/consts";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
   title: string;
-  type: 'type' | 'order';
+  type: "type" | "order";
 };
 export function Dropdown({ title, type }: Props) {
   const searchParams = useSearchParams();
@@ -14,12 +14,12 @@ export function Dropdown({ title, type }: Props) {
   function handleSelectParam(v: string) {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (type === 'type') {
-      params.set('type', v);
-      params.set('page', '1');
+    if (type === "type") {
+      params.set("type", v);
+      params.set("page", "1");
       router.replace(`?${params.toString()}`);
     } else {
-      params.set('order', v);
+      params.set("order", v);
       router.replace(`?${params.toString()}`);
     }
   }
@@ -27,15 +27,15 @@ export function Dropdown({ title, type }: Props) {
     <div>
       <select
         title={title}
-        value={searchParams.get(type) || 'all'}
-        className='p-[10px] bg-gray-100 rounded-md outline-none hover:bg-gray-300  cursor-pointer transition-all'
+        value={searchParams.get(type) || "all"}
+        className="p-[10px] bg-gray-100 rounded-md outline-none hover:bg-gray-300  cursor-pointer transition-all"
         name={title}
         id={title}
         onChange={(e) => handleSelectParam(e.target.value)}
       >
         {SORT_OPTIONS.slice(
-          type === 'type' ? 0 : 3,
-          type === 'type' ? 3 : 5
+          type === "type" ? 0 : 3,
+          type === "type" ? 3 : 5
         ).map((option) => {
           return (
             <option key={option} value={option}>

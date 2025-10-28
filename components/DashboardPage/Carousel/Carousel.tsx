@@ -1,6 +1,6 @@
 import { Slider } from "./Slider";
 import toast from "react-hot-toast";
-import { getCarouselAction } from "@/lib/server-actions/get-carousel";
+import { getCarouselAction } from "@/server-actions/get-carousel";
 
 type CarouselType = {
   imageUrl: string;

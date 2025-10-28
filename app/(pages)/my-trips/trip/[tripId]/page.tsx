@@ -3,7 +3,7 @@ import { PreviewStarRate } from "@/components/TripSinglePage/PreviewStarRate";
 import { TabsSectionView } from "@/components/TripSinglePage/TabsSectionView";
 import { Loader } from "@/components/ui/loader";
 import { Spacer } from "@/components/ui/spacer";
-import { getSingleTripAction } from "@/lib/server-actions/get-single-trip";
+import { getSingleTripAction } from "@/server-actions/get-single-trip";
 import { Edit } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

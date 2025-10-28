@@ -1,7 +1,7 @@
 "use server";
 
-import { getServerSession } from "@/lib/auth";
-import { prisma } from "../../prisma";
+import { getServerSession } from "next-auth/next";
+import { prisma } from "../prisma";
 
 export async function getCarouselAction() {
   const session = await getServerSession();

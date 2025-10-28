@@ -1,7 +1,7 @@
 "use server";
 
-import { getServerSession } from "@/lib/auth";
-import { prisma } from "../../prisma";
+import { getServerSession } from "next-auth/next";
+import { prisma } from "../prisma";
 import { Trip } from "@prisma/client";
 
 export async function getTripsStatsAction() {

@@ -1,4 +1,4 @@
-import { getTripsAction } from "@/lib/server-actions/get-trips";
+import { getTripsAction } from "@/server-actions/get-trips";
 import { TripsCardList } from "./TripsCardList";
 
 type Props = {

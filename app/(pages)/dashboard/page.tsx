@@ -5,7 +5,6 @@ import { Container } from "@/components/grid/Container";
 import { Spacer } from "@/components/ui/spacer";
 import { MyTripsStatsSkeleton } from "@/components/DashboardPage/MyTripsStatsSkeleton";
 import { CarouselSkeleton } from "@/components/DashboardPage/Carousel/CarouselSkeleton";
-import axios from "axios";
 
 export const metadata = {
   title: "Travel-Plan  / Dashboard",
