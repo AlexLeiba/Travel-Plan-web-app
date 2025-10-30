@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "res.cloudinary.com",
-      "picsum.photos",
       "cdn.jsdelivr.net",
       "a.tile.openstreetmap.org",
       "b.tile.openstreetmap.org",
