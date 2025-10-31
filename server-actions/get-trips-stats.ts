@@ -3,9 +3,10 @@
 import { getServerSession } from "next-auth/next";
 import { prisma } from "../prisma";
 import { Trip } from "@prisma/client";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function getTripsStatsAction() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   console.log("🚀 ~ getTripsStatsAction ~ session:", session);
   const currentDate = new Date().getTime();
 

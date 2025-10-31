@@ -5,9 +5,10 @@ import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
 import { Trip } from "@prisma/client";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function deleteTripAction(tripId: string, imageId: string) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if (!session || !session.user || !session.user.email) {
     throw new Error("You must be logged in to delet a trip");

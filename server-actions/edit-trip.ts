@@ -4,9 +4,10 @@ import { Trip } from "@prisma/client";
 import { prisma } from "../prisma";
 import { TripSchemaType } from "../lib/schemas";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function editTripAction(formData: TripSchemaType, tripId: string) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if (!session || !session.user || !session.user.email) {
     throw new Error("You must be logged in to edit a trip");

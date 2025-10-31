@@ -1,9 +1,10 @@
 import { getServerSession } from "next-auth/next";
 import { prisma } from "@/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET(req: NextRequest) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   try {
     if (!session || !session.user || !session.user.email) {
