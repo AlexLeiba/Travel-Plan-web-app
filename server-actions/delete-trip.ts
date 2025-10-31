@@ -5,7 +5,7 @@ import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
 import { Trip } from "@prisma/client";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function deleteTripAction(tripId: string, imageId: string) {
   const session = await getServerSession(authOptions);

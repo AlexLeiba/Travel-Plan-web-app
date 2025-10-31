@@ -3,7 +3,7 @@ import { getTripsStatsAction } from "@/server-actions/get-trips-stats";
 import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 import { NextTripStats } from "./NextTripStats/NextTripStats";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();

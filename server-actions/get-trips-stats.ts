@@ -3,7 +3,7 @@
 import { getServerSession } from "next-auth/next";
 import { prisma } from "../prisma";
 import { Trip } from "@prisma/client";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function getTripsStatsAction() {
   const session = await getServerSession(authOptions);
