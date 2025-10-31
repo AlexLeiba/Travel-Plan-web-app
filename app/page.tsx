@@ -31,9 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  console.log("ID", process.env.GOOGLE_CLIENT_ID);
-  console.log("Secret", process.env.GOOGLE_CLIENT_SECRET);
-  console.log("URL", process.env.NEXTAUTH_URL);
   return (
     <div className="w-full h-full">
       <Container>
