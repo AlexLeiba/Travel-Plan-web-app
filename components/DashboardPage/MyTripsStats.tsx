@@ -7,6 +7,7 @@ import { NextTripStats } from "./NextTripStats/NextTripStats";
 export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();
   const session = await getServerSession();
+  console.log("🚀 ~ MyTripsStats ~ session:", session);
 
   if (error)
     return (

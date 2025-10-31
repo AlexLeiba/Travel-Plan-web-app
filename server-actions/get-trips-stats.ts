@@ -6,6 +6,7 @@ import { Trip } from "@prisma/client";
 
 export async function getTripsStatsAction() {
   const session = await getServerSession();
+  console.log("🚀 ~ getTripsStatsAction ~ session:", session);
   const currentDate = new Date().getTime();
 
   if (!session || !session?.user || !session?.user?.email) {

@@ -13,6 +13,7 @@ export async function middleware(req: NextRequest) {
   const token =
     req.cookies.get("next-auth.session-token")?.value || // dev
     req.cookies.get("__Secure-next-auth.session-token")?.value; // prod
+  console.log("🚀 ~ middleware ~ token:", token);
 
   if (!token) {
     const loginUrl = new URL("/", req.url);
