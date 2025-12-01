@@ -8,7 +8,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 export async function MyTripsStats() {
   const { data, error } = await getTripsStatsAction();
   const session = await getServerSession(authOptions);
-  console.log("🚀 ~ MyTripsStats ~ session:", session);
 
   if (error)
     return (
