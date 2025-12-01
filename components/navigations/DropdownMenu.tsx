@@ -30,7 +30,7 @@ export function DropdownMenu() {
       {!dropdown ? (
         <div className="flex justify-end items-center w-full md:hidden ">
           <SquareMenu
-            onClick={() => setDropdown(!dropdown)}
+            onClick={() => setDropdown((prev) => !prev)}
             className="dark:text-white text-black cursor-pointer"
           />
         </div>
@@ -38,7 +38,7 @@ export function DropdownMenu() {
         <div className=" bg-white dark:bg-black fixed inset-0 z-50 flex flex-col items-center justify-between">
           <div className="flex justify-end items-center w-full pr-4 pt-4">
             <SquareX
-              onClick={() => setDropdown(!dropdown)}
+              onClick={() => setDropdown((prev) => !prev)}
               className="dark:text-white text-black cursor-pointer"
             />
           </div>

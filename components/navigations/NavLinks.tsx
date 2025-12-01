@@ -19,7 +19,7 @@ export function NavLinks() {
     <div>
       {session?.user?.email ? (
         <>
-          <div className=" gap-8 items-center hidden md:flex">
+          <nav className=" gap-8 items-center hidden md:flex">
             {links.map((link) => {
               return (
                 <Link key={link.name} href={link.href}>
@@ -36,7 +36,7 @@ export function NavLinks() {
               );
             })}
             <AuthButton type="navBar" />
-          </div>
+          </nav>
 
           <DropdownMenu />
         </>

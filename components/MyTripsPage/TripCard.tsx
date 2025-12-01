@@ -1,5 +1,4 @@
 "use client";
-// import { Trip } from '@/lib/generated/prisma';
 import { Edit, Eye, Heart, Images, Pin, X } from "lucide-react";
 import Image from "next/image";
 import { ModalContent, ModalProvider, ModalTrigger } from "../ui/modal";
@@ -28,11 +27,28 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
   return (
     <>
       <div className=" bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex  gap-4 lg:h-[250px]   overflow-hidden relative lg:flex-row flex-col ">
+        {/* FAVORITE */}
+        <div
+          onClick={() => !favoriteLoading && handleSetAsFavorite(data.id)}
+          title="Favorite trip"
+          className="absolute right-14 top-3 z-20"
+        >
+          <div className="size-[35px] transition-all  hover:bg-red-800 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
+            {favoriteLoading ? (
+              <Loader color="black" />
+            ) : data.favorite ? (
+              <Heart size={20} className="text-red-500" />
+            ) : (
+              <Heart size={20} className="dark:text-white text-gray-600" />
+            )}
+          </div>
+        </div>
+        {/* MODAL DELETE */}
         <ModalProvider>
           <ModalTrigger customeClassName="absolute right-1 top-1 z-20">
             <button
               title="Delete trip"
-              className="p-1 text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer"
+              className="size-[35px] text-gray-400 transition-all hover:bg-red-500 rounded-full hover:text-white bg-black/30 flex items-center justify-center absolute right-2 top-2 cursor-pointer"
             >
               <X />
             </button>
@@ -48,45 +64,34 @@ export function TripCard({ data }: { data: Trip & { images?: string[] } }) {
           </ModalContent>
         </ModalProvider>
 
+        {/* EDIT */}
         <Link
           href={`/my-trips/edit-trip/${data.id}`}
-          className="absolute right-3 top-12 z-20"
+          className="absolute right-3 top-14 z-20"
           title="Edit trip"
         >
-          <div className="p-1 transition-all text-gray-100 hover:bg-green-500 hover:text-white rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
+          <div className="size-[35px] transition-all text-gray-100 hover:bg-green-500 hover:text-white rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
             <Edit />
           </div>
         </Link>
+
+        {/* VIEW */}
         <Link
           title="View trip"
           href={`/my-trips/trip/${data.id}`}
-          className="absolute right-3 top-21 z-20"
+          className="absolute right-3 top-24 z-20"
         >
-          <div className="p-1 transition-all text-gray-100 hover:text-white hover:bg-green-500 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
+          <div className="size-[35px] transition-all text-gray-100 hover:text-white hover:bg-green-500 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
             <Eye />
           </div>
         </Link>
 
-        <div
-          onClick={() => !favoriteLoading && handleSetAsFavorite(data.id)}
-          title="Favorite trip"
-          className="absolute right-3 top-32 z-20"
-        >
-          <div className="p-1 transition-all  hover:bg-red-800 rounded-full bg-black/30 flex items-center justify-center  cursor-pointer">
-            {favoriteLoading ? (
-              <Loader color="black" />
-            ) : data.favorite ? (
-              <Heart className="text-red-500" />
-            ) : (
-              <Heart />
-            )}
-          </div>
-        </div>
-
         <div className="flex flex-1 relative">
+          {/* STAR RATE */}
           <div className="absolute top-2 left-2 flex items-center gap-2">
             <PreviewStarRate rate={data?.starRate || 0} />
           </div>
+          {/* COVER */}
           <Image
             className="object-center object-cover lg:h-full h-[250px] w-full"
             src={data.imageUrl || ""}

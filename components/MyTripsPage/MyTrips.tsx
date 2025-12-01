@@ -20,9 +20,5 @@ export async function MyTrips({
     return <p className="text-red-500 text-center">{trips.error}</p>;
   }
 
-  return (
-    <div className="">
-      <TripsCardList trips={trips || []} />
-    </div>
-  );
+  return <TripsCardList trips={trips || []} />;
 }
