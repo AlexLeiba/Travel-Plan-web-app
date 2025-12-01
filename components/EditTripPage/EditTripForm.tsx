@@ -270,11 +270,12 @@ export function EditTripForm({
           </div>
           <FormProvider {...formMethods}>
             <div className="flex flex-col gap-4">
-              {/* Star rate */}
+              {/* STAR RATE */}
               <FormProvider {...formMethods}>
                 <StarRate defaultValue={tripData?.starRate || 0} />
               </FormProvider>
 
+              {/* UPLOAD SINGLE IMAGE */}
               <UploadMultipleImage
                 type="single"
                 title="Upload cover image *"
@@ -282,6 +283,7 @@ export function EditTripForm({
                 imageDefault={defaultCoverImage}
               />
 
+              {/* UPLOAD MULTIPLE IMAGES */}
               <UploadMultipleImage
                 type="multiple"
                 title="Upload more images"
