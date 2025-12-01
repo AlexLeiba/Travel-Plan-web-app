@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/LandingPage/HeroSection";
 import { Container } from "@/components/grid/Container";
 import { CAROUSEL_DATA } from "@/consts";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const baseUrl = "https://travel-plan-chi-flame.vercel.app/";
 
@@ -31,6 +33,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const session = await getServerSession();
+
+  if (session) redirect("/dashboard");
   return (
     <div className="w-full h-full">
       <Container>

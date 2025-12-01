@@ -14,10 +14,11 @@ export const links = [
 ];
 export function NavLinks() {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { status } = useSession();
+
   return (
     <div>
-      {session?.user?.email ? (
+      {status === "authenticated" ? (
         <>
           <nav className=" gap-8 items-center hidden md:flex">
             {links.map((link) => {
@@ -41,9 +42,11 @@ export function NavLinks() {
           <DropdownMenu />
         </>
       ) : (
-        <div className="w-full">
-          <AuthButton type="landingPage" />
-        </div>
+        status === "unauthenticated" && (
+          <div className="w-full">
+            <AuthButton type="landingPage" />
+          </div>
+        )
       )}
     </div>
   );
